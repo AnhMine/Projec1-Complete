@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Projec1_Complete.DAL
 {
-    internal class ThongKeData
+    public class ThongKeData
     {
+        public DateTime Date { get; set; }
+        public decimal TotalRevenue { get; set; }
+        public string ProductId { get; set; }
     }
 }
