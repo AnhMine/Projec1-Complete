@@ -1,0 +1,133 @@
+﻿<Page x:Class="Projec1_Complete.Pages.Khachhang"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Projec1_Complete.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Khachhang">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Page.Resources>
+    <Border CornerRadius="20"  Background="#eff2f7">
+
+
+        <Grid Grid.Column="1" Margin="20 20 20 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <!--select textbox-->
+            <Grid Width="300" HorizontalAlignment="Left">
+                <TextBlock x:Name="txtbl_timkiemKH" Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                               Panel.ZIndex="1" 
+                               
+                             />
+
+                <TextBox x:Name="txtB_SearchClient" Style="{StaticResource textboxSearch}"/>
+
+                <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
+                                           Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+
+            </Grid>
+
+            <!--Top button-->
+
+
+
+
+            <TextBlock x:Name="txtbl_khachhang" Text="KHÁCH HÀNG" Grid.Row="1" FontSize="22" FontWeight="SemiBold" Margin="20 20 0 0"
+                           HorizontalAlignment="Left" Foreground="#121528"/>
+
+            <!--Add Button-->
+            <Button x:Name="btn_themkhahhang" Style="{StaticResource addButton}" Margin="0 20 70 0" Click="btn_themkhahhang_Click">
+                <StackPanel Orientation="Horizontal" >
+                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="13" Height="13"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnImportFile_customer" Style="{StaticResource addButton}" Margin="0 0 30 35" Grid.RowSpan="2" Grid.Row="1">
+                <StackPanel Orientation="Horizontal" >
+                    <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="14" Height="14"/>
+                </StackPanel>
+            </Button>
+
+            <!--Seprator-->
+            <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
+
+            <!--Tap button-->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0" >
+                <Button  Content="" Style="{StaticResource tabButton}"/>
+                <Button  Content="" Style="{StaticResource tabButton}"/>
+            </StackPanel>
+
+            <!--counter title-->
+            <TextBlock x:Name="txtbl_dskhachhang" Text="
+                           Danh sách khách hàng" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Margin="-120 0 0 0"
+                           Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+            <TextBlock x:Name="txtbl_sapxepKH" Text="Sắp xếp" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0"
+                           Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Hidden"/>
+
+            <!--Filter TextBox-->
+            <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4" Visibility="Hidden">
+
+                <ComboBox x:Name="cmd_sapxepkhachhang" Style="{StaticResource cmb}"/>
+
+            </Grid>
+
+            <!--Member Datagrid-->
+            <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="ClientDataGrid">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                        <DataGridCheckBoxColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="ckb_chonkhachhang" Style="{StaticResource CheckBoxStyle1}"/>
+                            </DataTemplate>
+                        </DataGridCheckBoxColumn.HeaderTemplate>
+                    </DataGridCheckBoxColumn>
+
+                    <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding MaKH}"/>
+                    <DataGridTextColumn Header="Tên khách hàng" IsReadOnly="True" Binding="{Binding TenKH}"/>
+                    <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding SDT}"/>
+                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding Diachi}"/>
+
+                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btb_suakhachhang" Style="{StaticResource gridEditButton}">
+                                        <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+
+                                    <Button x:Name="btb_xoakhachhang" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <!--pagination section-->
+
+
+
+        </Grid>
+
+
+    </Border>
+</Page>
