@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ce1de932cbb747b993a3a6bfb0d685b1" Name="Diagram1">
+      <Diagram DiagramId="9322e3f650084229a175617297c9797c" Name="Diagram1">
         <EntityTypeShape EntityType="ASMProject1Model.Account" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.Category" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.History" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.OrderInfo" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.Order" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASMProject1Model.Person" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASMProject1Model.Person" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.Product" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.sysdiagram" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <AssociationConnector Association="ASMProject1Model.FK__Account__PersonI__5812160E" ManuallyRouted="false" />

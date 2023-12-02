@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace Projec1_Complete.DAL
 {
@@ -30,6 +31,11 @@ namespace Projec1_Complete.DAL
         {
             var acc = db.Accounts.FirstOrDefault(a => a.AccountID == id);
             return acc;
+        }
+        public bool CheckStatus(string username)
+        {
+            var acc = db.Accounts.FirstOrDefault( a => a.UserName == username);
+            return acc.Type;
         }
     }
 }

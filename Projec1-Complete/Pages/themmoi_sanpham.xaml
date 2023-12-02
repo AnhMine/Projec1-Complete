@@ -53,22 +53,6 @@
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"/>
 
-                <ComboBox x:Name="cmb_TenSP"
-                         Height="30"
-                         Width="200"
-                         Margin="10 0 0 20 "
-                         FontSize="15"
-                         Background="Transparent"
-                         BorderBrush="DarkGray"                       
-                         BorderThickness="0 0 0 1"
-                         Foreground="Black" 
-                         Panel.ZIndex="1"
-                         VerticalContentAlignment="Bottom"/>
-
-
-                <RadioButton x:Name="rdb_moisp" Content="Mới" Width="70" Height="20" Margin="668,240,342,0" VerticalAlignment="Top"/>
-                <RadioButton x:Name="rdb_dacusp" Content="Đã có" Width="100" Height="22" Margin="668,208,312,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-
                 <TextBox x:Name="txtB_GiaB"
                          Height="30"
                          Width="300"

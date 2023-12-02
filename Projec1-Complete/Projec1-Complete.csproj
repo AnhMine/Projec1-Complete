@@ -112,21 +112,57 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Assets\Setting.cs" />
+    <Compile Include="BUS\AccountBUS.cs" />
+    <Compile Include="DAL\Account.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\AccountDAL.cs" />
+    <Compile Include="DAL\Category.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\CategoryDAL.cs" />
+    <Compile Include="DAL\History.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\HistoryDAL.cs" />
     <Compile Include="DAL\HisWithUsername.cs" />
+    <Compile Include="DAL\Order.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\OrderInfo.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Person.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\PersonDAL.cs" />
+    <Compile Include="DAL\Product.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="DAL\shopquanliquanao.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>shopquanliquanao.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\shopquanliquanao.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\shopquanliquanao.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\sp_helpdiagrams_Result.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\sysdiagram.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\ThongKeData.cs" />
     <Compile Include="DAL\ThongKeDataDAL.cs" />
@@ -272,9 +308,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BUS\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\Icons\anhhoathinh.jpg" />
   </ItemGroup>
@@ -294,6 +328,12 @@
     <Content Include="DAL\shopquanliquanao.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>shopquanliquanao.Context.cs</LastGenOutput>
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+    </Content>
+    <Content Include="DAL\shopquanliquanao.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+      <LastGenOutput>shopquanliquanao.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@
 
             <Grid Height="460" Width="360" Margin="20 30 490 100">
 
-                <Image x:Name="imagePrd"  Height="460" Width="360"/>
+                <Image x:Name="imagePrd"  Height="460" Width="360" MouseLeftButtonUp="imagePrd_MouseLeftButtonUp"/>
 
                 <Border x:Name="bdImg" Width="150" Height="150" Padding="3" Background="#623ed0" CornerRadius="100"
                                 DockPanel.Dock="Top" HorizontalAlignment="left" Margin="105 0 0 0" BorderBrush="#623ed0" BorderThickness="1">
@@ -32,8 +32,8 @@
             </Grid>
             <Grid>
 
-                <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="820 0 0 490" />
-                <Button x:Name="btnSave" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold">
+                <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="820 0 0 490" Click="btn_Close_Click" />
+                <Button x:Name="btnSave" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold" Click="btnSave_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_luu" Text="Lưu"/>
                     </StackPanel>
@@ -125,7 +125,7 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False"/>
+                         IsEnabled="False" PreviewTextInput="txtPriceSell_PreviewTextInput"/>
 
                 <TextBox x:Name="txtPrice" Width="250" Height="30" Margin="500 45 0 90 "  FontSize="15"
                          Background="Transparent"
@@ -135,7 +135,7 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False"/>
+                         IsEnabled="False" PreviewTextInput="txtPrice_PreviewTextInput"/>
 
                 <TextBox x:Name="txtQuantity" Width="250" Height="30" Margin="500 40 0 0 "  FontSize="15"
                          Background="Transparent"
@@ -145,7 +145,7 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False"/>
+                         IsEnabled="False" PreviewTextInput="txtQuantity_PreviewTextInput"/>
 
                 <ComboBox x:Name="cboActive" Width="250" Height="30" Margin="500 130 0 0 "  FontSize="15"
                          Background="Transparent"

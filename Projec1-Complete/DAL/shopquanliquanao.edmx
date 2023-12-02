@@ -62,6 +62,7 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="10" />
           <Property Name="Address" Type="nvarchar" MaxLength="150" />
           <Property Name="DateSave" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -331,6 +332,7 @@
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="DateSave" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__PersonI__5812160E" FromRole="Person" ToRole="Account" />
         </EntityType>
         <EntityType Name="Product">
@@ -606,6 +608,7 @@
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="DateSave" ColumnName="DateSave" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
