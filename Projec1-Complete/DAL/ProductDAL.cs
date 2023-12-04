@@ -87,23 +87,19 @@ namespace Projec1_Complete.DAL
             var prd = db.Products.FirstOrDefault(p => p.ProductID == id);
             if (prd != null)
             {
-                db.Products.Remove(prd);
+                prd.Status = "Đang Tạm Ngưng";
 
                 db.SaveChanges();
                 var historyRecord = new History
                 {
                     HistoryID = AddHistoryRecord(),
-                    Action = "Xóa Sản Phẩm",
+                    Action = "Đổi Trạng Thái Sản Phẩm",
                     TimeStamp = DateTime.Now,
                     AccountID = 1,
                     ProductID = id,
                 };
                 db.Histories.Add(historyRecord);
-                db.SaveChanges();
-
-                db.Products.ToList();
-
-
+        
             }
 
         }

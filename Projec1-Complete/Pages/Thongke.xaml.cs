@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Projec1_Complete.BUS;
 
 namespace Projec1_Complete.Pages
 {
@@ -22,47 +23,23 @@ namespace Projec1_Complete.Pages
     /// </summary>
     public partial class Thongke : Page
     {
+        private ThongKeDataBUS thongKeDataBUS;
+        public SeriesCollection seriesCollection;
+        public List<string> Labels;
         public Thongke()
         {
             InitializeComponent();
-            SeriesCollection = new SeriesCollection
-            {
-                new ColumnSeries
-                {
-                    Title="Tháng 10 2023",
-                    Values= new ChartValues<double> {20,10,36,90}
-                }
-
-            };
-
-            SeriesCollection.Add(new ColumnSeries
-            {
-                Title = "Tháng 11 2023",
-                Values = new ChartValues<double> { 12, 18, 15 }
-            });
-
-            SeriesCollection[1].Values.Add(48d);
-            Labels = new[] { "Chinh", " Châm", "Huy", "Duy" };
-            Values = value => value.ToString("N");
-
-            DataContext = this;
-
-
-
+            thongKeDataBUS = new ThongKeDataBUS();
         }
-
-        public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> Values { get; set; }
 
 
         private void btn_thongke_Click(object sender, RoutedEventArgs e)
         {
             stpn_history.Visibility = Visibility.Collapsed;
             bd_thongke.Visibility = Visibility.Visible;
-            btn_tktheongay.Visibility = Visibility.Visible;
-            btn_tktheothang.Visibility = Visibility.Visible;
-            btn_tksanpham.Visibility = Visibility.Visible;
+            btnDay.Visibility = Visibility.Visible;
+            btnMonth.Visibility = Visibility.Visible;
+            btnPrd.Visibility = Visibility.Visible;
             btn_quayve.Visibility = Visibility.Collapsed;
 
         }
@@ -71,11 +48,29 @@ namespace Projec1_Complete.Pages
         {
             stpn_history.Visibility = Visibility.Visible;
             bd_thongke.Visibility = Visibility.Collapsed;
-            btn_tktheongay.Visibility = Visibility.Collapsed;
-            btn_tktheothang.Visibility = Visibility.Collapsed;
-            btn_tksanpham.Visibility = Visibility.Collapsed;
+            btnDay.Visibility = Visibility.Collapsed;
+            btnMonth.Visibility = Visibility.Collapsed;
+            btnPrd.Visibility = Visibility.Collapsed;
             btn_quayve.Visibility = Visibility.Visible;
 
+        }
+
+        private void btnDay_Click(object sender, RoutedEventArgs e)
+        {
+            seriesCollection = thongKeDataBUS.GetChartData(out var labels, "Ngày");
+            ChartDT.AxisX.Clear();
+            ChartDT.AxisX.Add(new Axis
+            {
+                Title = "Ngày",
+                Labels = labels,
+            });
+            ChartDT.AxisY.Clear();
+            ChartDT.AxisY.Add(new Axis
+            {
+                Title = "Doanh thu"
+            });
+
+            ChartDT.Series = seriesCollection;
         }
     }
     

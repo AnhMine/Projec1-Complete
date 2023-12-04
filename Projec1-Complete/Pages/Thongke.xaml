@@ -46,13 +46,13 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="1" x:Name="btn_tktheongay" Style="{StaticResource Buttontktheo}" Margin="0">
+                            <Button Grid.Column="1" x:Name="btnDay" Style="{StaticResource Buttontktheo}" Margin="0" Click="btnDay_Click">
                                 <TextBlock x:Name="txtbl_ltktheongay" Text="Ngày" />
                             </Button>
-                            <Button Grid.Column="2"  x:Name="btn_tktheothang" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0">
+                            <Button Grid.Column="2"  x:Name="btnMonth" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0">
                                 <TextBlock x:Name="txtbl_tktheothang" Text="Tháng" />
                             </Button>
-                            <Button Grid.Column="3" x:Name="btn_tksanpham" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0">
+                            <Button Grid.Column="3" x:Name="btnPrd" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0">
                                 <TextBlock x:Name="txtbl_tksanpham" Text="Sản phẩm" />
                             </Button>
 
@@ -121,7 +121,7 @@
             <Border x:Name="bd_thongke" Grid.Row="2" Style="{StaticResource whiteboder}" Margin="20 20 20 0" >
 
 
-                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom">
+                <lvc:CartesianChart x:Name="ChartDT" Series="{Binding SeriesCollection}" LegendLocation="Bottom">
 
                     <lvc:CartesianChart.AxisX>
                         <lvc:Axis Title="Vendedor" Labels="{Binding Labels}"></lvc:Axis>
