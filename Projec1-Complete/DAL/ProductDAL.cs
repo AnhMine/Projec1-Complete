@@ -16,15 +16,11 @@ namespace Projec1_Complete.DAL
 
         public int AddHistoryRecord()
         {
-            int maxHistoryID = db.Histories.Max(h => h.HistoryID);
-
-
+            int maxHistoryID = db.Histories.Max(h => (int?)h.HistoryID) ?? 0;
             int newHistoryID = maxHistoryID + 1;
             return newHistoryID;
-
-
-
         }
+
         public List<Product> GetProducts()
         {
             return db.Products.ToList();

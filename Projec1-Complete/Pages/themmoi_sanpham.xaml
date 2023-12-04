@@ -16,10 +16,10 @@
 
 
                 <Grid Width="350" Height="400" Margin="0 0 640 30 ">
-                    <Image x:Name="pic_anhsp" Source="/Assets/Icons/anhpic-removebg-preview.png"  Width="350" Height="400" VerticalAlignment="Center" Margin="0 0 0 50">
+                    <Image x:Name="imgPrd" Source="/Assets/Icons/anhpic-removebg-preview.png"  Width="350" Height="400" VerticalAlignment="Center" Margin="0 0 0 50" MouseLeftButtonUp="imgPrd_MouseLeftButtonUp">
 
                     </Image>
-                    <Button Width="350" Height="400" Margin="0 0 0 0" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                    <Button Width="350" Height="400" Margin="0 0 0 0" Background="Transparent" BorderBrush="Transparent" >
 
                     </Button>
                 </Grid>
@@ -32,7 +32,7 @@
                 <TextBlock x:Name="txtbl_slsp" Text="Nhập số lượng " FontSize="20"  Margin="700 0 0 320 "  Height="30" Width="200" />
                 <TextBlock x:Name="txtbl_tinhtrang" Text="Tình trạng " FontSize="20"  Margin="700 0 0 170 "  Height="30" Width="200" />
                 <TextBlock x:Name="txtbl_maSP" Text="Mã sản phẩm " FontSize="20"  Margin="700 0 0 20 "  Height="30" Width="200" Visibility="Hidden" />
-                <ComboBox  x:Name="cmb_themdanhmuc" Height="30"
+                <ComboBox  x:Name="cboCate" Height="30"
                          Width="200"
                          Margin="10 0 0 250 "
                          FontSize="15"
@@ -40,7 +40,7 @@
 
 
 
-                <TextBox x:Name="txtB_TenSP"
+                <TextBox x:Name="txtNamePrd"
                          Height="30"
                          Width="200"
                          Margin="10 0 0 100 "
@@ -53,7 +53,7 @@
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"/>
 
-                <TextBox x:Name="txtB_GiaB"
+                <TextBox x:Name="txtPriceSell"
                          Height="30"
                          Width="300"
                          Margin="100 140 0 0 "
@@ -66,7 +66,7 @@
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"/>
 
-                <TextBox x:Name="txtB_GiaV"
+                <TextBox x:Name="txtPrice"
                          Height="30"
                          Width="300"
                          Margin="100 300 0 0 "
@@ -78,7 +78,7 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"/>
-                <TextBox x:Name="txtB_SoL"
+                <TextBox x:Name="txtQuantity"
                          Height="30"
                          Width="250"
                          Margin="750 0 0 250 "
@@ -104,7 +104,7 @@
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"/>
 
-                <ComboBox x:Name="cmb_themtinhtrang"  Height="30"
+                <ComboBox x:Name="cboStatus"  Height="30"
                          Width="200"
                          Margin="700 0 0 100 "
                          FontSize="15"
@@ -112,7 +112,7 @@
 
 
 
-                <Button x:Name="btn_themspmoi" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold">
+                <Button x:Name="btnAdd" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold" Click="btnAdd_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_themsp" Text="Thêm"/>
                     </StackPanel>

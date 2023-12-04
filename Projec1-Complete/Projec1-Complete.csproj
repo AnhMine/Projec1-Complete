@@ -113,6 +113,9 @@
     </ApplicationDefinition>
     <Compile Include="Assets\Setting.cs" />
     <Compile Include="BUS\AccountBUS.cs" />
+    <Compile Include="BUS\CategoryBUS.cs" />
+    <Compile Include="BUS\HistoryBUS.cs" />
+    <Compile Include="BUS\ProductBUS.cs" />
     <Compile Include="DAL\Account.cs">
       <DependentUpon>shopquanliquanao.tt</DependentUpon>
     </Compile>
@@ -308,7 +311,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DAL\shopquanliquanao.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+      <LastGenOutput>shopquanliquanao.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\shopquanliquanao.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+      <LastGenOutput>shopquanliquanao.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\anhhoathinh.jpg" />
   </ItemGroup>
@@ -323,18 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\anhpic-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DAL\shopquanliquanao.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>shopquanliquanao.Context.cs</LastGenOutput>
-      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
-    </Content>
-    <Content Include="DAL\shopquanliquanao.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
-      <LastGenOutput>shopquanliquanao.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
