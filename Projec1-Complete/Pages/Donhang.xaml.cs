@@ -64,83 +64,7 @@ namespace Projec1_Complete.Pages
 
         }
         private Button lastClickedButton;
-        private void btn_khdh2_Click(object sender, RoutedEventArgs e)
-        {
-            if (lastClickedButton != null)
-            {
-                lastClickedButton.Background = Brushes.White;
-            }
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_khdh1_Click(object sender, RoutedEventArgs e)
-        {
-            if (lastClickedButton != null)
-            {
-                lastClickedButton.Background = Brushes.White;
-            }
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_khdh3_Click(object sender, RoutedEventArgs e)
-        {
-            if (lastClickedButton != null)
-            {
-                lastClickedButton.Background = Brushes.White;
-            }
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_khdh4_Click(object sender, RoutedEventArgs e)
-        {
-            if (lastClickedButton != null)
-            {
-                lastClickedButton.Background = Brushes.White;
-            }
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_khdh5_Click(object sender, RoutedEventArgs e)
-        {
-            if (lastClickedButton != null)
-            {
-                lastClickedButton.Background = Brushes.White;
-            }
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_khdh6_Click(object sender, RoutedEventArgs e)
-        {
-            if (lastClickedButton != null)
-            {
-                lastClickedButton.Background = Brushes.White;
-            }
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
+      
 
         private void btn_sp1_Click(object sender, RoutedEventArgs e)
         {
@@ -226,9 +150,5 @@ namespace Projec1_Complete.Pages
             btn_quayve.Visibility = Visibility.Collapsed;
         }
 
-        private void btnAll_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

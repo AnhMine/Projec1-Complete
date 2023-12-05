@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projec1_Complete.Pages"
         mc:Ignorable="d"
-        Title="Donhang" Height="900" Width="1800">
+        Title="Donhang" Height="1000" Width="1800">
     <Grid Background="#eff2f7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -19,80 +19,76 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Style="{StaticResource Buttonalldon}">
-                <TextBlock x:Name="txtbl_allsalesorder" Text="Tất cả đơn đặt hàng" FontSize="18" FontWeight="Bold" Margin="0 0 120 0"/>
+
+                <Grid Width="420" Height="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btn_tatcakh" Style="{StaticResource Buttonloai}">
+                        <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả"/>
+                    </Button>
+                    <Button Grid.Column="1" x:Name="btn_dathanhtoan" Style="{StaticResource Buttonloaitt}">
+                        <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
+                    </Button>
+                    <Button Grid.Column="2" x:Name="btn_chuathanhtoan" Style="{StaticResource Buttonloaitt}">
+                        <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
+                    </Button>
+
+
+                </Grid>
+                
+                
             </Button>
 
-           
-            <Grid Grid.Row="1">
-                <WrapPanel Grid.ColumnSpan="2" Margin="0,0,25,5">
-                    <ItemsControl x:Name="itctCate2">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Button Margin="108 5 0 0" Style="{StaticResource Buttonsale}">
-                                    <Grid Width="320" Height="80">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <!-- ... Các thành phần trong Grid ... -->
 
-                                        <TextBlock Text="{Binding CategoryName}" />
+           <Grid Grid.Row="1">
 
-                                        <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                <ScrollViewer>
+
+                    <WrapPanel Grid.ColumnSpan="2" Margin="0,0,25,5">
+                        <ItemsControl x:Name="itctCate2">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Margin="62 5 0 0" Style="{StaticResource Buttonsale}">
+                                        <Grid Width="320" Height="80">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <!-- ... Các thành phần trong Grid ... -->
+
+                                            <TextBlock Text="{Binding CategoryName}" />
+
+                                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
                                             DockPanel.Dock="Top" HorizontalAlignment="left">
-                                            <Ellipse>
-                                                <Ellipse.Fill>
-                                                    <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                                </Ellipse.Fill>
-                                            </Ellipse>
-                                        </Border>
-                                        
-                                        <TextBlock Text="Phan Thanh Châm" Grid.Column="1" FontWeight="Bold" Margin="10 0 0 20"/>
-                                        <TextBlock Text="ĐÃ THANH TOÁN" Grid.Column="1" FontWeight="Bold" Margin="10 30 0 0" Foreground="#00CC33"/>
-                                        <TextBlock Text="1 000 000 đ" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 20"/>
-                                    </Grid>
-                                </Button>
+                                                <Ellipse>
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                            </Border>
+
+                                            <TextBlock Text="Phan Thanh Châm" Grid.Column="1" FontWeight="Bold" Margin="10 0 0 0" FontSize="18"/>
+                                            <TextBlock Text="ĐÃ THANH TOÁN" Grid.Column="1" FontWeight="Bold" Margin="10 30 0 0" Foreground="#00CC33" FontSize="18"/>
+                                            <TextBlock Text="1 000 000 đ" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 20" FontSize="18"/>
+                                        </Grid>
+                                    </Button>
 
 
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </WrapPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </WrapPanel>
+                </ScrollViewer>
             </Grid>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="1" HorizontalAlignment="Left" BorderBrush="#dee4ec" BorderThickness="1"
-                            CornerRadius="10" Padding="5" Background="White" Margin="20 10 0 20">
-
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btn_chuyentrangtruockh" Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource PagingButtonIcon}"/>
-                        </Button>
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
-
-                        <Button x:Name="btn_khtrang1" Style="{StaticResource pagingButton}" Content="1"/>
-                        <Button x:Name="btn_khtrang2" Style="{StaticResource pagingButton}" Content="2" Background="#623ed0" Foreground="#ffffff" />
-                        <Button x:Name="btn_khtrang3" Style="{StaticResource pagingButton}" Content="3"/>
-                        <Button x:Name="btn_khtrang4" Style="{StaticResource pagingButton}" Content="4"/>
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
-
-                        <Button x:Name="btn_chuyentrangsaukh" Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource PagingButtonIcon}"/>
-                        </Button>
-
-                    </StackPanel>
-
-                </Border>
-            </Grid>
+            
+            
         </Grid>
 
         <Border CornerRadius="10" Grid.Column="1" Background="White" Margin="20">
@@ -113,17 +109,6 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="btn_khohang" Style="{StaticResource Buttontieude}" HorizontalAlignment="Right" Margin="0 0 120 0" Click="btn_khohang_Click">
-                        <StackPanel Orientation="Horizontal" >
-                            <TextBlock x:Name="txtbl_khohang" Text="KHO HÀNG"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button x:Name="btn_Thongke" Style="{StaticResource Buttontieude}" HorizontalAlignment="Right" Margin="0 0 20 0">
-                        <StackPanel Orientation="Horizontal" >
-                            <TextBlock x:Name="txtbl_thongke" Text="THỐNG KÊ"/>
-                        </StackPanel>
-                    </Button>
 
                     <Separator x:Name="spr_duonggach" Background="#eff2f7" Grid.Row="0" Height="5" Margin="5 45 5 0" Visibility="Collapsed"/>
                 </Grid>
@@ -135,7 +120,7 @@
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="300"/>
+                                <RowDefinition Height="650"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Column="0">
@@ -198,7 +183,7 @@
                                 </DataGrid>
                             </Grid>
 
-                            <Grid Grid.Row="2">
+                            <Grid Grid.Row="2" Margin="0 00 0 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
@@ -246,11 +231,10 @@
                             </Grid.RowDefinitions>
 
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="652*"/>
-                                    <ColumnDefinition Width="165*"/>
-                                </Grid.ColumnDefinitions>
                                 
+                                <Button x:Name="btn_tatcaloai" Style="{StaticResource Buttonloai}">
+                                    <TextBlock x:Name="txtbl_tatcaloai" Text="Tất cả"/>
+                                </Button> 
                                
 
                                 <WrapPanel>
@@ -277,10 +261,10 @@
                                     <TextBlock Margin="20 0 40 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                      Panel.ZIndex="1"/>
 
-                                    <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="466,0,-466,0" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="466,-10,-466,0" VerticalAlignment="Center"/>
 
-                                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                                           Margin="0 0 15 5" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+                                    <!--<Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
+                                           Margin="0 0 15 5" Foreground="#b0b9c6" HorizontalAlignment="Right"/>-->
 
                                 </Grid>
 
@@ -592,7 +576,7 @@
 
                             </Grid>
 
-                            <Grid  Background="#eff2f7" Margin="14" Grid.Row="2">
+                            <Grid  Background="#eff2f7" Margin="15 0 0 0" Grid.Row="2">
                                 <Button x:Name="btn_thanhtoan" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 0 0" Click="btn_thanhtoan_Click">
                                     <StackPanel Orientation="Horizontal" >
                                         <TextBlock x:Name="txtbl_thanhtoan" Text="Thanh toán" />
@@ -603,30 +587,7 @@
                                         <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="20" Height="20"/>
                                     </StackPanel>
                                 </Button>
-                                <Border Grid.Row="2" HorizontalAlignment="Left" BorderBrush="#dee4ec" BorderThickness="1" Margin="0 13 0 0"
-                                    CornerRadius="10" Padding="5" Background="White" >
-                                    <StackPanel Orientation="Horizontal">
-
-                                        <Button x:Name="btn_chuyentrangtruoc" Style="{StaticResource pagingButton}">
-                                            <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource PagingButtonIcon}"/>
-                                        </Button>
-
-                                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
-
-                                        <Button x:Name="btn_trang1" Style="{StaticResource pagingButton}" Content="1"/>
-                                        <Button x:Name="btn_trang2" Style="{StaticResource pagingButton}" Content="2" Background="#623ed0" Foreground="#ffffff" />
-                                        <Button x:Name="btn_trang3" Style="{StaticResource pagingButton}" Content="3"/>
-                                        <Button x:Name="btn_trang4" Style="{StaticResource pagingButton}" Content="4"/>
-
-                                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
-
-                                        <Button x:Name="btn_chuyentrangsau" Style="{StaticResource pagingButton}">
-                                            <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource PagingButtonIcon}"/>
-                                        </Button>
-
-                                    </StackPanel>
-
-                                </Border>
+                               
 
                             </Grid>
 

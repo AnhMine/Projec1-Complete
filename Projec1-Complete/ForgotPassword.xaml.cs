@@ -35,12 +35,12 @@ namespace Projec1_Complete
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("quanaovnqas@gmail.com");
             mail.To.Add(email);
-            mail.Subject = "OTP từ VNQAS";
+            mail.Subject = "OTP từ Shop Quần Áo VNQAS";
             mail.Body =otp.ToString();
             SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
             System.Net.NetworkCredential ntcd = new NetworkCredential();
             ntcd.UserName = "quanaovnqas@gmail.com";
-            ntcd.Password = "Qaz15963";
+            ntcd.Password = "bnbp rvaq ceje iddj";
             smtpServer.Credentials = ntcd;
             smtpServer.Port = 587;
 
@@ -112,6 +112,13 @@ namespace Projec1_Complete
 
             txt_MaOTP.Visibility = Visibility.Visible;
             ((Button)sender).Visibility = Visibility.Collapsed;
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            this.Close();
+            login.Show();
         }
     }
 }

@@ -651,8 +651,8 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="Foreground" Value="black"/>
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                <Setter Property="Width" Value="320"/>
-                <Setter Property="Height" Value="75"/>
+                <Setter Property="Width" Value="420"/>
+                <Setter Property="Height" Value="80"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="13"/>
                 <Setter Property="Template">
@@ -679,7 +679,7 @@
                 <Setter Property="Width" Value="100"/>
                 <Setter Property="Height" Value="40"/>
                 <Setter Property="Margin" Value="5"/>
-                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Template">
                     <Setter.Value>
@@ -808,8 +808,8 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="Margin" Value="20 20 0 0"/>
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                <Setter Property="Width" Value="320"/>
-                <Setter Property="Height" Value="75"/>
+                <Setter Property="Width" Value="420"/>
+                <Setter Property="Height" Value="80"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <!--<Setter Property="FontSize" Value="13"/>-->
                 <Setter Property="Template">
@@ -859,11 +859,38 @@
                 <Setter Property="Background" Value="#ffffff"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                <Setter Property="Width" Value="70"/>
+                <Setter Property="Width" Value="75"/>
                 <Setter Property="Height" Value="30"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="Margin" Value="5"/>
-                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="#ffffff"/>
+                        <Setter Property="Background" Value="#6741d9"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="Buttonloaitt" TargetType="Button">
+                <Setter Property="Background" Value="#ffffff"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Width" Value="125"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="18"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Template">
                     <Setter.Value>
