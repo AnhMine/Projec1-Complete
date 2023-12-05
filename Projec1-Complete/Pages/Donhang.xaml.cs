@@ -41,6 +41,8 @@ namespace Projec1_Complete.Pages
         {
             List<Category> categorieslist = categoryBUS.GetCategories();
             itctCate.ItemsSource = categorieslist;
+            itctCate2.ItemsSource = categorieslist;
+            
         }
 
         private void btn_packages_Click(object sender, RoutedEventArgs e)

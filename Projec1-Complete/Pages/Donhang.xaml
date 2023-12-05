@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projec1_Complete.Pages"
         mc:Ignorable="d"
-        Title="Donhang" Height="900" Width="1100">
+        Title="Donhang" Height="900" Width="1800">
     <Grid Background="#eff2f7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,228 +16,82 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Style="{StaticResource Buttonalldon}">
                 <TextBlock x:Name="txtbl_allsalesorder" Text="Tất cả đơn đặt hàng" FontSize="18" FontWeight="Bold" Margin="0 0 120 0"/>
             </Button>
 
+           
             <Grid Grid.Row="1">
+                <WrapPanel Grid.ColumnSpan="2" Margin="0,0,25,5">
+                    <ItemsControl x:Name="itctCate2">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Margin="108 5 0 0" Style="{StaticResource Buttonsale}">
+                                    <Grid Width="320" Height="80">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <!-- ... Các thành phần trong Grid ... -->
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding CategoryName}" />
 
-                <Grid Grid.Row="6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border Grid.Column="1" HorizontalAlignment="Left" BorderBrush="#dee4ec" BorderThickness="1"
-                            CornerRadius="10" Padding="5" Background="White" Margin="20 10 0 0">
-
-                        <StackPanel Orientation="Horizontal">
-                            <Button x:Name="btn_chuyentrangtruockh" Style="{StaticResource pagingButton}">
-                                <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource PagingButtonIcon}"/>
-                            </Button>
-
-                            <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
-
-                            <Button x:Name="btn_khtrang1" Style="{StaticResource pagingButton}" Content="1"/>
-                            <Button x:Name="btn_khtrang2" Style="{StaticResource pagingButton}" Content="2" Background="#623ed0" Foreground="#ffffff" />
-                            <Button x:Name="btn_khtrang3" Style="{StaticResource pagingButton}" Content="3"/>
-                            <Button x:Name="btn_khtrang4" Style="{StaticResource pagingButton}" Content="4"/>
-
-                            <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
-
-                            <Button x:Name="btn_chuyentrangsaukh" Style="{StaticResource pagingButton}">
-                                <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource PagingButtonIcon}"/>
-                            </Button>
-
-                        </StackPanel>
-
-                    </Border>
-                </Grid>
+                                        <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                                            DockPanel.Dock="Top" HorizontalAlignment="left">
+                                            <Ellipse>
+                                                <Ellipse.Fill>
+                                                    <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                        </Border>
+                                        
+                                        <TextBlock Text="Phan Thanh Châm" Grid.Column="1" FontWeight="Bold" Margin="10 0 0 20"/>
+                                        <TextBlock Text="ĐÃ THANH TOÁN" Grid.Column="1" FontWeight="Bold" Margin="10 30 0 0" Foreground="#00CC33"/>
+                                        <TextBlock Text="1 000 000 đ" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 20"/>
+                                    </Grid>
+                                </Button>
 
 
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <Button  Margin="20 5 0 0" Style="{StaticResource Buttonsale}">
+                <Border Grid.Column="1" HorizontalAlignment="Left" BorderBrush="#dee4ec" BorderThickness="1"
+                            CornerRadius="10" Padding="5" Background="White" Margin="20 10 0 20">
 
-                    <Grid Width="320" Height="80">
-                        <Grid Width="320" Height="80">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                DockPanel.Dock="Top" HorizontalAlignment="left">
-                                <Ellipse>
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="img_anhkh1" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
-                            <TextBlock x:Name="txtbl_tenkhmuahang1" Grid.Column="1" Height="20" Text="Phan Thanh Châm" Margin="10 0 0 20" FontWeight="Bold"/>
-                            <TextBlock x:Name="txtbl_trangthai1" Grid.Column="1" Height="20" FontSize="10" Text="ĐÃ THANH TOÁN" Margin="10 30 0 0" FontWeight="Bold" Foreground="#00CC33"/>
-                            <TextBlock x:Name="txtbl_tienkh1" Grid.Column="2" Text="1 000 000 đ" FontWeight="Bold" Margin="10 20 0 0"/>
-                            <Button x:Name="btn_bacham1" Grid.Column="3" Style="{StaticResource Button3cham}">
-                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            </Button>
-                        </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btn_chuyentrangtruockh" Style="{StaticResource pagingButton}">
+                            <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource PagingButtonIcon}"/>
+                        </Button>
 
-                    </Grid>
-                </Button>
+                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
 
-                <Button Grid.Row="1" Margin="20 5 0 0" Style="{StaticResource Buttonsale}">
-                    <Grid Width="320" Height="80">
-                        <Grid Width="320" Height="80">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                DockPanel.Dock="Top" HorizontalAlignment="left">
-                                <Ellipse>
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="img_anhkh2" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
-                            <TextBlock x:Name="txtbl_tenkhmuahang2" Grid.Column="1" Height="20" Text="Phan Thanh Châm" Margin="10 0 0 20" FontWeight="Bold"/>
-                            <TextBlock x:Name="txtbl_trangthai2" Grid.Column="1" Height="20" FontSize="10" Text="ĐÃ THANH TOÁN" Margin="10 30 0 0" FontWeight="Bold" Foreground="#00CC33"/>
-                            <TextBlock x:Name="txtbl_tienkh2" Grid.Column="2" Text="1 000 000 đ" FontWeight="Bold" Margin="10 20 0 0"/>
-                            <Button x:Name="btn_bacham2" Grid.Column="3" Style="{StaticResource Button3cham}">
-                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            </Button>
-                        </Grid>
+                        <Button x:Name="btn_khtrang1" Style="{StaticResource pagingButton}" Content="1"/>
+                        <Button x:Name="btn_khtrang2" Style="{StaticResource pagingButton}" Content="2" Background="#623ed0" Foreground="#ffffff" />
+                        <Button x:Name="btn_khtrang3" Style="{StaticResource pagingButton}" Content="3"/>
+                        <Button x:Name="btn_khtrang4" Style="{StaticResource pagingButton}" Content="4"/>
 
-                    </Grid>
-                </Button>
+                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7 "/>
 
-                <Button Grid.Row="2"  Margin="20 5 0 0 " Style="{StaticResource Buttonsale}">
-                    <Grid Width="320" Height="80">
-                        <Grid Width="320" Height="80">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                DockPanel.Dock="Top" HorizontalAlignment="left">
-                                <Ellipse>
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="img_anhkh3" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
-                            <TextBlock x:Name="txtbl_tenkhmuahang3" Grid.Column="1" Height="20" Text="Phan Thanh Châm" Margin="10 0 0 20" FontWeight="Bold"/>
-                            <TextBlock x:Name="txtbl_trangthai3" Grid.Column="1" Height="20" FontSize="10" Text="ĐÃ THANH TOÁN" Margin="10 30 0 0" FontWeight="Bold" Foreground="#00CC33"/>
-                            <TextBlock x:Name="txtbl_tienkh3" Grid.Column="2" Text="1 000 000 đ" FontWeight="Bold" Margin="10 20 0 0"/>
-                            <Button x:Name="btn_bacham3" Grid.Column="3" Style="{StaticResource Button3cham}">
-                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            </Button>
-                        </Grid>
+                        <Button x:Name="btn_chuyentrangsaukh" Style="{StaticResource pagingButton}">
+                            <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource PagingButtonIcon}"/>
+                        </Button>
 
-                    </Grid>
-                </Button>
+                    </StackPanel>
 
-                <Button Grid.Row="3" Margin="20 5 0 0" Style="{StaticResource Buttonsale}">
-                    <Grid Width="320" Height="80">
-                        <Grid Width="320" Height="80">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                DockPanel.Dock="Top" HorizontalAlignment="left">
-                                <Ellipse>
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="img_anhkh4" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
-                            <TextBlock x:Name="txtbl_tenkhmuahang4" Grid.Column="1" Height="20" Text="Phan Thanh Châm" Margin="10 0 0 20" FontWeight="Bold"/>
-                            <TextBlock x:Name="txtbl_trangthai4" Grid.Column="1" Height="20" FontSize="10" Text="ĐÃ THANH TOÁN" Margin="10 30 0 0" FontWeight="Bold" Foreground="#00CC33"/>
-                            <TextBlock x:Name="txtbl_tienkh4" Grid.Column="2" Text="1 000 000 đ" FontWeight="Bold" Margin="10 20 0 0"/>
-                            <Button x:Name="btn_bacham4" Grid.Column="3" Style="{StaticResource Button3cham}">
-                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            </Button>
-                        </Grid>
-
-                    </Grid>
-                </Button>
-
-                <Button Grid.Row="4" Margin="20 5 0 0" Style="{StaticResource Buttonsale}">
-                    <Grid Width="320" Height="80">
-                        <Grid Width="320" Height="80">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                DockPanel.Dock="Top" HorizontalAlignment="left">
-                                <Ellipse>
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="img_anhkh5" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
-                            <TextBlock x:Name="txtbl_tenkhmuahang5" Grid.Column="1" Height="20" Text="Phan Thanh Châm" Margin="10 0 0 20" FontWeight="Bold"/>
-                            <TextBlock x:Name="txtbl_trangthai5" Grid.Column="1" Height="20" FontSize="10" Text="ĐÃ THANH TOÁN" Margin="10 30 0 0" FontWeight="Bold" Foreground="#00CC33"/>
-                            <TextBlock x:Name="txtbl_tienkh5" Grid.Column="2" Text="1 000 000 đ" FontWeight="Bold" Margin="10 20 0 0"/>
-                            <Button x:Name="btn_bacham5" Grid.Column="3" Style="{StaticResource Button3cham}">
-                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            </Button>
-                        </Grid>
-
-                    </Grid>
-                </Button>
-
-                <Button Grid.Row="5" Margin="20 5 0 0" Style="{StaticResource Buttonsale}">
-                    <Grid Width="320" Height="80">
-                        <Grid Width="320" Height="80">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                DockPanel.Dock="Top" HorizontalAlignment="left">
-                                <Ellipse>
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
-                            <TextBlock x:Name="txtbl_tenkhmuahang6" Grid.Column="1" Height="20" Text="Phan Thanh Châm" Margin="10 0 0 20" FontWeight="Bold"/>
-                            <TextBlock x:Name="txtbl_trangthai6" Grid.Column="1" Height="20" FontSize="10" Text="ĐÃ THANH TOÁN" Margin="10 30 0 0" FontWeight="Bold" Foreground="#00CC33"/>
-                            <TextBlock x:Name="txtbl_tienkh6" Grid.Column="2" Text="1 000 000 đ" FontWeight="Bold" Margin="10 20 0 0"/>
-                            <Button x:Name="btn_bacham6" Grid.Column="3" Style="{StaticResource Button3cham}">
-                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            </Button>
-                        </Grid>
-
-                    </Grid>
-
-                </Button>
-
+                </Border>
             </Grid>
         </Grid>
 
@@ -397,17 +251,7 @@
                                     <ColumnDefinition Width="165*"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <!--<WrapPanel Grid.ColumnSpan="2" Margin="0,0,25,5">
-                                    <ItemsControl x:Name="itctCate">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button Style="{StaticResource Buttonloai}" Margin="5">
-                                                    <TextBlock Text="{Binding CategoryName}" />
-                                                </Button>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </WrapPanel>-->
+                               
 
                                 <WrapPanel>
                                     <ListBox x:Name="itctCate" ItemsSource="{Binding}">
@@ -427,15 +271,7 @@
                                 </WrapPanel>
 
 
-                                <!--<Button x:Name="btn_loai_ao" Style="{StaticResource Buttonloai}" Margin="75,12,0,13">
-                                    <TextBlock x:Name="txtbl_loaiao" Text="Áo" />
-                                </Button>
-                                <Button x:Name="btn_loai_quan" Style="{StaticResource Buttonloai}" Margin="150,12,0,13">
-                                    <TextBlock x:Name="txtbl_loaiquan" Text="Quần" />
-                                </Button>
-                                <Button x:Name="btn_loai_mu" Style="{StaticResource Buttonloai}" Margin="225,12,0,13">
-                                    <TextBlock x:Name="txtbl_loaimu" Text="Mũ" />
-                                </Button>-->
+                                
 
                                 <Grid Width="200" HorizontalAlignment="Left" Margin="570 0 0 0" Grid.ColumnSpan="2">
                                     <TextBlock Margin="20 0 40 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
