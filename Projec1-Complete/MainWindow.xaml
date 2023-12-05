@@ -5,7 +5,7 @@
         Height="600" Width="1200"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
-       FontFamily="Poppins" Loaded="home_Loaded">
+       FontFamily="Poppins">
 
 
     <Border x:Name="bdr_Main" CornerRadius="20" Background="#eff2f7">
@@ -51,7 +51,7 @@
                         <RadioButton x:Name="rd_khachhang" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource user}" Checked="rd_khachhang_Checked" Foreground="#d0c0ff"/>
                         <RadioButton x:Name="rd_thongke" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource analytics}" Margin="0 1 0 1" Checked="rd_thongke_Checked" Foreground="#d0c0ff"/>
                         <Separator Margin="20 20" Background="{DynamicResource TertiaryBackgroundColor}"/>
-                        <RadioButton x:Name="rdLogout" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource logout}" Margin="0 0 0 1" Foreground="#d0c0ff" Click="rdLogOut_Click" RenderTransformOrigin="0.478,-1.479">
+                        <RadioButton x:Name="rdLogout" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource logout}" Margin="0 0 0 1" Foreground="#d0c0ff" Click="rdLogOut_Click" RenderTransformOrigin="0.478,-1.479" >
                             <UIElement.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>

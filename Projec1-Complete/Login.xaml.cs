@@ -1,4 +1,6 @@
-﻿using Projec1_Complete.BUS;
+﻿using MaterialDesignThemes.Wpf;
+using Projec1_Complete.BUS;
+using Projec1_Complete.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,7 +79,7 @@ namespace Projec1_Complete
                 }    
                 else
                 {
-                    // hỏi thầy
+                
                 }    
                 
             }
