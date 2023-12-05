@@ -46,13 +46,13 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="1" x:Name="btn_tktheongay" Style="{StaticResource Buttontktheo}" Margin="0">
+                            <Button Grid.Column="1" x:Name="btnDay" Style="{StaticResource Buttontktheo}" Margin="0" Click="btnDay_Click">
                                 <TextBlock x:Name="txtbl_ltktheongay" Text="Ngày" />
                             </Button>
-                            <Button Grid.Column="2"  x:Name="btn_tktheothang" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0">
+                            <Button Grid.Column="2"  x:Name="btnMonth" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0" Click="btnMonth_Click">
                                 <TextBlock x:Name="txtbl_tktheothang" Text="Tháng" />
                             </Button>
-                            <Button Grid.Column="3" x:Name="btn_tksanpham" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0">
+                            <Button Grid.Column="3" x:Name="btnPrd" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnPrd_Click">
                                 <TextBlock x:Name="txtbl_tksanpham" Text="Sản phẩm" />
                             </Button>
 
@@ -67,7 +67,7 @@
                                                
                     </StackPanel>
                     
-                    <Button Grid.Column="1" x:Name="btn_lichsu" Margin="0 -5 10 0" Content="Lịch sử" FontWeight="Bold" Style="{StaticResource TabButton}" Click="btn_lichsu_Click_1"/>
+                    <Button Grid.Column="1" x:Name="btn_lichsu" Margin="0 -5 10 0" Content="Lịch sử" FontWeight="Bold" Style="{StaticResource TabButton}" Click="btn_lichsu_Click"/>
                    
                     
 
@@ -79,7 +79,7 @@
 
             <!--Main Chart Section-->
             <StackPanel Grid.Row="2" Visibility="Collapsed" x:Name="stpn_history" Margin="20 20 20 0" >
-                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="DTGHistory" Margin="0,10,0,60" Grid.RowSpan="3">
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="DTGHistory" Margin="0,10,0,60" Grid.RowSpan="3" Loaded="DTGHistory_Loaded">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                             <DataGridCheckBoxColumn.HeaderTemplate>
@@ -89,11 +89,11 @@
                             </DataGridCheckBoxColumn.HeaderTemplate>
                         </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn x:Name="ID" Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding HistoryID}"/>
-                        <DataGridTextColumn x:Name="Action"  Header="Hành Động" IsReadOnly="True" Width="*" Binding="{Binding Action}"/>
-                        <DataGridTextColumn x:Name="Time"  Header="Thời Gian" IsReadOnly="True" Width="*" Binding="{Binding Timestamp}"/>
-                        <DataGridTextColumn x:Name="Employee"  Header="Nhân Viên" IsReadOnly="True" Width="*" Binding="{Binding TypeAcc}"/>
-                        <DataGridTextColumn x:Name="OrderID"  Header="Mã Đơn Hàng" IsReadOnly="True" Width="*" Binding="{Binding OrderID}"/>
+                        <DataGridTextColumn x:Name="ID" Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding History.HistoryID}"/>
+                        <DataGridTextColumn x:Name="Action"  Header="Hành Động" IsReadOnly="True" Width="*" Binding="{Binding History.Action}"/>
+                        <DataGridTextColumn x:Name="Time"  Header="Thời Gian" IsReadOnly="True" Width="*" Binding="{Binding History.TimeStamp}"/>
+                        <DataGridTextColumn x:Name="Employee"  Header="Nhân Viên" IsReadOnly="True" Width="*" Binding="{Binding Username}"/>
+                        <DataGridTextColumn x:Name="OrderID"  Header="Mã Đơn Hàng" IsReadOnly="True" Width="*" Binding="{Binding History.OrderID}"/>
                         <DataGridTextColumn x:Name="ProductID"  Header="Tên Sản Phẩm" IsReadOnly="True" Width="*" Binding="{Binding ProductName}"/>
 
 
@@ -121,7 +121,7 @@
             <Border x:Name="bd_thongke" Grid.Row="2" Style="{StaticResource whiteboder}" Margin="20 20 20 0" >
 
 
-                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom">
+                <lvc:CartesianChart x:Name="ChartDT" Series="{Binding SeriesCollection}" LegendLocation="Bottom">
 
                     <lvc:CartesianChart.AxisX>
                         <lvc:Axis Title="Vendedor" Labels="{Binding Labels}"></lvc:Axis>

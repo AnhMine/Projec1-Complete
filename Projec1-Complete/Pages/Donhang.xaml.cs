@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Projec1_Complete.BUS;
+using Projec1_Complete.DAL;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +22,27 @@ namespace Projec1_Complete.Pages
     /// Interaction logic for Donhang.xaml
     /// </summary>
     public partial class Donhang : Page
+        
     {
+        public ObservableCollection<Category> categories { get; set; }
+        public ObservableCollection<Person> persons { get; set; }
+        private CategoryBUS categoryBUS;
         public Donhang()
         {
             InitializeComponent();
+            DataContext = this;
+            categories = new ObservableCollection<Category>();
+            persons = new ObservableCollection<Person>();
+
+            categoryBUS = new CategoryBUS();
+            LoadCategory();
         }
+        private void LoadCategory()
+        {
+            List<Category> categorieslist = categoryBUS.GetCategories();
+            itctCate.ItemsSource = categorieslist;
+        }
+
         private void btn_packages_Click(object sender, RoutedEventArgs e)
         {
             stpn_packages.Visibility = Visibility.Visible;
@@ -203,6 +222,11 @@ namespace Projec1_Complete.Pages
             stpn_packages.Visibility = Visibility.Collapsed;
             spr_duonggach.Visibility = Visibility.Collapsed;
             btn_quayve.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnAll_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projec1_Complete.Pages"
         mc:Ignorable="d"
-        Title="Donhang" Height="680" Width="1200">
+        Title="Donhang" Height="900" Width="1100">
     <Grid Background="#eff2f7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -396,10 +396,38 @@
                                     <ColumnDefinition Width="652*"/>
                                     <ColumnDefinition Width="165*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="btn_loai_tatca" Style="{StaticResource Buttonloai}" Margin="0,12,0,13">
-                                    <TextBlock x:Name="txtbl_loaitatca" Text="Tất cả" />
-                                </Button>
-                                <Button x:Name="btn_loai_ao" Style="{StaticResource Buttonloai}" Margin="75,12,0,13">
+                                
+                                <!--<WrapPanel Grid.ColumnSpan="2" Margin="0,0,25,5">
+                                    <ItemsControl x:Name="itctCate">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{StaticResource Buttonloai}" Margin="5">
+                                                    <TextBlock Text="{Binding CategoryName}" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </WrapPanel>-->
+
+                                <WrapPanel>
+                                    <ListBox x:Name="itctCate" ItemsSource="{Binding}">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{StaticResource Buttonloai}" Margin="5">
+                                                    <TextBlock Text="{Binding CategoryName}" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </WrapPanel>
+
+
+                                <!--<Button x:Name="btn_loai_ao" Style="{StaticResource Buttonloai}" Margin="75,12,0,13">
                                     <TextBlock x:Name="txtbl_loaiao" Text="Áo" />
                                 </Button>
                                 <Button x:Name="btn_loai_quan" Style="{StaticResource Buttonloai}" Margin="150,12,0,13">
@@ -407,13 +435,13 @@
                                 </Button>
                                 <Button x:Name="btn_loai_mu" Style="{StaticResource Buttonloai}" Margin="225,12,0,13">
                                     <TextBlock x:Name="txtbl_loaimu" Text="Mũ" />
-                                </Button>
+                                </Button>-->
 
                                 <Grid Width="200" HorizontalAlignment="Left" Margin="570 0 0 0" Grid.ColumnSpan="2">
                                     <TextBlock Margin="20 0 40 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                      Panel.ZIndex="1"/>
 
-                                    <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="0 4 0 11"/>
+                                    <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="466,0,-466,0" VerticalAlignment="Center"/>
 
                                     <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
                                            Margin="0 0 15 5" Foreground="#b0b9c6" HorizontalAlignment="Right"/>

@@ -1,4 +1,6 @@
-﻿using Projec1_Complete.BUS;
+﻿using MaterialDesignThemes.Wpf;
+using Projec1_Complete.BUS;
+using Projec1_Complete.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,12 +67,21 @@ namespace Projec1_Complete
             }
 
             bool isValid = accountBUS.CheckAccount(username, password);
+            bool type = accountBUS.CheckType(username);
 
             if (isValid)
             {
-                mainWindow = new MainWindow();
-                mainWindow.Show();
-                this.Hide();
+                if(type == true)
+                {
+                    mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Hide();
+                }    
+                else
+                {
+                
+                }    
+                
             }
             else
             {

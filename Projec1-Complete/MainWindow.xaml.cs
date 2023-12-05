@@ -23,6 +23,8 @@ namespace Projec1_Complete
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Login Instance { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -104,20 +106,11 @@ namespace Projec1_Complete
 
         private void rdLogOut_Click(object sender, RoutedEventArgs e)
         {
-            /*if (File.Exists("account.txt"))
-            {
-                // Xóa tệp tin lưu trữ thông tin tài khoản
-                File.Delete("account.txt");
-            }
-
+            Login loginwd = new Login();
+            loginwd.Show();
             this.Close();
-            Login.Instance.Visibility = Visibility.Visible;*/
-
         }
 
-        private void home_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }

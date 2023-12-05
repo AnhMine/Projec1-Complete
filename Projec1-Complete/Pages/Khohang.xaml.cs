@@ -40,6 +40,7 @@ namespace Projec1_Complete.Pages
         {
             InitializeComponent();
             productBUS = new ProductBUS();
+            LoadPage();
         }
 
         #region Method

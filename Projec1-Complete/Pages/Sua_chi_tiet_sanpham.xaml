@@ -17,12 +17,12 @@
 
             <Grid Height="460" Width="360" Margin="20 30 490 100">
 
-                <Image x:Name="imagePrd"  Height="460" Width="360" MouseLeftButtonUp="imagePrd_MouseLeftButtonUp"/>
+                <Image x:Name="imagePrd" Height="460" Width="360" Source="{Binding ImageLink}" Cursor="Hand" MouseLeftButtonUp="imagePrd_MouseLeftButtonUp"/>
 
                 <Border x:Name="bdImg" Width="150" Height="150" Padding="3" Background="#623ed0" CornerRadius="100"
                                 DockPanel.Dock="Top" HorizontalAlignment="left" Margin="105 0 0 0" BorderBrush="#623ed0" BorderThickness="1">
 
-                    <Button x:Name="btnImage" Background="Transparent" Width="100" Height="100" BorderBrush="Transparent" >
+                    <Button x:Name="btnImage" Background="Transparent" Width="100" Height="100" BorderBrush="Transparent" Loaded="btnImage_Loaded" Click="btnImage_Click" >
                         <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}" Width="50" Height="50"/>
                     </Button>
 
@@ -32,7 +32,7 @@
             </Grid>
             <Grid>
 
-                <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="820 0 0 490" Click="btn_Close_Click" />
+                <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="820 0 0 490" Click="btnClose_Click" />
                 <Button x:Name="btnSave" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold" Click="btnSave_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_luu" Text="Lưu"/>
@@ -78,15 +78,7 @@
                 <Button x:Name="btnDes" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 260 0 0 " Click="btnDes_Click">
                     <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                 </Button>
-                <TextBox x:Name="txtprdID" Width="250" Height="30" Margin="500 0 0 380 "  FontSize="15"
-                         Background="Transparent"
-                         BorderBrush="DarkGray"
-                         CaretBrush="LightGray"
-                         BorderThickness="0 0 0 1"
-                         Foreground="White" 
-                         Panel.ZIndex="1"
-                         VerticalContentAlignment="Bottom"
-                         Visibility="Hidden"/>
+
 
                 <TextBox x:Name="txtID" Width="250" Height="30" Margin="500 0 0 380 "  FontSize="15"
                          Background="Transparent"
@@ -96,7 +88,9 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False"/>
+                         IsEnabled="False"
+                         Text="{Binding ProductID}"
+                         />
 
                 <TextBox x:Name="txtName" Width="250" Height="30" Margin="500 0 0 300 "  FontSize="15"
                          Background="Transparent"
@@ -106,7 +100,8 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False"/>
+                         IsEnabled="False"
+                         Text="{Binding ProductName}"/>
 
                 <TextBox x:Name="txtCategory" Width="250" Height="30" Margin="500 0 0 220 "  FontSize="15"
                          Background="Transparent"
@@ -115,7 +110,9 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False"/>
+                         IsEnabled="False"
+                         
+                        />
 
                 <TextBox x:Name="txtPriceSell" Width="250" Height="30" Margin="500 0 0 140 "  FontSize="15"
                          Background="Transparent"
@@ -125,7 +122,8 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False" PreviewTextInput="txtPriceSell_PreviewTextInput"/>
+                         IsEnabled="False"
+                         Text="{Binding PriceSell}" PreviewTextInput="txtPriceSell_PreviewTextInput"/>
 
                 <TextBox x:Name="txtPrice" Width="250" Height="30" Margin="500 45 0 90 "  FontSize="15"
                          Background="Transparent"
@@ -135,7 +133,8 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False" PreviewTextInput="txtPrice_PreviewTextInput"/>
+                         IsEnabled="False"
+                         Text="{Binding Price}" PreviewTextInput="txtPrice_PreviewTextInput"/>
 
                 <TextBox x:Name="txtQuantity" Width="250" Height="30" Margin="500 40 0 0 "  FontSize="15"
                          Background="Transparent"
@@ -145,16 +144,18 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Bottom"
-                         IsEnabled="False" PreviewTextInput="txtQuantity_PreviewTextInput"/>
-
-                <ComboBox x:Name="cboActive" Width="250" Height="30" Margin="500 130 0 0 "  FontSize="15"
-                         Background="Transparent"
-                         BorderBrush="DarkGray"                        
-                         BorderThickness="0 0 0 1"
-                         Foreground="Black" 
-                         Panel.ZIndex="1"
-                         VerticalContentAlignment="Bottom"
-                          />
+                         IsEnabled="False"
+                         Text="{Binding Quantity}" PreviewTextInput="txtQuantity_PreviewTextInput" />
+                <TextBox x:Name="txtStatus" Width="250" Height="30" Margin="574,331,76,189"  FontSize="15"
+                    Background="Transparent"
+                    BorderBrush="DarkGray"
+                    CaretBrush="LightGray"
+                    BorderThickness="0 0 0 1"
+                    Foreground="Black" 
+                    Panel.ZIndex="1"
+                    VerticalContentAlignment="Top"
+                    IsEnabled="False"
+                    Text="{Binding Status}" />
 
                 <TextBox x:Name="txtDes" Width="250" Height="90" Margin="500 260 0 0 "  FontSize="15"
                          Background="Transparent"
@@ -164,7 +165,8 @@
                          Foreground="Black" 
                          Panel.ZIndex="1"
                          VerticalContentAlignment="Center"
-                         IsEnabled="False"/>
+                         IsEnabled="False"
+                         Text="{Binding Description}"/>
 
             </Grid>
         </Grid>
