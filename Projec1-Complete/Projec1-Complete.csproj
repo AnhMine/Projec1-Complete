@@ -115,6 +115,7 @@
     <Compile Include="BUS\AccountBUS.cs" />
     <Compile Include="BUS\CategoryBUS.cs" />
     <Compile Include="BUS\HistoryBUS.cs" />
+    <Compile Include="BUS\PersonBUS.cs" />
     <Compile Include="BUS\ProductBUS.cs" />
     <Compile Include="BUS\ThongKeDataBUS.cs" />
     <Compile Include="DAL\Account.cs">

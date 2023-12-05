@@ -44,51 +44,46 @@
                 
             </Button>
 
-
-           <Grid Grid.Row="1">
-
+            <Grid Grid.Row="1">
                 <ScrollViewer>
-
-                    <WrapPanel Grid.ColumnSpan="2" Margin="0,0,25,5">
-                        <ItemsControl x:Name="itctCate2">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Margin="62 5 0 0" Style="{StaticResource Buttonsale}">
-                                        <Grid Width="320" Height="80">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <!-- ... Các thành phần trong Grid ... -->
-
-                                            <TextBlock Text="{Binding CategoryName}" />
-
-                                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                    <ItemsControl x:Name="itctPeople" ItemsSource="{Binding}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Margin="62 5 0 0" Style="{StaticResource Buttonsale}">
+                                    <Grid Width="320" Height="80">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
                                             DockPanel.Dock="Top" HorizontalAlignment="left">
-                                                <Ellipse>
-                                                    <Ellipse.Fill>
-                                                        <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-                                            </Border>
+                                            <Ellipse>
+                                                <Ellipse.Fill>
+                                                    <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                        </Border>
 
-                                            <TextBlock Text="Phan Thanh Châm" Grid.Column="1" FontWeight="Bold" Margin="10 0 0 0" FontSize="18"/>
-                                            <TextBlock Text="ĐÃ THANH TOÁN" Grid.Column="1" FontWeight="Bold" Margin="10 30 0 0" Foreground="#00CC33" FontSize="18"/>
-                                            <TextBlock Text="1 000 000 đ" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 20" FontSize="18"/>
-                                        </Grid>
-                                    </Button>
-
-
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </WrapPanel>
+                                        <TextBlock Text="{Binding PersonName}" Grid.Column="1" FontWeight="Bold" Margin="10 0 0 0" FontSize="18"/>
+                                        <TextBlock Text="{Binding Status}" Grid.Column="1" FontWeight="Bold" Margin="10 30 0 0" Foreground="#00CC33" FontSize="18"/>
+                                        <TextBlock Text="{Binding TotalAmout}" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 20" FontSize="18"/>
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </Grid>
-            
-            
+
+
+
         </Grid>
 
         <Border CornerRadius="10" Grid.Column="1" Background="White" Margin="20">
@@ -234,28 +229,30 @@
                                 
                                 <Button x:Name="btn_tatcaloai" Style="{StaticResource Buttonloai}">
                                     <TextBlock x:Name="txtbl_tatcaloai" Text="Tất cả"/>
-                                </Button> 
-                               
-
-                                <WrapPanel>
-                                    <ListBox x:Name="itctCate" ItemsSource="{Binding}">
-                                        <ListBox.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" />
-                                            </ItemsPanelTemplate>
-                                        </ListBox.ItemsPanel>
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button Style="{StaticResource Buttonloai}" Margin="5">
-                                                    <TextBlock Text="{Binding CategoryName}" />
-                                                </Button>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </WrapPanel>
+                                </Button>
 
 
-                                
+                                <Grid Grid.Row="1">
+                                  
+                                        <ItemsControl x:Name="itctCate" ItemsSource="{Binding}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Horizontal" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Button Style="{StaticResource Buttonloai}" Margin="5" Click="CategoryBtn_Click">
+                                                        <TextBlock Text="{Binding CategoryName}"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                </Grid>
+
+
+
+
 
                                 <Grid Width="200" HorizontalAlignment="Left" Margin="570 0 0 0" Grid.ColumnSpan="2">
                                     <TextBlock Margin="20 0 40 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
@@ -270,310 +267,56 @@
 
                                 <Separator x:Name="spr_duonggach2" Background="LightGray" Grid.Row="0" Height="5" Margin="5,45,5,5" Grid.ColumnSpan="2"/>
                             </Grid>
-
                             <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                <ScrollViewer>
+                                    <ItemsControl x:Name="itctCate3" ItemsSource="{Binding}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
+                                                <Button Grid.Row="1" x:Name="btn_sp1" Style="{StaticResource Buttonspham}" Click="btn_sp1_Click" >
+                                                    <Grid Width="170" Height="210">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="auto"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                        </Grid.RowDefinitions>
 
+                                                        <Image x:Name="img_anhsp1" Width="170" Height="130" Source="{Binding ImageLink}"/>
+                                                        <TextBlock Grid.Row="1" Text="{Binding ProductName}" Style="{StaticResource texttensp}"/>
+                                                        <TextBlock  Width="70" Height="20" Grid.Row="2" Text="{Binding PriceSell}" Style="{StaticResource textgiasp}" />
 
-                                <Button Grid.Row="1" x:Name="btn_sp1" Style="{StaticResource Buttonspham}" Click="btn_sp1_Click" >
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Button x:Name="btn_tru1" Style="{StaticResource Buttonsoluong}">
+                                                                <TextBlock x:Name="txtbl_tru1" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
+                                                            </Button>
 
-                                        <Image x:Name="img_anhsp1" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp1" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp1" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
+                                                            <TextBlock Grid.Column="1" x:Name="txtbl_so1" Text="2" HorizontalAlignment="Center" FontSize="10"/>
 
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru1" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru1" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
+                                                            <Button Grid.Column="2" x:Name="btn_cong1" Style="{StaticResource Buttonsoluong}">
+                                                                <TextBlock x:Name="txtbl_cong1" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
+                                                            </Button>
+                                                        </Grid>
 
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so1" Text="2" HorizontalAlignment="Center" FontSize="10"/>
+                                                        <Button x:Name="btn_giohang1" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
+                                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
+                                                        </Button>
 
-                                            <Button Grid.Column="2" x:Name="btn_cong1" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong1" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button x:Name="btn_giohang1" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
-                                <Button Grid.Row="1" Grid.Column="1" x:Name="btn_sp2" Style="{StaticResource Buttonspham}" Click="btn_sp2_Click">
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image x:Name="img_anhsp2" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp2" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp2" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
-
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru2" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru2" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
-
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so2" Text="2" HorizontalAlignment="Center" FontSize="10"/>
-
-                                            <Button Grid.Column="2" x:Name="btn_cong2" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong2" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button x:Name="btn_giohang2" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
-                                <Button Grid.Row="1" Grid.Column="2" x:Name="btn_sp3" Style="{StaticResource Buttonspham}" Click="btn_sp3_Click">
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image x:Name="img_anhsp3" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp3" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp3" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
-
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru3" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru3" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
-
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so3" Text="2" HorizontalAlignment="Center" FontSize="10"/>
-
-                                            <Button Grid.Column="2" x:Name="btn_cong3" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong3" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button x:Name="btn_giohang3"  Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
-                                <Button Grid.Row="1" Grid.Column="3" x:Name="btn_sp4" Style="{StaticResource Buttonspham}" Click="btn_sp4_Click">
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image x:Name="img_anhsp4" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp4" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp4" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
-
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru4" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru4" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
-
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so4" Text="2" HorizontalAlignment="Center" FontSize="10"/>
-
-                                            <Button Grid.Column="2" x:Name="btn_cong4" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong4" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button  x:Name="btn_giohang4" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
-                                <Button Grid.Row="2"  x:Name="btn_sp5" Style="{StaticResource Buttonspham}" Click="btn_sp5_Click">
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image x:Name="img_anhsp5" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp5" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp5" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
-
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru5" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru5" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
-
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so5" Text="2" HorizontalAlignment="Center" FontSize="10"/>
-
-                                            <Button  Grid.Column="2" x:Name="btn_cong5" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong5" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button x:Name="btn_giohang5" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 0 0 5">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
-                                <Button Grid.Column="1" Grid.Row="2" x:Name="btn_sp6" Style="{StaticResource Buttonspham}" Click="btn_sp6_Click">
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image x:Name="img_anhsp6" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp6" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp6" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
-
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru6" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru6" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
-
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so6" Text="2" HorizontalAlignment="Center" FontSize="10"/>
-
-                                            <Button  Grid.Column="2" x:Name="btn_cong6" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong6" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button x:Name="btn_giohang6" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
-                                <Button Grid.Column="2" Grid.Row="2" x:Name="btn_sp7" Style="{StaticResource Buttonspham}" Click="btn_sp7_Click">
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image x:Name="img_anhsp7" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp7" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp7" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
-
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru7" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru7" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
-
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so7" Text="2" HorizontalAlignment="Center" FontSize="10"/>
-
-                                            <Button Grid.Column="2" x:Name="btn_cong7" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong7" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button x:Name="btn_giohang7" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
-                                <Button Grid.Column="3" Grid.Row="2" x:Name="btn_sp8" Style="{StaticResource Buttonspham}" Click="btn_sp8_Click">
-                                    <Grid Width="170" Height="210">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Image x:Name="img_anhsp8" Width="170" Height="130" Source="/Assets/Icons/aohoodie.jpg"/>
-                                        <TextBlock x:Name="txtbl_tensp8" Grid.Row="1" Text="Áo Hoodie vải mềm mịn đẹp" Style="{StaticResource texttensp}"/>
-                                        <TextBlock x:Name="txtbl_giasp8" Width="70" Height="20" Grid.Row="2" Text="320 000 đ" Style="{StaticResource textgiasp}" />
-
-                                        <Grid Grid.Row="2" Width="45" Height="15" Margin="40 5 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="btn_tru" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_tru8" Text="-" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 5"/>
-                                            </Button>
-
-                                            <TextBlock Grid.Column="1" x:Name="txtbl_so8" Text="2" HorizontalAlignment="Center" FontSize="10"/>
-
-                                            <Button  Grid.Column="2" x:Name="btn_cong8" Style="{StaticResource Buttonsoluong}">
-                                                <TextBlock x:Name="txtbl_cong8" Text="+" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 5"/>
-                                            </Button>
-                                        </Grid>
-
-                                        <Button x:Name="btn_giohang8" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="120 5 0 0">
-                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="20" Height="20" />
-                                        </Button>
-
-                                    </Grid>
-                                </Button>
-
+                                                    </Grid>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
                             </Grid>
 
                             <Grid  Background="#eff2f7" Margin="15 0 0 0" Grid.Row="2">

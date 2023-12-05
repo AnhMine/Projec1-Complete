@@ -27,22 +27,40 @@ namespace Projec1_Complete.Pages
         public ObservableCollection<Category> categories { get; set; }
         public ObservableCollection<Person> persons { get; set; }
         private CategoryBUS categoryBUS;
+        private PersonBUS personBUS;
         public Donhang()
         {
             InitializeComponent();
             DataContext = this;
             categories = new ObservableCollection<Category>();
             persons = new ObservableCollection<Person>();
-
+            personBUS = new PersonBUS();
             categoryBUS = new CategoryBUS();
             LoadCategory();
+            LoadPerson();
         }
         private void LoadCategory()
         {
             List<Category> categorieslist = categoryBUS.GetCategories();
             itctCate.ItemsSource = categorieslist;
-            itctCate2.ItemsSource = categorieslist;
             
+        }
+        private void LoadProductByIDCategory(int id)
+        {
+            List<Product> prdList = categoryBUS.GetProductByID(id);
+            itctCate3.ItemsSource = prdList;
+        }
+        private void LoadPerson()
+        {
+            List<Person> perList = personBUS.GetListCustomer();
+            itctPeople.ItemsSource = perList;
+        }
+        private void CategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button cateBtn = (Button)sender;
+            Category cate = (Category)cateBtn.DataContext;
+            int categoryID = cate.CategoryID;
+            LoadProductByIDCategory(categoryID);
         }
 
         private void btn_packages_Click(object sender, RoutedEventArgs e)

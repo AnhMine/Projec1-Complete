@@ -17,5 +17,10 @@ namespace Projec1_Complete.DAL
         {
             return db.Categories.ToList();
         }
+        public List<Product> GetProductByID(int id)
+        {
+            List<Product> products = db.Products.Where(p=>p.CategoryID == id).ToList(); 
+            return products;
+        }
     }
 }

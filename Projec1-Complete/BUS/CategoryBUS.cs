@@ -18,5 +18,9 @@ namespace Projec1_Complete.BUS
         {
             return _categoryDAL.GetCategories();
         }
+        public List<Product> GetProductByID(int id)
+        {
+            return _categoryDAL.GetProductByID(id);
+        }
     }
 }
