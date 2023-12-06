@@ -67,11 +67,11 @@ namespace Projec1_Complete
             }
 
             bool isValid = accountBUS.CheckAccount(username, password);
-            bool type = accountBUS.CheckType(username);
+            string type = accountBUS.CheckType(username);
 
             if (isValid)
             {
-                if(type == true)
+                if(type == "Admin")
                 {
                     mainWindow = new MainWindow();
                     mainWindow.Show();

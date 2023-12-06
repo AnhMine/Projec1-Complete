@@ -23,6 +23,7 @@ namespace Projec1_Complete.DAL
     
         public int OrderID { get; set; }
         public Nullable<int> AccountID { get; set; }
+        public Nullable<int> PersonID { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<bool> Status { get; set; }
         public Nullable<byte> Discount { get; set; }
@@ -32,5 +33,6 @@ namespace Projec1_Complete.DAL
         public virtual ICollection<History> Histories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderInfo> OrderInfoes { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

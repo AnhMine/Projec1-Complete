@@ -41,7 +41,6 @@ namespace Projec1_Complete.DAL
                 HistoryID = AddHistoryRecord(),
                 Action = "Thêm Sản Phẩm",
                 TimeStamp = DateTime.Now,
-                AccountID = 1,
                 ProductID = product.ProductID,
             };
             db.Histories.Add(historyRecord);
@@ -70,7 +69,6 @@ namespace Projec1_Complete.DAL
                     HistoryID = AddHistoryRecord(),
                     Action = "Sửa Sản Phẩm",
                     TimeStamp = DateTime.Now,
-                    AccountID = 1,
                     ProductID = product.ProductID,
                 };
                 db.Histories.Add(historyRecord);
@@ -95,7 +93,6 @@ namespace Projec1_Complete.DAL
                     HistoryID = AddHistoryRecord(),
                     Action = "Đổi Trạng Thái Sản Phẩm",
                     TimeStamp = DateTime.Now,
-                    AccountID = 1,
                     ProductID = id,
                 };
                 db.Histories.Add(historyRecord);

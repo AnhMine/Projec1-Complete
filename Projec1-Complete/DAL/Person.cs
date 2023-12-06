@@ -18,17 +18,21 @@ namespace Projec1_Complete.DAL
         public Person()
         {
             this.Accounts = new HashSet<Account>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int PersonID { get; set; }
         public string PersonName { get; set; }
+        public string PersonImage { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public Nullable<System.DateTime> DateSave { get; set; }
-        public string status { get; set; }
+        public string Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Projec1_Complete.BUS
         {
             return accountDAL.GetAccountById(id);
         }
-        public bool CheckType(string username)
+        public string CheckType(string username)
         {
             return accountDAL.CheckStatus(username);
         }

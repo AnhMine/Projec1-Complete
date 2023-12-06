@@ -32,10 +32,16 @@ namespace Projec1_Complete.DAL
             var acc = db.Accounts.FirstOrDefault(a => a.AccountID == id);
             return acc;
         }
-        public bool CheckStatus(string username)
+        public string CheckStatus(string username)
         {
-            var acc = db.Accounts.FirstOrDefault( a => a.UserName == username);
-            return acc.Type;
+            var personType = db.Accounts
+                                .Where(acc => acc.UserName == username)
+                                .Join(db.People, acc => acc.PersonID, person => person.PersonID, (acc, person) => person.Type)
+                                .FirstOrDefault();
+
+            return personType ?? "DefaultType";
         }
+
+
     }
 }

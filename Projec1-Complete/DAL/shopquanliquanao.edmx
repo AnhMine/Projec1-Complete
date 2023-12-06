@@ -12,7 +12,6 @@
           <Property Name="AccountID" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="24" Nullable="false" />
-          <Property Name="Type" Type="bit" Nullable="false" />
           <Property Name="PersonID" Type="int" />
         </EntityType>
         <EntityType Name="Category">
@@ -29,7 +28,6 @@
           <Property Name="HistoryID" Type="int" Nullable="false" />
           <Property Name="Action" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
-          <Property Name="AccountID" Type="int" />
           <Property Name="OrderID" Type="int" />
           <Property Name="ProductID" Type="char" MaxLength="7" />
         </EntityType>
@@ -48,6 +46,7 @@
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="AccountID" Type="int" />
+          <Property Name="PersonID" Type="int" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
           <Property Name="Discount" Type="tinyint" />
@@ -58,11 +57,12 @@
           </Key>
           <Property Name="PersonID" Type="int" Nullable="false" />
           <Property Name="PersonName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PersonImage" Type="varchar" MaxLength="255" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone" Type="nvarchar" MaxLength="10" />
           <Property Name="Address" Type="nvarchar" MaxLength="150" />
           <Property Name="DateSave" Type="datetime" />
-          <Property Name="status" Type="nvarchar" MaxLength="10" />
+          <Property Name="Type" Type="nvarchar" MaxLength="11" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -89,7 +89,7 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK__Account__PersonI__5812160E">
+        <Association Name="FK__Account__PersonI__59063A47">
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -101,19 +101,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__History__Account__656C112C">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="History" Type="Self.History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountID" />
-            </Principal>
-            <Dependent Role="History">
-              <PropertyRef Name="AccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__History__OrderID__66603565">
+        <Association Name="FK__History__OrderID__6754599E">
           <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
@@ -125,7 +113,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__History__Product__6754599E">
+        <Association Name="FK__History__Product__68487DD7">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
@@ -137,7 +125,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderInfo__Order__619B8048">
+        <Association Name="FK__OrderInfo__Order__6383C8BA">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderInfo__Produ__628FA481">
+        <Association Name="FK__OrderInfo__Produ__6477ECF3">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -161,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__AccountI__5AEE82B9">
+        <Association Name="FK__Orders__AccountI__5BE2A6F2">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,6 +158,18 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PersonID__5CD6CB2B">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -225,32 +225,32 @@
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Account__PersonI__5812160E" Association="Self.FK__Account__PersonI__5812160E">
+          <AssociationSet Name="FK__Account__PersonI__59063A47" Association="Self.FK__Account__PersonI__59063A47">
             <End Role="Person" EntitySet="Person" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__History__Account__656C112C" Association="Self.FK__History__Account__656C112C">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="History" EntitySet="History" />
-          </AssociationSet>
-          <AssociationSet Name="FK__History__OrderID__66603565" Association="Self.FK__History__OrderID__66603565">
+          <AssociationSet Name="FK__History__OrderID__6754599E" Association="Self.FK__History__OrderID__6754599E">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="History" EntitySet="History" />
           </AssociationSet>
-          <AssociationSet Name="FK__History__Product__6754599E" Association="Self.FK__History__Product__6754599E">
+          <AssociationSet Name="FK__History__Product__68487DD7" Association="Self.FK__History__Product__68487DD7">
             <End Role="Product" EntitySet="Product" />
             <End Role="History" EntitySet="History" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderInfo__Order__619B8048" Association="Self.FK__OrderInfo__Order__619B8048">
+          <AssociationSet Name="FK__OrderInfo__Order__6383C8BA" Association="Self.FK__OrderInfo__Order__6383C8BA">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderInfo" EntitySet="OrderInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderInfo__Produ__628FA481" Association="Self.FK__OrderInfo__Produ__628FA481">
+          <AssociationSet Name="FK__OrderInfo__Produ__6477ECF3" Association="Self.FK__OrderInfo__Produ__6477ECF3">
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderInfo" EntitySet="OrderInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__AccountI__5AEE82B9" Association="Self.FK__Orders__AccountI__5AEE82B9">
+          <AssociationSet Name="FK__Orders__AccountI__5BE2A6F2" Association="Self.FK__Orders__AccountI__5BE2A6F2">
             <End Role="Account" EntitySet="Account" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PersonID__5CD6CB2B" Association="Self.FK__Orders__PersonID__5CD6CB2B">
+            <End Role="Person" EntitySet="Person" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__Product__Categor__4BAC3F29" Association="Self.FK__Product__Categor__4BAC3F29">
@@ -270,11 +270,9 @@
           <Property Name="AccountID" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Type" Type="Boolean" Nullable="false" />
           <Property Name="PersonID" Type="Int32" />
-          <NavigationProperty Name="Person" Relationship="Self.FK__Account__PersonI__5812160E" FromRole="Account" ToRole="Person" />
-          <NavigationProperty Name="Histories" Relationship="Self.FK__History__Account__656C112C" FromRole="Account" ToRole="History" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AccountI__5AEE82B9" FromRole="Account" ToRole="Orders" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__Account__PersonI__59063A47" FromRole="Account" ToRole="Person" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AccountI__5BE2A6F2" FromRole="Account" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -291,12 +289,10 @@
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
           <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="AccountID" Type="Int32" />
           <Property Name="OrderID" Type="Int32" />
           <Property Name="ProductID" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__History__Account__656C112C" FromRole="History" ToRole="Account" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__History__OrderID__66603565" FromRole="History" ToRole="Orders" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__History__Product__6754599E" FromRole="History" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__History__OrderID__6754599E" FromRole="History" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__History__Product__68487DD7" FromRole="History" ToRole="Product" />
         </EntityType>
         <EntityType Name="OrderInfo">
           <Key>
@@ -306,8 +302,8 @@
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__OrderInfo__Order__619B8048" FromRole="OrderInfo" ToRole="Orders" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__OrderInfo__Produ__628FA481" FromRole="OrderInfo" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__OrderInfo__Order__6383C8BA" FromRole="OrderInfo" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__OrderInfo__Produ__6477ECF3" FromRole="OrderInfo" ToRole="Product" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -315,12 +311,14 @@
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="AccountID" Type="Int32" />
+          <Property Name="PersonID" Type="Int32" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="Discount" Type="Byte" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Orders__AccountI__5AEE82B9" FromRole="Orders" ToRole="Account" />
-          <NavigationProperty Name="Histories" Relationship="Self.FK__History__OrderID__66603565" FromRole="Orders" ToRole="History" />
-          <NavigationProperty Name="OrderInfoes" Relationship="Self.FK__OrderInfo__Order__619B8048" FromRole="Orders" ToRole="OrderInfo" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Orders__AccountI__5BE2A6F2" FromRole="Orders" ToRole="Account" />
+          <NavigationProperty Name="Histories" Relationship="Self.FK__History__OrderID__6754599E" FromRole="Orders" ToRole="History" />
+          <NavigationProperty Name="OrderInfoes" Relationship="Self.FK__OrderInfo__Order__6383C8BA" FromRole="Orders" ToRole="OrderInfo" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__Orders__PersonID__5CD6CB2B" FromRole="Orders" ToRole="Person" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -328,12 +326,14 @@
           </Key>
           <Property Name="PersonID" Type="Int32" Nullable="false" />
           <Property Name="PersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="DateSave" Type="DateTime" Precision="3" />
-          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__PersonI__5812160E" FromRole="Person" ToRole="Account" />
+          <Property Name="Type" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__PersonI__59063A47" FromRole="Person" ToRole="Account" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PersonID__5CD6CB2B" FromRole="Person" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -350,8 +350,8 @@
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ImageLink" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__4BAC3F29" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="Histories" Relationship="Self.FK__History__Product__6754599E" FromRole="Product" ToRole="History" />
-          <NavigationProperty Name="OrderInfoes" Relationship="Self.FK__OrderInfo__Produ__628FA481" FromRole="Product" ToRole="OrderInfo" />
+          <NavigationProperty Name="Histories" Relationship="Self.FK__History__Product__68487DD7" FromRole="Product" ToRole="History" />
+          <NavigationProperty Name="OrderInfoes" Relationship="Self.FK__OrderInfo__Produ__6477ECF3" FromRole="Product" ToRole="OrderInfo" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -363,7 +363,7 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK__Account__PersonI__5812160E">
+        <Association Name="FK__Account__PersonI__59063A47">
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -375,19 +375,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__History__Account__656C112C">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="History" Type="Self.History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountID" />
-            </Principal>
-            <Dependent Role="History">
-              <PropertyRef Name="AccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Orders__AccountI__5AEE82B9">
+        <Association Name="FK__Orders__AccountI__5BE2A6F2">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -411,7 +399,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__History__OrderID__66603565">
+        <Association Name="FK__History__OrderID__6754599E">
           <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
@@ -423,7 +411,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__History__Product__6754599E">
+        <Association Name="FK__History__Product__68487DD7">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
@@ -435,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderInfo__Order__619B8048">
+        <Association Name="FK__OrderInfo__Order__6383C8BA">
           <End Role="Orders" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -447,7 +435,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderInfo__Produ__628FA481">
+        <Association Name="FK__OrderInfo__Produ__6477ECF3">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -456,6 +444,18 @@
             </Principal>
             <Dependent Role="OrderInfo">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PersonID__5CD6CB2B">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -468,15 +468,11 @@
           <EntitySet Name="People" EntityType="Self.Person" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK__Account__PersonI__5812160E" Association="Self.FK__Account__PersonI__5812160E">
+          <AssociationSet Name="FK__Account__PersonI__59063A47" Association="Self.FK__Account__PersonI__59063A47">
             <End Role="Person" EntitySet="People" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK__History__Account__656C112C" Association="Self.FK__History__Account__656C112C">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="History" EntitySet="Histories" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Orders__AccountI__5AEE82B9" Association="Self.FK__Orders__AccountI__5AEE82B9">
+          <AssociationSet Name="FK__Orders__AccountI__5BE2A6F2" Association="Self.FK__Orders__AccountI__5BE2A6F2">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
@@ -484,21 +480,25 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__History__OrderID__66603565" Association="Self.FK__History__OrderID__66603565">
+          <AssociationSet Name="FK__History__OrderID__6754599E" Association="Self.FK__History__OrderID__6754599E">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="History" EntitySet="Histories" />
           </AssociationSet>
-          <AssociationSet Name="FK__History__Product__6754599E" Association="Self.FK__History__Product__6754599E">
+          <AssociationSet Name="FK__History__Product__68487DD7" Association="Self.FK__History__Product__68487DD7">
             <End Role="Product" EntitySet="Products" />
             <End Role="History" EntitySet="Histories" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderInfo__Order__619B8048" Association="Self.FK__OrderInfo__Order__619B8048">
+          <AssociationSet Name="FK__OrderInfo__Order__6383C8BA" Association="Self.FK__OrderInfo__Order__6383C8BA">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderInfo" EntitySet="OrderInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderInfo__Produ__628FA481" Association="Self.FK__OrderInfo__Produ__628FA481">
+          <AssociationSet Name="FK__OrderInfo__Produ__6477ECF3" Association="Self.FK__OrderInfo__Produ__6477ECF3">
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderInfo" EntitySet="OrderInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PersonID__5CD6CB2B" Association="Self.FK__Orders__PersonID__5CD6CB2B">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -554,7 +554,6 @@
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PersonID" ColumnName="PersonID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -573,7 +572,6 @@
                 <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
               </MappingFragment>
@@ -593,6 +591,7 @@
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
@@ -604,11 +603,12 @@
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="PersonID" ColumnName="PersonID" />
                 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="PersonImage" ColumnName="PersonImage" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="DateSave" ColumnName="DateSave" />
-                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

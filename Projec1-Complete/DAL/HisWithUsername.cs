@@ -9,7 +9,7 @@ namespace Projec1_Complete.DAL
     public class HisWithUsername
     {
         public History History { get; set; }
-        public string Username { get; set; }
+        public string EmployeeName { get; set; }
         public string ProductName { get; set; }
     }
 }

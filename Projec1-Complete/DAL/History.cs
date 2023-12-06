@@ -17,11 +17,9 @@ namespace Projec1_Complete.DAL
         public int HistoryID { get; set; }
         public string Action { get; set; }
         public System.DateTime TimeStamp { get; set; }
-        public Nullable<int> AccountID { get; set; }
         public Nullable<int> OrderID { get; set; }
         public string ProductID { get; set; }
     
-        public virtual Account Account { get; set; }
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }
