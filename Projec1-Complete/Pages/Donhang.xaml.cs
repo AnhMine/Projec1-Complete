@@ -1,4 +1,5 @@
-﻿using Projec1_Complete.BUS;
+﻿using OfficeOpenXml.Style;
+using Projec1_Complete.BUS;
 using Projec1_Complete.DAL;
 using System;
 using System.Collections.Generic;
@@ -41,35 +42,13 @@ namespace Projec1_Complete.Pages
             productBUS = new ProductBUS();
             orderBUS = new OrderBUS();
             LoadCategory();
-            LoadPerson();
+            LoadPersonsByStatus(null);
         }
         private void LoadOrderDTG(int id)
         {
-            
-           /* OrdersAndCustomers firstOrder = orders.FirstOrDefault();
-
-            if (firstOrder != null)
-            {
-                if(firstOrder.order.Status == true && firstOrder.order.PersonID == 0)
-                {
-                    tblStatus.Text = "Đã Thanh Toán";
-                    tblStatus.Foreground = new SolidColorBrush(Color.FromRgb(0, 204, 51)); ;
-                }
-                else if (firstOrder.order.Status == true && firstOrder.order.PersonID == 0)
-                {
-                    tblStatus.Text = "Chưa Thanh Toán";
-
-                    tblStatus.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                }
-             
-                
-                tblTotalAmount.Text = firstOrder.TotalAmount.ToString(); 
-            }
-            else
-            {
-                tblStatus.Text = "Chưa Thanh Toán";
-                tblTotalAmount.Text = "0";
-            }*/
+            List<OrdersAndCustomers> orders = orderBUS.GetOrdersByPersonId(id);
+            DTGOrder.ItemsSource = orders;
+    
         }
 
         private void LoadCategory()
@@ -88,15 +67,63 @@ namespace Projec1_Complete.Pages
             List<Product> prdList = categoryBUS.GetProductByID(id);
             itctCate3.ItemsSource = prdList;
         }
-        private void LoadPerson()
+        //private void LoadPerson()
+        //{
+        //    List<Person> perList = personBUS.GetListCustomer();
+        //    List<PersonOrder> personOrderlist = new List<PersonOrder>();
+
+        //    foreach (Person personItem in perList)
+        //    {
+        //        bool status = orderBUS.GetStatus(personItem.PersonID);
+        //        string statusText = status ? "Đã Thanh Toán" : "Chưa Thanh Toán";
+
+        //        PersonOrder personOrder = new PersonOrder
+        //        {
+        //            PerSon = personItem,
+        //            DisplayStatus = statusText,
+        //        };
+        //        personOrderlist.Add(personOrder);
+        //    }
+
+        //    itctPeople.ItemsSource = personOrderlist;
+        //}
+        private void LoadPersonsByStatus(bool? status)
         {
             List<Person> perList = personBUS.GetListCustomer();
-            List<PersonOrder> personOrder = new List<PersonOrder>;
+            List<PersonOrder> personOrderlist = new List<PersonOrder>();
+
             foreach (Person personItem in perList)
             {
+                bool personStatus = orderBUS.GetStatus(personItem.PersonID);
+                int OrderID = orderBUS.GetOrder(personItem.PersonID);
+                decimal totalAmount = orderBUS.GetTotalAmount(OrderID);
+                
+                string statusText = personStatus == true ? "Đã Thanh Toán" : personStatus == false ? "Chưa Thanh Toán" : "";
+                statusText = statusText ?? "";
 
+                PersonOrder personOrder = new PersonOrder
+                {
+                    PerSon = personItem,
+                    DisplayStatus = statusText,
+                    TotalAmount = totalAmount,
+                };
+                personOrderlist.Add(personOrder);
             }
+
+            // Sắp xếp danh sách theo trạng thái (status)
+            if (status.HasValue)
+            {
+                personOrderlist = personOrderlist.Where(o => orderBUS.GetStatus(o.PerSon.PersonID) == status.Value).ToList();
+            }
+
+            itctPeople.ItemsSource = personOrderlist;
         }
+
+
+
+
+
+
         private void CategoryBtn_Click(object sender, RoutedEventArgs e)
         {
             Button cateBtn = (Button)sender;
@@ -142,10 +169,24 @@ namespace Projec1_Complete.Pages
         private void btnCustomers_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-            Person person = (Person)btn.DataContext;
-            int personID = person.PersonID;
-
+            PersonOrder person = (PersonOrder)btn.DataContext;
+            int personID = person.PerSon.PersonID;
+           
             LoadOrderDTG(personID);
+        }
+
+        private void btnAllCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPersonsByStatus(null);
+        }
+        private void btnPaid_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPersonsByStatus(true);
+        }
+        private void btnUnPaid_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPersonsByStatus(false);
+
         }
     }
 }

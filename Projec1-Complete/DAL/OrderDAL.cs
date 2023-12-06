@@ -13,7 +13,42 @@ namespace Projec1_Complete.DAL
         {
             db = new ASMProject1Entities();
         }
-    
+        public int GetOrder(int id)
+        {
+            var order = db.Orders.FirstOrDefault(o => o.PersonID == id);
+
+            if (order != null)
+            {
+                return order.OrderID;
+            }
+
+            // Trong trường hợp không tìm thấy đơn hàng
+            return -1; // hoặc giá trị mặc định phù hợp với yêu cầu của bạn
+        }
+
+        public bool GetStatus(int personId)
+        {
+            var order = db.Orders.FirstOrDefault(o => o.PersonID == personId);
+            return order != null && order.Status != null && order.Status.Value;
+        }
+        public decimal GetTotalAmount(int id)
+        {
+            var totalAmount = db.OrderInfoes
+                .Where(oi => oi.OrderID == id)
+                .Sum(oi => oi.Quantity * oi.Product.PriceSell);
+            if(totalAmount  == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return (decimal)totalAmount;
+            }
+        }
+           
+       
+
+
         public List<OrdersAndCustomers> GetOrdersByPersonId(int personId)
         {
             var ordersAndCustomers = db.Orders

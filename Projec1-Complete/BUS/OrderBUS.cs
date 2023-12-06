@@ -18,5 +18,17 @@ namespace Projec1_Complete.BUS
         {
             return orderDAL.GetOrdersByPersonId(id);
         }
-    }
+        public bool GetStatus(int id)
+        {
+            return orderDAL.GetStatus(id);
+        }
+        public int GetOrder(int id)
+        { 
+            return orderDAL.GetOrder(id);
+        }
+        public decimal GetTotalAmount(int id)
+        {
+            return orderDAL.GetTotalAmount(id);
+        }
+     }
 }

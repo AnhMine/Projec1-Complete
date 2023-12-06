@@ -34,5 +34,13 @@ namespace Projec1_Complete.BUS
         {
             return personDAL.SearchCustomer(query);
         }
+        public List<Person> GetPersonById(int id)
+        {
+            return personDAL.GetPersonById(id);
+        }
+        public List<Person> GetPeopleByStatus(bool isPaid)
+        {
+            return personDAL.GetPeopleByStatus(isPaid);
+        }
     }
 }

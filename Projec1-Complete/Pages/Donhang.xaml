@@ -25,28 +25,28 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
-                        
+
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="btnAllCustomer" Style="{StaticResource Buttonloai}">
+                    <Button x:Name="btnAllCustomer" Style="{StaticResource Buttonloai}" Click="btnAllCustomer_Click">
                         <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả"/>
                     </Button>
-                    <Button Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}">
+                    <Button Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click">
                         <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
                     </Button>
-                    <Button Grid.Column="2" x:Name="btnUnpaid" Style="{StaticResource Buttonloaitt}">
+                    <Button Grid.Column="2" x:Name="btnUnPaid" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click">
                         <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
                     </Button>
 
 
                 </Grid>
-                
-                
+
+
             </Button>
 
             <Grid Grid.Row="1" Margin="-5 5 0 0" >
 
-                <Button x:Name="btnRetailCustomers"  Style="{StaticResource Buttonsale}" VerticalAlignment="Top" Margin=" 25 0 0 0" Click="btnRetailCustomers_Click">
+                <!--<Button x:Name="btnRetailCustomers"  Style="{StaticResource Buttonsale}" VerticalAlignment="Top" Margin=" 25 0 0 0" Click="btnRetailCustomers_Click">
                     <Grid Width="400" Height="80">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -69,8 +69,8 @@
                         <TextBlock x:Name="tblStatus" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0"  FontSize="18" Width="200"/>
                         <TextBlock x:Name="tblTotalAmount" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 10" FontSize="18" Height="60" VerticalAlignment="Bottom"/>
                     </Grid>
-                </Button>
-                
+                </Button>-->
+
                 <ScrollViewer Margin="0 85 0 0">
                     <ItemsControl x:Name="itctPeople" ItemsSource="{Binding}">
                         <ItemsControl.ItemsPanel>
@@ -97,9 +97,9 @@
                                             </Ellipse>
                                         </Border>
 
-                                        <TextBlock Text="{Binding PersonName}" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
-                                        <TextBlock x:Name="tblStatusSQL" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="#00CC33" FontSize="18"/>
-                                        <TextBlock x:Name="tblTotalAmount" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 10" FontSize="18"/>
+                                        <TextBlock Text="{Binding PerSon.PersonName}" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
+                                        <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="#00CC33" FontSize="18"/>
+                                        <TextBlock Text="{Binding TotalAmount}" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 10" FontSize="18"/>
                                     </Grid>
                                 </Button>
                             </DataTemplate>
@@ -252,28 +252,28 @@
                             </Grid.RowDefinitions>
 
                             <Grid>
-                                
+
                                 <Button x:Name="btnAllCateGory" Style="{StaticResource Buttonloai}" Margin="0 0 0 14" Click="btnAllCateGory_Click">
                                     <TextBlock x:Name="txtbl_tatcaloai" Text="Tất cả"/>
                                 </Button>
 
 
                                 <Grid Grid.Row="1" Margin="90 -5 0 0">
-                                  
-                                        <ItemsControl x:Name="itctCate" ItemsSource="{Binding}">
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <WrapPanel Orientation="Horizontal" />
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Button Style="{StaticResource Buttonloai}" Margin="5" Click="CategoryBtn_Click">
-                                                        <TextBlock Text="{Binding CategoryName}"  />
-                                                    </Button>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+
+                                    <ItemsControl x:Name="itctCate" ItemsSource="{Binding}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{StaticResource Buttonloai}" Margin="5" Click="CategoryBtn_Click">
+                                                    <TextBlock Text="{Binding CategoryName}"  />
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </Grid>
 
 
@@ -293,7 +293,7 @@
 
                                 <Separator x:Name="spr_duonggach2" Background="LightGray" Grid.Row="0" Height="5" Margin="5,45,5,5" Grid.ColumnSpan="2"/>
                             </Grid>
-                            
+
                             <Grid Grid.Row="1" >
                                 <ScrollViewer>
                                     <ItemsControl x:Name="itctCate3" ItemsSource="{Binding}">
@@ -347,7 +347,7 @@
                                 </ScrollViewer>
                             </Grid>
 
-                            <Grid  Background="#eff2f7" Margin="15 0 0 0" Grid.Row="2">
+                            <Grid  Background="#eff2f7" Margin="15,800,0,-25" Grid.Row="1" Grid.RowSpan="2">
                                 <Button x:Name="btn_thanhtoan" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 0 0" Click="btn_thanhtoan_Click">
                                     <StackPanel Orientation="Horizontal" >
                                         <TextBlock x:Name="txtbl_thanhtoan" Text="Thanh toán" FontSize="18" FontWeight="Bold"/>
@@ -363,7 +363,7 @@
 
                         </Grid>
 
-                        
+
 
                     </StackPanel>
 

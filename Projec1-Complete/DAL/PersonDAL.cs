@@ -13,7 +13,21 @@ namespace Projec1_Complete.DAL
         {
             db = new ASMProject1Entities();
         }
-        
+        public List<Person> GetPersonById(int id)
+        {
+            var person = db.People.Where( p=> p.PersonID == id);
+            return  person.ToList();
+
+        }
+        public List<Person> GetPeopleByStatus(bool isPaid)
+        {
+            var filteredPersons = from order in db.Orders
+                                  join person in db.People on order.PersonID equals person.PersonID
+                                  where order.Status == isPaid
+                                  select person;
+
+            return filteredPersons.ToList();
+        }
         public List<Person> GetListCustomers()
         {
             return db.People.ToList();

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Projec1_Complete.DAL
 {
-    internal class PersonOrder
+    public class PersonOrder
     {
+        public Person PerSon { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string DisplayStatus { get; set; }
     }
 }

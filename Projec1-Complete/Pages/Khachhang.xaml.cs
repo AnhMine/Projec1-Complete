@@ -38,7 +38,7 @@ namespace Projec1_Complete.Pages
         void LoadPage()
         {
             ObservableCollection<Person> customers = new ObservableCollection<Person>();
-            List<Person> list = personBUS.GetListCustomer();
+            List<Person> list = personBUS.GetPeopleByStatus(true && false);
             foreach (Person customer in list)
             {
                 if(customer.Type == "Khách Hàng")
