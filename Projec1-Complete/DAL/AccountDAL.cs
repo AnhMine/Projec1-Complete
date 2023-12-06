@@ -29,7 +29,9 @@ namespace Projec1_Complete.DAL
         }
         public dynamic GetAccountById(int id)
         {
+
             var acc = db.Accounts.FirstOrDefault(a => a.AccountID == id);
+
             return acc;
         }
         public string GetPersonById(int id)
@@ -44,7 +46,7 @@ namespace Projec1_Complete.DAL
                                 .Join(db.People, acc => acc.PersonID, person => person.PersonID, (acc, person) => person.Type)
                                 .FirstOrDefault();
 
-            return personType ?? "DefaultType";
+            return personType ?? "Hacker";
         }
 
 

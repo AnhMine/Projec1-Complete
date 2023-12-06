@@ -47,20 +47,43 @@ namespace Projec1_Complete.Pages
 
             foreach (History historyItem in hisList)
             {
-                Account account = accountBUS.GetAccountID((int)historyItem.OrderID);
-                Product prd = productBUS.GetProduct(historyItem.ProductID);
-                string employeeName = account != null ? account.UserName : "N/A";
-                string prdname = prd != null ? prd.ProductName : "Tên Sản Phẩm";
 
-
-                HisWithUsername historyWithUsername = new HisWithUsername
+                if(historyItem.OrderID.HasValue)
                 {
-                    History = historyItem,
-                    EmployeeName = employeeName,
-                    ProductName = prdname,
-                };
+                    Account account = accountBUS.GetAccountID((int)historyItem.OrderID);
+                    string person = accountBUS.GetPersonById(account.AccountID);
+                    Product prd = productBUS.GetProduct(historyItem.ProductID);
+                    string prdname = prd != null ? prd.ProductName : "Tên Sản Phẩm";
 
-                historyWithUsernameList.Add(historyWithUsername);
+
+                    HisWithUsername historyWithUsername = new HisWithUsername
+                    {
+                        History = historyItem,
+                        EmployeeName = person,
+                        ProductName = prdname,
+                    };
+
+                    historyWithUsernameList.Add(historyWithUsername);
+                }
+               
+             
+                
+                else
+                {
+                    Product prd = productBUS.GetProduct(historyItem.ProductID);
+
+                    string person = "Admin";
+                    string prdname = prd != null ? prd.ProductName : "Tên Sản Phẩm";
+
+                    HisWithUsername historyWithUsername = new HisWithUsername
+                    {
+                        History = historyItem,
+                        EmployeeName = person,
+                        ProductName = prdname,
+                    };
+                    historyWithUsernameList.Add(historyWithUsername);
+                }
+
             }
 
             DTGHistory.ItemsSource = historyWithUsernameList;

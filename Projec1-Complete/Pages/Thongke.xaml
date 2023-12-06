@@ -46,13 +46,13 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="1" x:Name="btnDay" Style="{StaticResource Buttontktheo}" Margin="0" Click="btnDay_Click">
+                            <Button Grid.Column="1" x:Name="btnDay" FontSize="18" Style="{StaticResource Buttontktheo}" Margin="0" Click="btnDay_Click">
                                 <TextBlock x:Name="txtbl_ltktheongay" Text="Ngày" />
                             </Button>
-                            <Button Grid.Column="2"  x:Name="btnMonth" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0" Click="btnMonth_Click">
+                            <Button Grid.Column="2"  x:Name="btnMonth" FontSize="18" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0" Click="btnMonth_Click">
                                 <TextBlock x:Name="txtbl_tktheothang" Text="Tháng" />
                             </Button>
-                            <Button Grid.Column="3" x:Name="btnPrd" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnPrd_Click">
+                            <Button Grid.Column="3" x:Name="btnPrd" FontSize="18" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnPrd_Click">
                                 <TextBlock x:Name="txtbl_tksanpham" Text="Sản phẩm" />
                             </Button>
 
@@ -66,8 +66,8 @@
                         </Grid>
                                                
                     </StackPanel>
-                    
-                    <Button Grid.Column="1" x:Name="btn_lichsu" Margin="0 -5 10 0" Content="Lịch sử" FontWeight="Bold" Style="{StaticResource TabButton}" Click="btn_lichsu_Click"/>
+
+                    <Button Grid.Column="1" x:Name="btn_lichsu" Margin="0 -5 10 0" Content="Lịch sử" FontSize="18" FontWeight="Bold" Style="{StaticResource TabButton}" Click="btn_lichsu_Click"/>
                    
                     
 
@@ -99,7 +99,7 @@
                         <DataGridTextColumn x:Name="ID" Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding History.HistoryID}"/>
                         <DataGridTextColumn x:Name="Action"  Header="Hành Động" IsReadOnly="True" Width="*" Binding="{Binding History.Action}"/>
                         <DataGridTextColumn x:Name="Time"  Header="Thời Gian" IsReadOnly="True" Width="*" Binding="{Binding History.TimeStamp}"/>
-                        <DataGridTextColumn x:Name="Employee"  Header="Nhân Viên" IsReadOnly="True" Width="*" Binding="{Binding Username}"/>
+                        <DataGridTextColumn x:Name="Employee"  Header="Nhân Viên" IsReadOnly="True" Width="*" Binding="{Binding EmployeeName}"/>
                         <DataGridTextColumn x:Name="OrderID"  Header="Mã Đơn Hàng" IsReadOnly="True" Width="*" Binding="{Binding History.OrderID}"/>
                         <DataGridTextColumn x:Name="ProductID"  Header="Tên Sản Phẩm" IsReadOnly="True" Width="*" Binding="{Binding ProductName}"/>
 

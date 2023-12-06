@@ -25,6 +25,16 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
+            <!--Seprator-->
+            <Separator x:Name="spt_duongke" Height="1" Grid.Row="2" Background="#dae2ea" Margin="0,54,0,10" Grid.RowSpan="2"/>
+
+            <!--Tap button-->
+            <StackPanel x:Name="stpn_tabcontrol" Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10" Grid.RowSpan="2" >
+                <Button x:Name="btn_khachhang" Content="Khách hàng" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_sanpham_Click"/>
+            </StackPanel>
+            <StackPanel x:Name="stpn_tabcontrol1" Grid.Row="2" Orientation="Horizontal" Margin="100,10,0,10" Grid.RowSpan="2" >
+                <Button x:Name="btn_nhanvien" Content="Nhân viên" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_nhanvien_Click" />
+            </StackPanel>
             <!--select textbox-->
             <Grid Width="300" HorizontalAlignment="Left">
                 <TextBlock x:Name="txtbl_timkiemKH" Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
@@ -44,83 +54,104 @@
 
 
 
-            <TextBlock x:Name="txtbl_khachhang" Text="KHÁCH HÀNG" Grid.Row="1" FontSize="22" FontWeight="SemiBold" Margin="20 20 0 0"
+            <TextBlock x:Name="txtbl_khachhang" Text="KHÁCH HÀNG" Grid.Row="1" FontSize="22" FontWeight="Bold" Margin="20 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121528"/>
 
             <!--Add Button-->
-            <Button x:Name="btn_themkhahhang" Style="{StaticResource addButton}" Margin="0 20 70 0" Click="btn_themkhahhang_Click">
+            <Button x:Name="btn_themkhahhang" Style="{StaticResource addButton}" Margin="0 5 90 0" Click="btn_themkhahhang_Click">
                 <StackPanel Orientation="Horizontal" >
-                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="13" Height="13"/>
+                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="20" Height="20"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="btnImportFile_customer" Style="{StaticResource addButton}" Margin="0 0 30 35" Grid.RowSpan="2" Grid.Row="1">
+            <Button x:Name="btnImportFile_customer" Style="{StaticResource addButton}" Margin="0 0 30 40" Grid.RowSpan="2" Grid.Row="1">
                 <StackPanel Orientation="Horizontal" >
-                    <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="14" Height="14"/>
+                    <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="20" Height="20"/>
                 </StackPanel>
             </Button>
 
-            <!--Seprator-->
-            <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
-
-            <!--Tap button-->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0" >
-                <Button  Content="" Style="{StaticResource tabButton}"/>
-                <Button  Content="" Style="{StaticResource tabButton}"/>
-            </StackPanel>
-
-            <!--counter title-->
-            <TextBlock x:Name="txtbl_dskhachhang" Text="
-                           Danh sách khách hàng" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Margin="-120 0 0 0"
-                           Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-            <TextBlock x:Name="txtbl_sapxepKH" Text="Sắp xếp" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0"
-                           Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Hidden"/>
-
-            <!--Filter TextBox-->
-            <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4" Visibility="Hidden">
-
-                <ComboBox x:Name="cmd_sapxepkhachhang" Style="{StaticResource cmb}"/>
-
-            </Grid>
+        
+            
 
             <!--Member Datagrid-->
-            <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="ClientDataGrid">
-                <DataGrid.Columns>
-                    <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                        <DataGridCheckBoxColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <CheckBox x:Name="ckb_chonkhachhang" Style="{StaticResource CheckBoxStyle1}"/>
-                            </DataTemplate>
-                        </DataGridCheckBoxColumn.HeaderTemplate>
-                    </DataGridCheckBoxColumn>
+            <StackPanel x:Name="stpn_dskh" Grid.Row="5" >
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="DTGCustomers">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="ckb_chonkhachhang" Style="{StaticResource CheckBoxStyle1}"/>
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
 
-                    <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding MaKH}"/>
-                    <DataGridTextColumn Header="Tên khách hàng" IsReadOnly="True" Binding="{Binding TenKH}"/>
-                    <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding SDT}"/>
-                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                    <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding Diachi}"/>
+                        <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding MaKH}"/>
+                        <DataGridTextColumn Header="Tên khách hàng" IsReadOnly="True" Binding="{Binding TenKH}"/>
+                        <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding SDT}"/>
+                        <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding Diachi}"/>
 
-                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="btb_suakhachhang" Style="{StaticResource gridEditButton}">
-                                        <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
-                                    </Button>
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="btb_suakhachhang" Style="{StaticResource gridEditButton}">
+                                            <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
 
-                                    <Button x:Name="btb_xoakhachhang" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
-                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                    </Button>
+                                        <Button x:Name="btb_xoakhachhang" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
 
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
 
-                </DataGrid.Columns>
+                    </DataGrid.Columns>
 
-            </DataGrid>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel x:Name="stpn_dsnv" Grid.Row="5" Visibility="Collapsed" >
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="nhanvienDataGrid">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="ckb_chonkhachhang" Style="{StaticResource CheckBoxStyle1}"/>
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
+
+                        <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding o}"/>
+                        <DataGridTextColumn Header="Tên nhân viên" IsReadOnly="True" Binding="{Binding o}"/>
+                        <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding o}"/>
+                        <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding o}"/>
+                        <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding o}"/>
+
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="btb_suakhachhang" Style="{StaticResource gridEditButton}">
+                                            <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
+
+                                        <Button x:Name="btb_xoakhachhang" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </StackPanel>
+
 
             <!--pagination section-->
 

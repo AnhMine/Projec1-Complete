@@ -22,5 +22,10 @@ namespace Projec1_Complete.DAL
             List<Product> products = db.Products.Where(p=>p.CategoryID == id).ToList(); 
             return products;
         }
+        public List<Product> GetAllProduct()
+        {
+            List<Product> products = db.Products.ToList();
+            return products;
+        }
     }
 }

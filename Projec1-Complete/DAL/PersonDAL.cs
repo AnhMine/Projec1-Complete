@@ -13,9 +13,12 @@ namespace Projec1_Complete.DAL
         {
             db = new ASMProject1Entities();
         }
+        
         public List<Person> GetListCustomers()
         {
             return db.People.ToList();
+
+
         }
         public int GetMaxCustomerID()
         {

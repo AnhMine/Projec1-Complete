@@ -115,6 +115,7 @@
     <Compile Include="BUS\AccountBUS.cs" />
     <Compile Include="BUS\CategoryBUS.cs" />
     <Compile Include="BUS\HistoryBUS.cs" />
+    <Compile Include="BUS\OrderBUS.cs" />
     <Compile Include="BUS\PersonBUS.cs" />
     <Compile Include="BUS\ProductBUS.cs" />
     <Compile Include="BUS\ThongKeDataBUS.cs" />
@@ -134,9 +135,12 @@
     <Compile Include="DAL\Order.cs">
       <DependentUpon>shopquanliquanao.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\OrderDAL.cs" />
     <Compile Include="DAL\OrderInfo.cs">
       <DependentUpon>shopquanliquanao.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\OrderInfoDAL.cs" />
+    <Compile Include="DAL\OrdersAndCustomers.cs" />
     <Compile Include="DAL\Person.cs">
       <DependentUpon>shopquanliquanao.tt</DependentUpon>
     </Compile>
@@ -185,6 +189,9 @@
     </Compile>
     <Compile Include="Pages\Khohang.xaml.cs">
       <DependentUpon>Khohang.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\nhanvien.xaml.cs">
+      <DependentUpon>nhanvien.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Sua_chi_tiet_sanpham.xaml.cs">
       <DependentUpon>Sua_chi_tiet_sanpham.xaml</DependentUpon>
@@ -235,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Khohang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\nhanvien.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

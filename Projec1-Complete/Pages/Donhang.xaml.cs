@@ -28,6 +28,8 @@ namespace Projec1_Complete.Pages
         public ObservableCollection<Person> persons { get; set; }
         private CategoryBUS categoryBUS;
         private PersonBUS personBUS;
+        private ProductBUS productBUS;
+        private OrderBUS orderBUS;
         public Donhang()
         {
             InitializeComponent();
@@ -36,14 +38,50 @@ namespace Projec1_Complete.Pages
             persons = new ObservableCollection<Person>();
             personBUS = new PersonBUS();
             categoryBUS = new CategoryBUS();
+            productBUS = new ProductBUS();
+            orderBUS = new OrderBUS();
             LoadCategory();
             LoadPerson();
         }
+        private void LoadOrderDTG(int id)
+        {
+            
+           /* OrdersAndCustomers firstOrder = orders.FirstOrDefault();
+
+            if (firstOrder != null)
+            {
+                if(firstOrder.order.Status == true && firstOrder.order.PersonID == 0)
+                {
+                    tblStatus.Text = "Đã Thanh Toán";
+                    tblStatus.Foreground = new SolidColorBrush(Color.FromRgb(0, 204, 51)); ;
+                }
+                else if (firstOrder.order.Status == true && firstOrder.order.PersonID == 0)
+                {
+                    tblStatus.Text = "Chưa Thanh Toán";
+
+                    tblStatus.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                }
+             
+                
+                tblTotalAmount.Text = firstOrder.TotalAmount.ToString(); 
+            }
+            else
+            {
+                tblStatus.Text = "Chưa Thanh Toán";
+                tblTotalAmount.Text = "0";
+            }*/
+        }
+
         private void LoadCategory()
         {
             List<Category> categorieslist = categoryBUS.GetCategories();
             itctCate.ItemsSource = categorieslist;
             
+        }
+        private void LoadAllProduct()
+        {
+            List<Product> productList = productBUS.GetProducts();
+            itctCate3.ItemsSource = productList;
         }
         private void LoadProductByIDCategory(int id)
         {
@@ -53,7 +91,11 @@ namespace Projec1_Complete.Pages
         private void LoadPerson()
         {
             List<Person> perList = personBUS.GetListCustomer();
-            itctPeople.ItemsSource = perList;
+            List<PersonOrder> personOrder = new List<PersonOrder>;
+            foreach (Person personItem in perList)
+            {
+
+            }
         }
         private void CategoryBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -62,16 +104,14 @@ namespace Projec1_Complete.Pages
             int categoryID = cate.CategoryID;
             LoadProductByIDCategory(categoryID);
         }
-
+        
         private void btn_packages_Click(object sender, RoutedEventArgs e)
         {
             stpn_packages.Visibility = Visibility.Visible;
             stpn_invoices.Visibility = Visibility.Collapsed;
             spr_duonggach.Visibility = Visibility.Visible;
 
-        }
-
-        
+        }    
 
         private void btn_thanhtoan_Click(object sender, RoutedEventArgs e)
         {
@@ -80,85 +120,7 @@ namespace Projec1_Complete.Pages
             spr_duonggach.Visibility = Visibility.Visible;
             btn_quayve.Visibility = Visibility.Visible;
 
-        }
-        private Button lastClickedButton;
-      
-
-        private void btn_sp1_Click(object sender, RoutedEventArgs e)
-        {
-
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_sp2_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_sp3_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-        }
-
-        private void btn_sp4_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-        }
-
-        private void btn_sp5_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_sp6_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_sp7_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_sp8_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#6741d9"));
-            lastClickedButton = button;
-
-
-        }
-
-        private void btn_khohang_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        }     
 
         private void btn_quayve_Click(object sender, RoutedEventArgs e)
         {
@@ -168,5 +130,22 @@ namespace Projec1_Complete.Pages
             btn_quayve.Visibility = Visibility.Collapsed;
         }
 
+        private void btnAllCateGory_Click(object sender, RoutedEventArgs e)
+        {
+            LoadAllProduct();
+        }
+
+        private void btnRetailCustomers_Click(object sender, RoutedEventArgs e)
+        {
+               LoadOrderDTG(0);
+        }
+        private void btnCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Person person = (Person)btn.DataContext;
+            int personID = person.PersonID;
+
+            LoadOrderDTG(personID);
+        }
     }
 }

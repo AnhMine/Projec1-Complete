@@ -39,7 +39,7 @@
 
             </Grid>
 
-            <TextBlock x:Name="txtbl_khohang" Text="KHO HÀNG" Grid.Row="1" FontSize="22" FontWeight="SemiBold" Margin="20,20,0,55"
+            <TextBlock x:Name="txtbl_khohang" Text="KHO HÀNG" Grid.Row="1" FontSize="22" FontWeight="Bold" Margin="20,20,0,55"
                            HorizontalAlignment="Left" Foreground="#121528" Grid.RowSpan="2"/>
 
             <!--counter title-->
@@ -48,28 +48,23 @@
 
 
             <!--Add Button-->
-            <Button x:Name="btnAddPrd" Style="{StaticResource addButton}" Click="btn_themsp_Click" Margin="0 0 70 32" Grid.RowSpan="2" Grid.Row="1">
+            <Button x:Name="btnAddPrd" Style="{StaticResource addButton}" Click="btn_themsp_Click" Margin="0 0 90 32" Grid.RowSpan="2" Grid.Row="1">
                 <StackPanel Orientation="Horizontal" >
-                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="13" Height="13"/>
+                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="20" Height="20"/>
                 </StackPanel>
             </Button>
             <Button x:Name="btnImportFile" Style="{StaticResource addButton}" Margin="0 0 30 32" Grid.RowSpan="2" Grid.Row="1" Click="btnImportFile_Click">
                 <StackPanel Orientation="Horizontal" >
-                    <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="14" Height="14" />
+                    <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="20" Height="20" />
                 </StackPanel>
             </Button>
 
             <!--Seprator-->
             <Separator x:Name="spt_duongke" Height="1" Grid.Row="2" Background="#dae2ea" Margin="0,54,0,10" Grid.RowSpan="2"/>
 
-            <!--Tap button-->
-            <StackPanel x:Name="stpn_tabcontrol" Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10" Grid.RowSpan="2" >
-                <Button x:Name="btn_sanpham" Content="Sản phẩm" Style="{StaticResource TabButton}" Click="btn_sanpham_Click"/>
-            </StackPanel>
+            
 
-            <!--Filter TextBox-->
-            <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4" />
-
+            
 
             <!--Member Datagrid-->
             <StackPanel Grid.Row="6" x:Name="stpn_product" >

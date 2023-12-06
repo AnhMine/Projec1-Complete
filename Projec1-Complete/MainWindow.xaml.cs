@@ -111,6 +111,9 @@ namespace Projec1_Complete
             this.Close();
         }
 
-       
+        private void rd_nhanvien_Checked(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new nhanvien());
+        }
     }
 }
