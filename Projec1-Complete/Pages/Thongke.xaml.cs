@@ -47,17 +47,16 @@ namespace Projec1_Complete.Pages
 
             foreach (History historyItem in hisList)
             {
-
                 Account account = accountBUS.GetAccountID((int)historyItem.OrderID);
                 Product prd = productBUS.GetProduct(historyItem.ProductID);
-                string username = account != null ? account.UserName : "N/A";
+                string employeeName = account != null ? account.UserName : "N/A";
                 string prdname = prd != null ? prd.ProductName : "Tên Sản Phẩm";
 
 
                 HisWithUsername historyWithUsername = new HisWithUsername
                 {
                     History = historyItem,
-                    Username = username,
+                    EmployeeName = employeeName,
                     ProductName = prdname,
                 };
 

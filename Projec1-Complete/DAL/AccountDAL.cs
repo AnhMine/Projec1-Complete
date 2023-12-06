@@ -32,6 +32,11 @@ namespace Projec1_Complete.DAL
             var acc = db.Accounts.FirstOrDefault(a => a.AccountID == id);
             return acc;
         }
+        public string GetPersonById(int id)
+        {
+            var person = db.People.FirstOrDefault(a => a.PersonID == id);
+            return person.Type;
+        }
         public string CheckStatus(string username)
         {
             var personType = db.Accounts
