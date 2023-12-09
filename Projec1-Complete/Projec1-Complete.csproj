@@ -116,6 +116,7 @@
     <Compile Include="BUS\CategoryBUS.cs" />
     <Compile Include="BUS\HistoryBUS.cs" />
     <Compile Include="BUS\OrderBUS.cs" />
+    <Compile Include="BUS\OrderInfoBUS.cs" />
     <Compile Include="BUS\PersonBUS.cs" />
     <Compile Include="BUS\ProductBUS.cs" />
     <Compile Include="BUS\ThongKeDataBUS.cs" />
@@ -145,10 +146,10 @@
       <DependentUpon>shopquanliquanao.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PersonDAL.cs" />
-    <Compile Include="DAL\PersonOrder.cs" />
     <Compile Include="DAL\Product.cs">
       <DependentUpon>shopquanliquanao.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\ProductAndOrderInfo.cs" />
     <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="DAL\shopquanliquanao.Context.cs">
       <AutoGen>True</AutoGen>

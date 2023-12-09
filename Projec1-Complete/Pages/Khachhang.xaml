@@ -29,15 +29,14 @@
             <Separator x:Name="spt_duongke" Height="1" Grid.Row="2" Background="#dae2ea" Margin="0,54,0,10" Grid.RowSpan="2"/>
 
             <!--Tap button-->
-            <StackPanel x:Name="stpn_tabcontrol" Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10" Grid.RowSpan="2" >
-                <Button x:Name="btn_khachhang" Content="Khách hàng" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_sanpham_Click"/>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10" Grid.RowSpan="2" >
+                <RadioButton x:Name="btn_khachhang" Content="Khách hàng" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_sanpham_Click" GroupName="tabnahnluc"/>
+                <RadioButton x:Name="btn_nhanvien" Content="Nhân viên" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_nhanvien_Click" GroupName="tabnahnluc" />
             </StackPanel>
-            <StackPanel x:Name="stpn_tabcontrol1" Grid.Row="2" Orientation="Horizontal" Margin="100,10,0,10" Grid.RowSpan="2" >
-                <Button x:Name="btn_nhanvien" Content="Nhân viên" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_nhanvien_Click" />
-            </StackPanel>
+            
             <!--select textbox-->
             <Grid Width="300" HorizontalAlignment="Left">
-                <TextBlock x:Name="txtbl_timkiemKH" Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                <TextBlock x:Name="txtbl_timkiemKH" Margin="20 0 30 0" Height="30" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" 
                                
                              />
@@ -54,10 +53,11 @@
 
 
 
-            <TextBlock x:Name="txtbl_khachhang" Text="KHÁCH HÀNG" Grid.Row="1" FontSize="22" FontWeight="Bold" Margin="20 20 0 0"
+            <TextBlock x:Name="txtbl_khachhang" Text="Nhân lực" Grid.Row="1" FontSize="22" FontWeight="Bold" Margin="20 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121528"/>
 
             <!--Add Button-->
+            
             <Button x:Name="btn_themkhahhang" Style="{StaticResource addButton}" Margin="0 5 90 0" Click="btn_themkhahhang_Click">
                 <StackPanel Orientation="Horizontal" >
                     <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="20" Height="20"/>
@@ -76,13 +76,7 @@
             <StackPanel x:Name="stpn_dskh" Grid.Row="5" >
                 <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="DTGCustomers">
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                            <DataGridCheckBoxColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <CheckBox x:Name="ckb_chonkhachhang" Style="{StaticResource CheckBoxStyle1}"/>
-                                </DataTemplate>
-                            </DataGridCheckBoxColumn.HeaderTemplate>
-                        </DataGridCheckBoxColumn>
+                        
 
                         <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding MaKH}"/>
                         <DataGridTextColumn Header="Tên khách hàng" IsReadOnly="True" Binding="{Binding TenKH}"/>
@@ -115,13 +109,7 @@
             <StackPanel x:Name="stpn_dsnv" Grid.Row="5" Visibility="Collapsed" >
                 <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="nhanvienDataGrid">
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                            <DataGridCheckBoxColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <CheckBox x:Name="ckb_chonkhachhang" Style="{StaticResource CheckBoxStyle1}"/>
-                                </DataTemplate>
-                            </DataGridCheckBoxColumn.HeaderTemplate>
-                        </DataGridCheckBoxColumn>
+                        
 
                         <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding o}"/>
                         <DataGridTextColumn Header="Tên nhân viên" IsReadOnly="True" Binding="{Binding o}"/>

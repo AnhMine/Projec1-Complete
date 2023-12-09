@@ -17,11 +17,73 @@ namespace Projec1_Complete.DAL
         {
             return db.Categories.ToList();
         }
-        public List<Product> GetProductByID(int id)
+        public List<ProductAndOrderInfo> GetCateGory()
         {
-            List<Product> products = db.Products.Where(p=>p.CategoryID == id).ToList(); 
-            return products;
+            var products = db.Products.ToList();
+            var categoriesWithProducts = products.Select(p => new ProductAndOrderInfo
+            {
+                CategoryID = (int)p.CategoryID,  // Trích xuất CategoryID từ Product
+                Product = p,
+            }).ToList();
+            return categoriesWithProducts;
         }
+        public List<ProductAndOrderInfo> GetProductByCateAndPersonId(int categoryId, int personId)
+        {
+            var products = db.Products.Where(p => p.CategoryID == categoryId).ToList();
+            var orderInfo = (from oi in db.OrderInfoes
+                             join o in db.Orders on oi.OrderID equals o.OrderID
+                             where o.PersonID == personId
+                             select new
+                             {
+                                 oi.ProductID,
+                                 oi.Quantity,
+                             }).ToList();
+            var orderInfoDict = orderInfo.ToDictionary(x => x.ProductID, x => x.Quantity);
+
+            var productsWithOrderInfo = products.Select(p => new ProductAndOrderInfo
+            {
+                Product = p,
+                OrderQuantity = (byte)(orderInfoDict.ContainsKey(p.ProductID) ? orderInfoDict[p.ProductID] : 0)
+            }).ToList();
+
+            return productsWithOrderInfo;
+        }
+
+
+
+        public List<ProductAndOrderInfo> GetProductsWithOrderInfo(int personID)
+        {
+            // Lấy tất cả sản phẩm
+            var products = db.Products.ToList();
+
+            // Lấy bản ghi từ bảng OrderInfo theo PersonID
+            var orderInfo = (from oi in db.OrderInfoes
+                             join o in db.Orders on oi.OrderID equals o.OrderID
+                             where o.PersonID == personID
+                             select new
+                             {
+                                 oi.ProductID,
+                                 oi.Quantity
+                             }).ToList();
+
+            // Tạo một Dictionary để lưu thông tin OrderInfo theo ProductID
+            var orderInfoDict = orderInfo.ToDictionary(x => x.ProductID, x => x.Quantity);
+
+            // Tạo danh sách kết quả
+            var productsWithOrderInfo = products.Select(p => new ProductAndOrderInfo
+            {
+              
+                Product = p,
+             
+                OrderQuantity = ((byte)(orderInfoDict.ContainsKey(p.ProductID) ? orderInfoDict[p.ProductID] : 0))
+            }).ToList();
+
+            return productsWithOrderInfo;
+        }
+
+
+ 
+
         public List<Product> GetAllProduct()
         {
             List<Product> products = db.Products.ToList();

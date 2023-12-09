@@ -24,5 +24,44 @@ namespace Projec1_Complete.Pages
         {
             InitializeComponent();
         }
+
+        private void btnName_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void btnpass_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void btnemailnv_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
+
+        private void btnphone_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
+
+        private void btndress_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
+
+        private void btn_tennvmoi_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
+
+        private void btn_huytennvmoi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

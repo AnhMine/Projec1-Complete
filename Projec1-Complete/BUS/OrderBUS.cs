@@ -30,5 +30,14 @@ namespace Projec1_Complete.BUS
         {
             return orderDAL.GetTotalAmount(id);
         }
+        public void AddProductToOrder(Order order, OrderInfo orderInfo, short quantityOrder)
+        
+        {
+            orderDAL.AddProductToOrder(order, orderInfo, quantityOrder);
+        }
+        public bool PersonIDExists(int personID)
+        {
+            return orderDAL.PersonIDExists(personID);
+        }
      }
 }

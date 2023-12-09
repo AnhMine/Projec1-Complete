@@ -54,7 +54,7 @@ namespace Projec1_Complete.Pages
         {
             stpn_dsnv.Visibility = Visibility.Collapsed;
             stpn_dskh.Visibility = Visibility.Visible;
-            txtbl_khachhang.Text = "Khách hàng";
+           
 
         }
 
@@ -62,7 +62,7 @@ namespace Projec1_Complete.Pages
         {
             stpn_dsnv.Visibility = Visibility.Visible;
             stpn_dskh.Visibility = Visibility.Collapsed;
-            txtbl_khachhang.Text = "Nhân viên";
+           
         }
     }
 }

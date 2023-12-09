@@ -50,8 +50,8 @@ namespace Projec1_Complete.DAL
                         (joined.Product.PriceSell * joined.OrderInfo.Quantity) - ((joined.Product.PriceSell * joined.OrderInfo.Quantity) * joined.Order.Discount)
           )
                 })
-      .OrderBy(td => td.Date)
-      .ToList();
+                .OrderBy(td => td.Date)
+                .ToList();
 
             }
             else if (groupBy == "Product")

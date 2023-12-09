@@ -13,6 +13,19 @@ namespace Projec1_Complete.DAL
         {
             db = new ASMProject1Entities();
         }
+        public void AddProductToOrder(Order order, OrderInfo orderInfo, short quantityOrder)
+        {
+            string productId = orderInfo.ProductID;
+            Product prd = db.Products.FirstOrDefault(x => x.ProductID == productId);
+            if(prd != null)
+            {
+                prd.Quantity -= quantityOrder;
+                db.Orders.Add(order);
+                db.OrderInfoes.Add(orderInfo);
+                db.SaveChanges();
+            }    
+         
+        }
         public int GetOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(o => o.PersonID == id);
@@ -45,10 +58,6 @@ namespace Projec1_Complete.DAL
                 return (decimal)totalAmount;
             }
         }
-           
-       
-
-
         public List<OrdersAndCustomers> GetOrdersByPersonId(int personId)
         {
             var ordersAndCustomers = db.Orders
@@ -85,7 +94,10 @@ namespace Projec1_Complete.DAL
             decimal discountedPrice = priceSell - (priceSell * discount / 100);
             return quantity * discountedPrice;
         }
-
+        public bool PersonIDExists(int personID)
+        {
+            return db.Orders.Any(p => p.PersonID == personID );
+        }
 
 
 

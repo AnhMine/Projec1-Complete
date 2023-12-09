@@ -7,371 +7,393 @@
         xmlns:local="clr-namespace:Projec1_Complete.Pages"
         mc:Ignorable="d"
         Title="Donhang" Height="1000" Width="1800">
-    <Grid Background="#eff2f7">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2.5*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Style="{StaticResource Buttonalldon}">
-
-                <Grid Width="420" Height="80">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-
-                    </Grid.ColumnDefinitions>
-
-                    <Button x:Name="btnAllCustomer" Style="{StaticResource Buttonloai}" Click="btnAllCustomer_Click">
-                        <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả"/>
-                    </Button>
-                    <Button Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click">
-                        <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
-                    </Button>
-                    <Button Grid.Column="2" x:Name="btnUnPaid" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click">
-                        <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
-                    </Button>
-
-
-                </Grid>
-
-
-            </Button>
-
-            <Grid Grid.Row="1" Margin="-5 5 0 0" >
-
-                <!--<Button x:Name="btnRetailCustomers"  Style="{StaticResource Buttonsale}" VerticalAlignment="Top" Margin=" 25 0 0 0" Click="btnRetailCustomers_Click">
-                    <Grid Width="400" Height="80">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-
-
-                        <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                            DockPanel.Dock="Top" HorizontalAlignment="left">
-                            <Ellipse>
-                                <Ellipse.Fill>
-                                    <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </Border>
-
-                        <TextBlock Text="Khách lẻ" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
-                        <TextBlock x:Name="tblStatus" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0"  FontSize="18" Width="200"/>
-                        <TextBlock x:Name="tblTotalAmount" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 10" FontSize="18" Height="60" VerticalAlignment="Bottom"/>
-                    </Grid>
-                </Button>-->
-
-                <ScrollViewer Margin="0 85 0 0">
-                    <ItemsControl x:Name="itctPeople" ItemsSource="{Binding}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Button Margin="62 5 0 0" Style="{StaticResource Buttonsale}" x:Name="btnCustomers" Click="btnCustomers_Click" >
-                                    <Grid Width="400" Height="80">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                        DockPanel.Dock="Top" HorizontalAlignment="left">
-                                            <Ellipse>
-                                                <Ellipse.Fill>
-                                                    <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                                </Ellipse.Fill>
-                                            </Ellipse>
-                                        </Border>
-
-                                        <TextBlock Text="{Binding PerSon.PersonName}" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
-                                        <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="#00CC33" FontSize="18"/>
-                                        <TextBlock Text="{Binding TotalAmount}" Grid.Column="2" FontWeight="Bold" Margin="10 0 0 10" FontSize="18"/>
-                                    </Grid>
-                                </Button>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-
-
-
-        </Grid>
-
-        <Border CornerRadius="10" Grid.Column="1" Background="White" Margin="20">
-            <Grid>
+    <Border Background="#eff2f7" CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
-
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+
+                <StackPanel>
+                    <Button Grid.Row="0" Style="{StaticResource Buttonalldon}" Margin="0 20 7 0">
+                        <StackPanel>
+                            <Grid Width="480" Height="90">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
 
-                    <Button x:Name="btn_quayve" Visibility="Collapsed" Style="{StaticResource Buttontieude}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btn_quayve_Click">
-                        <StackPanel Orientation="Horizontal" >
-                            <StackPanel Orientation="Horizontal" >
-                                <Icon:PackIconMaterial Kind="ArrowLeft" VerticalAlignment="Center" Width="15" Height="15" Margin="0 0 60 0"/>
-                            </StackPanel>
+                                <RadioButton x:Name="btnAllCustomer" Style="{StaticResource Buttonloaitt}" Click="btnAllCustomer_Click" GroupName="tinhtrangdoanhang" >
+                                    <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả"/>
+                                </RadioButton>
+                                <RadioButton Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
+                                    <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
+                                </RadioButton>
+                                <RadioButton Grid.Column="2" x:Name="btnUnPaid" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click" GroupName="tinhtrangdoanhang">
+                                    <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
+                                </RadioButton>
+
+
+                            </Grid>
                         </StackPanel>
+                      
+
+
                     </Button>
+                </StackPanel>
+                
 
+                <StackPanel Grid.Row="1" >
+                    <RadioButton Margin="0 5 7 0" Style="{StaticResource Buttonsale}" x:Name="btnCustomers"  GroupName="CustomersGroup" >
+                        <Grid Width="480" Height="90">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                                                 DockPanel.Dock="Top" HorizontalAlignment="left">
+                                <Ellipse>
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Border>
 
-                    <Separator x:Name="spr_duonggach" Background="#eff2f7" Grid.Row="0" Height="5" Margin="5 45 5 0" Visibility="Collapsed"/>
-                </Grid>
-                <Grid Grid.Row="1" >
+                            <TextBlock Text="Khách lẻ" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
+                            <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="#00CC33" FontSize="18"/>
+                            <TextBlock Text="{Binding TotalAmount}" Grid.Column="2" FontWeight="Bold" Margin="20 10 0 0" FontSize="18"/>
 
-                    <StackPanel Grid.Column="1" Grid.Row="1" x:Name="stpn_packages"  Visibility="Collapsed" >
-
-                        <Grid>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="580"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Width="300" Height="50" x:Name="txtbl_salesorder" Text="Đơn Đặt Hàng" Foreground="Black" FontWeight="Bold" FontSize="38" Margin="20" HorizontalAlignment="Left"/>
-                                <TextBlock Grid.Row="1" x:Name="txtbl_ngaydathang" Text="Ngày Đặt" Foreground="Gray" FontWeight="Bold" Margin="20 0 0 20" Width="100" Height="30" FontSize="20" HorizontalAlignment="Left"/>
-                                <TextBlock Grid.Row="1" x:Name="txtbl_ngaydat" Text="10/10/2023"  FontWeight="Bold" Margin="20 40 0 0" Width="100" Height="30" FontSize="20" HorizontalAlignment="Left"/>
-                            </Grid>
-
-                            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Buttonbilingkh}">
-                                <StackPanel Width="270" Height="270">
-                                    <TextBlock x:Name="txtbl_billingto" Text="THANH TOÁN CHO" Foreground="Gray" FontWeight="Bold" Margin="5"/>
-                                    <Border Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                        DockPanel.Dock="Top" Margin="5" HorizontalAlignment="Left">
-                                        <Ellipse>
-                                            <Ellipse.Fill>
-                                                <ImageBrush x:Name="img_anhbilling" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                    </Border>
-                                    <TextBlock x:Name="txtbl_tenbilling" Text="Phan Thanh Cham" Style="{StaticResource texttensp}" Foreground="Blue" Margin="15 20 0 0"/>
-                                    <TextBlock x:Name="txtbl_diachibilling" Text="217 Ngô Quyền" Style="{StaticResource texttensp}" Margin="15 20 0 0" Height="74"/>
-                                </StackPanel>
+                            <Button x:Name="btn_bacham2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0">
+                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
                             </Button>
-                            <Grid Grid.Row="1">
-                                <DataGrid Grid.Row="1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}"  x:Name="DTGOrder" Grid.RowSpan="3" Margin="10">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn x:Name="dtgtxtcolumn_masp" Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding InventoryID}"/>
-                                        <DataGridTemplateColumn Header="Ảnh">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Image Source="{Binding ImageLink}" Width="24" Height="24" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTextColumn x:Name="dtgtxtcolumn_tensp"  Header="Tên sản phẩm" IsReadOnly="True" Width="*" Binding="{Binding ProductName}"/>
-                                        <DataGridTextColumn x:Name="dtgtxtcolumn_giabansp"  Header="Giá" IsReadOnly="True" Width="*" Binding="{Binding PriceSell}"/>
-                                        <DataGridTextColumn x:Name="dtgtxtcolumn_slsp"  Header="Số lượng" IsReadOnly="True" Width="*" Binding="{Binding OrderInfo.Quantity}"/>
-                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                        <Button x:Name="RemoveButton" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
-                                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                                        </Button>
-
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-
-                            <Grid Grid.Row="2" Margin="0 00 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="2" x:Name="txtbl_tongtien" Text="Tổng tiền:" Margin="0 28 95 0" FontSize="20" HorizontalAlignment="Right" Style="{StaticResource texttensp}"/>
-                                <TextBlock Grid.Column="2" x:Name="txtbl_tongtiensp" Margin="150 40 15 0" Text="320 000" FontSize="20"  HorizontalAlignment="Right" Style="{StaticResource textgiasp}"/>
-                                <Button Grid.Column="3" x:Name="btn_thanhtien" Margin="0 30 20 0" Style="{StaticResource Buttonthanhtoan}">
-                                    <StackPanel Orientation="Horizontal" >
-                                        <TextBlock x:Name="txtbl_thanhtien" Text="Thành tiền" FontSize="18" FontWeight="Bold"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <TextBlock x:Name="txtbl_giamgia" Text="Giảm giá" FontSize="26" FontWeight="Bold" Foreground="red" Margin="20 36 0 0"/>
-
-
-
-                                <Grid Width="100" Grid.Column="1" HorizontalAlignment="Left" Margin="20 10 0 0">
-                                    <TextBlock Margin="10 22 20 0" VerticalAlignment="Center" Foreground="Black" IsHitTestVisible="False"
-                                    Panel.ZIndex="1"/>
-
-                                    <TextBox x:Name="txtSearch" Style="{StaticResource textboxgiamgia}" Margin="0 20 10 0"/>
-
-                                </Grid>
-                                <Button Grid.Column="1" x:Name="btn_addgiamgia" Margin="130 30 0 0" HorizontalAlignment="Left" Style="{StaticResource Buttonthanhtoan}">
-                                    <StackPanel Orientation="Horizontal" >
-                                        <TextBlock x:Name="txtbl_addgiamgia" Text="Áp dụng" FontSize="18" FontWeight="Bold"/>
-                                    </StackPanel>
-                                </Button>
-
-                            </Grid>
 
                         </Grid>
+                    </RadioButton>
+                    <Grid  Margin="-5 5 0 0" >
 
-                    </StackPanel>
+                        <ScrollViewer Margin="0 0 0 0">
+                            <ItemsControl x:Name="itctPeople" ItemsSource="{Binding}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <RadioButton Margin="20 5 0 0" Style="{StaticResource Buttonsale}" x:Name="btnCustomers" Click="btnCustomers_Click" GroupName="CustomersGroup" >
+                                            <Grid Width="480" Height="90">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="65"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="40"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                                                 DockPanel.Dock="Top" HorizontalAlignment="left">
+                                                    <Ellipse>
+                                                        <Ellipse.Fill>
+                                                            <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                </Border>
 
-                    <StackPanel Grid.Row="1" x:Name="stpn_invoices" Background="#eff2f7" >
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="850"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
+                                                <TextBlock Text="{Binding person.PersonName}" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
+                                                <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="#00CC33" FontSize="18"/>
+                                                <TextBlock Text="{Binding TotalAmount}" Grid.Column="2" FontWeight="Bold" Margin="20 10 0 0" FontSize="18"/>
 
-                            <Grid>
-
-                                <Button x:Name="btnAllCateGory" Style="{StaticResource Buttonloai}" Margin="0 0 0 14" Click="btnAllCateGory_Click">
-                                    <TextBlock x:Name="txtbl_tatcaloai" Text="Tất cả"/>
-                                </Button>
-
-
-                                <Grid Grid.Row="1" Margin="90 -5 0 0">
-
-                                    <ItemsControl x:Name="itctCate" ItemsSource="{Binding}">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button Style="{StaticResource Buttonloai}" Margin="5" Click="CategoryBtn_Click">
-                                                    <TextBlock Text="{Binding CategoryName}"  />
+                                                <Button x:Name="btn_bacham2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0">
+                                                    <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
                                                 </Button>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </Grid>
 
+                                            </Grid>
+                                        </RadioButton>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
 
+                </StackPanel>
+               
 
-
-
-                                <Grid Width="200" HorizontalAlignment="Left" Margin="1045 0 0 0" Grid.ColumnSpan="2">
-                                    <TextBlock Margin="20 -20 40 0" VerticalAlignment="Center" Foreground="Black" IsHitTestVisible="False"
-                                     Panel.ZIndex="1"/>
-
-                                    <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0" VerticalAlignment="Center"/>
-
-                                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                                           Margin="0 0 8 15" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-
-                                </Grid>
-
-                                <Separator x:Name="spr_duonggach2" Background="LightGray" Grid.Row="0" Height="5" Margin="5,45,5,5" Grid.ColumnSpan="2"/>
-                            </Grid>
-
-                            <Grid Grid.Row="1" >
-                                <ScrollViewer>
-                                    <ItemsControl x:Name="itctCate3" ItemsSource="{Binding}">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-
-                                                <Button Grid.Row="1" x:Name="btn_sp" Style="{StaticResource Buttonspham}" >
-                                                    <Grid Width="275" Height="320">
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="auto"/>
-                                                            <RowDefinition Height="*"/>
-                                                            <RowDefinition Height="*"/>
-                                                        </Grid.RowDefinitions>
-
-                                                        <Image x:Name="img_anhsp" Width="275" Height="200" Source="{Binding ImageLink}" Margin="0 0 0 0"/>
-
-                                                        <TextBlock Grid.Row="1" Text="{Binding ProductName}" Style="{StaticResource texttensp}" />
-                                                        <TextBlock  Width="80" Height="30" Grid.Row="2" Text="{Binding PriceSell}" Style="{StaticResource textgiasp}" />
-
-                                                        <Grid Grid.Row="2" Width="55" Height="25" Margin="0 5 60 0" HorizontalAlignment="Right">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="auto"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <Button x:Name="btn_tru" Style="{StaticResource Buttonsoluong}">
-                                                                <TextBlock x:Name="txtbl_tru" Text="-" VerticalAlignment="Center" FontSize="30" Margin="0 0 0 5"/>
-                                                            </Button>
-
-                                                            <TextBlock Grid.Column="1" x:Name="txtbl_so" Text="2" HorizontalAlignment="Center" FontSize="18"/>
-
-                                                            <Button Grid.Column="2" x:Name="btn_cong" Style="{StaticResource Buttonsoluong}">
-                                                                <TextBlock x:Name="txtbl_cong" Text="+" VerticalAlignment="Center" FontSize="18" Margin="0 0 0 5"/>
-                                                            </Button>
-                                                        </Grid>
-
-                                                        <Button x:Name="btn_giohang" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" HorizontalAlignment="Right" Margin="0 5 10 0">
-                                                            <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="30" Height="30" />
-                                                        </Button>
-
-                                                    </Grid>
-                                                </Button>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </ScrollViewer>
-                            </Grid>
-
-                            <Grid  Background="#eff2f7" Margin="15,800,0,-25" Grid.Row="1" Grid.RowSpan="2">
-                                <Button x:Name="btn_thanhtoan" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 0 0" Click="btn_thanhtoan_Click">
-                                    <StackPanel Orientation="Horizontal" >
-                                        <TextBlock x:Name="txtbl_thanhtoan" Text="Thanh toán" FontSize="18" FontWeight="Bold"/>
-                                    </StackPanel>
-                                </Button>
-                                <Button x:Name="btn_in" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 140 0">
-                                    <StackPanel Orientation="Horizontal" >
-                                        <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="30" Height="30"/>
-                                    </StackPanel>
-                                </Button>
-
-                            </Grid>
-
-                        </Grid>
-
-
-
-                    </StackPanel>
-
-                </Grid>
 
             </Grid>
 
-        </Border>
+            <Border CornerRadius="10" Grid.Column="1" Background="White" Margin="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
 
-    </Grid>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+
+
+                        <Button x:Name="btn_quayve" Visibility="Collapsed" Style="{StaticResource Buttontieude}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btn_quayve_Click">
+                            <StackPanel Orientation="Horizontal" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <Icon:PackIconMaterial Kind="ArrowLeft" VerticalAlignment="Center" Width="15" Height="15" Margin="0 0 60 0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+
+
+                        <Separator x:Name="spr_duonggach" Background="#eff2f7" Grid.Row="0" Height="5" Margin="5 45 5 0" Visibility="Collapsed"/>
+                    </Grid>
+                    <Grid Grid.Row="1" >
+
+                        <StackPanel Grid.Column="1" Grid.Row="1" x:Name="stpn_packages" Visibility="Collapsed" >
+
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="520"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Width="300" Height="50" x:Name="txtbl_salesorder" Text="Đơn Đặt Hàng" Foreground="Black" FontWeight="Bold" FontSize="38" Margin="20" HorizontalAlignment="Left"/>
+                                    <TextBlock Grid.Row="1" x:Name="txtbl_ngaydathang" Text="Ngày Đặt" Foreground="Gray" FontWeight="Bold" Margin="20 0 0 20" Width="100" Height="30" FontSize="20" HorizontalAlignment="Left"/>
+                                    <TextBlock Grid.Row="1" x:Name="txtbl_ngaydat" Text="10/10/2023"  FontWeight="Bold" Margin="20 40 0 0" Width="150" Height="30" FontSize="20" HorizontalAlignment="Left"/>
+                                </Grid>
+
+                                <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Buttonbilingkh}">
+                                    <StackPanel Width="270" Height="270">
+                                        <TextBlock x:Name="txtbl_billingto" Text="THANH TOÁN CHO" Foreground="Gray" FontWeight="Bold" Margin="5"/>
+                                        <Border Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                                        DockPanel.Dock="Top" Margin="5" HorizontalAlignment="Left">
+                                            <Ellipse>
+                                                <Ellipse.Fill>
+                                                    <ImageBrush x:Name="img_anhbilling" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                        </Border>
+                                        <TextBlock x:Name="txtbl_tenbilling" Text="Phan Thanh Cham" Style="{StaticResource texttensp}" Foreground="Blue" Margin="15 20 0 0"/>
+                                        <TextBlock x:Name="txtbl_diachibilling" Text="217 Ngô Quyền" Style="{StaticResource texttensp}" Margin="15 20 0 0" Height="74"/>
+                                    </StackPanel>
+                                </Button>
+                                <Grid Grid.Row="1">
+                                    <DataGrid Grid.Row="1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}"  x:Name="DTGOrder" Grid.RowSpan="3" Margin="10">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn x:Name="dtgtxtcolumn_masp" Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding InventoryID}"/>
+                                            <DataGridTemplateColumn Header="Ảnh">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Image Source="{Binding ImageLink}" Width="24" Height="24" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTextColumn x:Name="dtgtxtcolumn_tensp"  Header="Tên sản phẩm" IsReadOnly="True" Width="*" Binding="{Binding ProductName}"/>
+                                            <DataGridTextColumn x:Name="dtgtxtcolumn_giabansp"  Header="Giá" IsReadOnly="True" Width="*" Binding="{Binding PriceSell}"/>
+                                            <DataGridTextColumn x:Name="dtgtxtcolumn_slsp"  Header="Số lượng" IsReadOnly="True" Width="*" Binding="{Binding OrderInfo.Quantity}"/>
+                                            <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+
+                                                            <Button x:Name="RemoveButton" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                                                <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                                            </Button>
+
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="2" x:Name="txtbl_tongtien" Text="Tổng tiền:" Margin="0 28 95 0" FontSize="20" HorizontalAlignment="Right" Style="{StaticResource texttensp}"/>
+                                    <TextBlock Grid.Column="2" x:Name="txtbl_tongtiensp" Margin="150 40 15 0" Text="320 000" FontSize="20"  HorizontalAlignment="Right" Style="{StaticResource textgiasp}"/>
+                                    <Button Grid.Column="3" x:Name="btn_thanhtien" Margin="0 30 20 0" Style="{StaticResource Buttonthanhtoan}">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock x:Name="txtbl_thanhtien" Text="Thành tiền" FontSize="18" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <TextBlock x:Name="txtbl_giamgia" Text="Giảm giá" FontSize="26" FontWeight="Bold" Foreground="red" Margin="20 36 0 0"/>
+
+
+
+                                    <Grid Width="100" Grid.Column="1" HorizontalAlignment="Left" Margin="20 10 0 0">
+                                        <TextBlock Margin="10 22 20 0" VerticalAlignment="Center" Foreground="Black" IsHitTestVisible="False"
+                                    Panel.ZIndex="1"/>
+
+                                        <TextBox x:Name="txtSearch" Style="{StaticResource textboxgiamgia}" Margin="0 20 10 0"/>
+
+                                    </Grid>
+                                    <Button Grid.Column="1" x:Name="btn_addgiamgia" Margin="130 30 0 0" HorizontalAlignment="Left" Style="{StaticResource Buttonthanhtoan}">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock x:Name="txtbl_addgiamgia" Text="Áp dụng" FontSize="18" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" x:Name="stpn_invoices" Background="#eff2f7"  >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="850"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid>
+
+                                    <RadioButton x:Name="btnAllCateGory" Style="{StaticResource Buttonloai}" Margin="0 0 0 14" Click="btnAllCateGory_Click"  GroupName="CategoryButtons">
+                                        <TextBlock x:Name="txtbl_tatcaloai" Text="Tất cả"/>
+                                    </RadioButton>
+
+
+                                    <Grid Grid.Row="1" Margin="90 -5 0 0">
+                                        <ItemsControl x:Name="itctCate" ItemsSource="{Binding}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Horizontal" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <RadioButton  Style="{StaticResource Buttonloai}" Margin="5" Click="CategoryBtn_Click"
+                                                        GroupName="CategoryButtons">
+                                                        <TextBlock Text="{Binding CategoryName}"  />
+                                                    </RadioButton>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+
+
+
+
+
+
+
+                                    <Grid Width="200" HorizontalAlignment="Left" Margin="1045 0 0 0" Grid.ColumnSpan="2">
+                                        <TextBlock Margin="20 -20 40 0" VerticalAlignment="Center" Foreground="Black" IsHitTestVisible="False"
+                                     Panel.ZIndex="1"/>
+
+                                        <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0" VerticalAlignment="Center"/>
+
+                                        <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
+                                           Margin="0 0 8 15" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+
+                                    </Grid>
+
+                                    <Separator x:Name="spr_duonggach2" Background="LightGray" Grid.Row="0" Height="5" Margin="5,45,5,5" Grid.ColumnSpan="2"/>
+                                </Grid>
+
+                                <Grid Grid.Row="1" >
+                                    <ScrollViewer>
+                                        <ItemsControl x:Name="itctProduct" ItemsSource="{Binding}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Horizontal" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+
+                                                    <Button Grid.Row="1" x:Name="btn_sp" Style="{StaticResource Buttonspham}" >
+                                                        <Grid Width="275" Height="320">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="auto"/>
+                                                                <RowDefinition Height="*"/>
+                                                                <RowDefinition Height="*"/>
+                                                            </Grid.RowDefinitions>
+
+                                                            <Image x:Name="img_anhsp" Width="275" Height="200" Source="{Binding Product.ImageLink}" Margin="0 0 0 0"/>
+
+                                                            <TextBlock Grid.Row="1" Text="{Binding  Product.ProductName}" Style="{StaticResource texttensp}" />
+                                                            <TextBlock  Width="80" Height="30" Grid.Row="2" Text="{Binding  Product.PriceSell}" Style="{StaticResource textgiasp}" />
+
+                                                            <Grid Grid.Row="2" Width="55" Height="25" Margin="0 5 60 0" HorizontalAlignment="Right">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <RadioButton x:Name="btnMinus" Style="{StaticResource Buttonsoluong}" Click="btnMinus_Click">
+                                                                    <TextBlock Text="-" VerticalAlignment="Center" FontSize="30" Margin="0 0 0 5"/>
+                                                                </RadioButton>
+
+                                                                <TextBlock Grid.Column="1" x:Name="tblQuantity" Text="{Binding OrderQuantity}" HorizontalAlignment="Center" FontSize="18"/>
+
+                                                                <RadioButton Grid.Column="2" x:Name="btnPlus" Style="{StaticResource Buttonsoluong}"  Click="btnPlus_Click">
+                                                                    <TextBlock Text="+" VerticalAlignment="Center" FontSize="18" Margin="0 0 0 5"/>
+                                                                </RadioButton>
+                                                            </Grid>
+
+                                                            <Button x:Name="btn_giohang" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" HorizontalAlignment="Right" Margin="0 5 10 0">
+                                                                <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="30" Height="30" />
+                                                            </Button>
+
+                                                        </Grid>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Grid>
+
+                                <Grid  Background="#eff2f7" Margin="15,800,0,-25" Grid.Row="1" Grid.RowSpan="2">
+                                    <Button x:Name="btn_thanhtoan" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 0 0" Click="btn_thanhtoan_Click">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock x:Name="txtbl_thanhtoan" Text="Thanh toán" FontSize="18" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="btn_in" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 140 0">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="30" Height="30"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                </Grid>
+
+                            </Grid>
+
+
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+    </Border>
+    
 </Page>

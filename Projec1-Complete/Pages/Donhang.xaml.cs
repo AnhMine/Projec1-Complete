@@ -4,11 +4,14 @@ using Projec1_Complete.DAL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -16,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Projec1_Complete.DAL.CategoryDAL;
 
 namespace Projec1_Complete.Pages
 {
@@ -28,9 +32,11 @@ namespace Projec1_Complete.Pages
         public ObservableCollection<Category> categories { get; set; }
         public ObservableCollection<Person> persons { get; set; }
         private CategoryBUS categoryBUS;
+        private OrderInfoBUS orderInfoBUS;
         private PersonBUS personBUS;
-        private ProductBUS productBUS;
         private OrderBUS orderBUS;
+        private int currentID;
+        private int currentCateID;
         public Donhang()
         {
             InitializeComponent();
@@ -39,10 +45,23 @@ namespace Projec1_Complete.Pages
             persons = new ObservableCollection<Person>();
             personBUS = new PersonBUS();
             categoryBUS = new CategoryBUS();
-            productBUS = new ProductBUS();
             orderBUS = new OrderBUS();
+            orderInfoBUS = new OrderInfoBUS();
+            currentID = 0;
+            currentCateID = 1;
             LoadCategory();
             LoadPersonsByStatus(null);
+            GetProductInfo(1);
+
+        }
+
+        private int GetCurrentPersonID()
+        {
+            return currentID;
+        }
+        private int GetCateID()
+        {
+            return currentCateID;
         }
         private void LoadOrderDTG(int id)
         {
@@ -54,43 +73,26 @@ namespace Projec1_Complete.Pages
         private void LoadCategory()
         {
             List<Category> categorieslist = categoryBUS.GetCategories();
+            //List<ProductAndOrderInfo> categorieslist = categoryBUS.GetCateGory();
             itctCate.ItemsSource = categorieslist;
-            
+
         }
-        private void LoadAllProduct()
+   
+        private void LoadProductByIDCategory(int categoryId,int personId)
         {
-            List<Product> productList = productBUS.GetProducts();
-            itctCate3.ItemsSource = productList;
+            List<ProductAndOrderInfo> prdList = categoryBUS.GetProductByCateAndPersonId(categoryId,personId);
+            itctProduct.ItemsSource = prdList;
         }
-        private void LoadProductByIDCategory(int id)
+        private void GetProductInfo(int id)
         {
-            List<Product> prdList = categoryBUS.GetProductByID(id);
-            itctCate3.ItemsSource = prdList;
+            List<ProductAndOrderInfo> list = categoryBUS.GetProductsWithOrderInfo(id);
+            itctProduct.ItemsSource = list;
         }
-        //private void LoadPerson()
-        //{
-        //    List<Person> perList = personBUS.GetListCustomer();
-        //    List<PersonOrder> personOrderlist = new List<PersonOrder>();
-
-        //    foreach (Person personItem in perList)
-        //    {
-        //        bool status = orderBUS.GetStatus(personItem.PersonID);
-        //        string statusText = status ? "Đã Thanh Toán" : "Chưa Thanh Toán";
-
-        //        PersonOrder personOrder = new PersonOrder
-        //        {
-        //            PerSon = personItem,
-        //            DisplayStatus = statusText,
-        //        };
-        //        personOrderlist.Add(personOrder);
-        //    }
-
-        //    itctPeople.ItemsSource = personOrderlist;
-        //}
+    
         private void LoadPersonsByStatus(bool? status)
         {
             List<Person> perList = personBUS.GetListCustomer();
-            List<PersonOrder> personOrderlist = new List<PersonOrder>();
+            List<ProductAndOrderInfo> personOrderlist = new List<ProductAndOrderInfo>();
 
             foreach (Person personItem in perList)
             {
@@ -101,9 +103,9 @@ namespace Projec1_Complete.Pages
                 string statusText = personStatus == true ? "Đã Thanh Toán" : personStatus == false ? "Chưa Thanh Toán" : "";
                 statusText = statusText ?? "";
 
-                PersonOrder personOrder = new PersonOrder
+                ProductAndOrderInfo personOrder = new ProductAndOrderInfo
                 {
-                    PerSon = personItem,
+                    person = personItem,
                     DisplayStatus = statusText,
                     TotalAmount = totalAmount,
                 };
@@ -113,7 +115,7 @@ namespace Projec1_Complete.Pages
             // Sắp xếp danh sách theo trạng thái (status)
             if (status.HasValue)
             {
-                personOrderlist = personOrderlist.Where(o => orderBUS.GetStatus(o.PerSon.PersonID) == status.Value).ToList();
+                personOrderlist = personOrderlist.Where(o => orderBUS.GetStatus(o.person.PersonID) == status.Value).ToList();
             }
 
             itctPeople.ItemsSource = personOrderlist;
@@ -126,10 +128,12 @@ namespace Projec1_Complete.Pages
 
         private void CategoryBtn_Click(object sender, RoutedEventArgs e)
         {
-            Button cateBtn = (Button)sender;
-            Category cate = (Category)cateBtn.DataContext;
-            int categoryID = cate.CategoryID;
-            LoadProductByIDCategory(categoryID);
+            RadioButton btn = (RadioButton)sender;
+            Category prd = (Category)btn.DataContext;
+            int categoryID = prd.CategoryID;
+            int personID = GetCurrentPersonID();
+            currentCateID = categoryID;
+            LoadProductByIDCategory(categoryID, personID);
         }
         
         private void btn_packages_Click(object sender, RoutedEventArgs e)
@@ -156,10 +160,52 @@ namespace Projec1_Complete.Pages
             spr_duonggach.Visibility = Visibility.Collapsed;
             btn_quayve.Visibility = Visibility.Collapsed;
         }
+       
+        private void  btnProductOrder_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void btnMinus_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        {
+            
+            RadioButton btn = (RadioButton)sender;
+            ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
+
+            Order order = person.order;
+          
+
+            OrderInfo info = orderInfoBUS.GetOrderInfoByOrderAndProduct(order.OrderID, person.Product.ProductID);
+            if (info != null)
+            {
+                info.Quantity++;
+                orderInfoBUS.UpdateOrderInfo(info);
+            }
+            else
+            {
+                OrderInfo newOrderInfo = new OrderInfo
+                {
+                    OrderID = order.OrderID,
+                    ProductID = person.Product.ProductID,
+                    Quantity = 1,
+                };
+                orderBUS.AddProductToOrder(order, newOrderInfo, (short)newOrderInfo.Quantity);
+            }
+
+
+
+            LoadProductByIDCategory(currentID, currentID);
+            LoadOrderDTG(currentID);
+        }
+        
         private void btnAllCateGory_Click(object sender, RoutedEventArgs e)
         {
-            LoadAllProduct();
+
+            ///*LoadAllProduct*/();
+
         }
 
         private void btnRetailCustomers_Click(object sender, RoutedEventArgs e)
@@ -168,11 +214,14 @@ namespace Projec1_Complete.Pages
         }
         private void btnCustomers_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-            PersonOrder person = (PersonOrder)btn.DataContext;
-            int personID = person.PerSon.PersonID;
-           
+            RadioButton btn = (RadioButton)sender;
+            ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
+            int personID = person.person.PersonID;
+            currentID = personID;
+            LoadProductByIDCategory(currentCateID, personID);
             LoadOrderDTG(personID);
+
+
         }
 
         private void btnAllCustomer_Click(object sender, RoutedEventArgs e)

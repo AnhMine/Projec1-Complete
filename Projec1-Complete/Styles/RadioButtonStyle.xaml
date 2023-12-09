@@ -24,7 +24,7 @@
                             <Border x:Name="btnSelected"
                                         Grid.ColumnSpan="2"
                                         CornerRadius="10"
-                                        Width="225" HorizontalAlignment="Right">
+                                        Width="150" HorizontalAlignment="Right">
                             </Border>
 
                             <!-- Indicator -->

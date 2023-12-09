@@ -28,7 +28,7 @@
 
             <!--select textbox-->
             <Grid Width="300" HorizontalAlignment="Left">
-                <TextBlock Margin="10,25,10,0" VerticalAlignment="Top" Foreground="#b0b9c6" IsHitTestVisible="False"
+                <TextBlock Margin="20 15 30 0" VerticalAlignment="Top" Height="30" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" 
                               />
 
