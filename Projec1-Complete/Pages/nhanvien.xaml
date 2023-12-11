@@ -17,12 +17,10 @@
             </Grid.ColumnDefinitions>
             <Grid Width="600" Height="800" Margin="20 0 0 0">
 
-                <Image x:Name="pic_anhsp" Source="/Assets/Icons/anhnenquanao.jpg"  Width="600" Height="800" VerticalAlignment="Center" Margin="0 0 0 200">
+                <Image x:Name="imgEmployee" Source="{Binding person.PersonImage}"  Width="600" Height="800" VerticalAlignment="Center" Margin="0 0 0 200" MouseLeftButtonUp="imgEmployee_MouseLeftButtonUp" Cursor="Hand" Loaded="imgEmployee_Loaded">
 
                 </Image>
-                <Button Width="600" Height="800" Style="{StaticResource Buttonimage}">
-
-                </Button>
+                <Button Width="600" Height="800" Style="{StaticResource Buttonimage}" x:Name="btnImg"></Button>
             </Grid>
             <Border Grid.Column="1" CornerRadius="20" Background="#eff2f7" Margin="40">
                 <Grid>
@@ -43,9 +41,9 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock x:Name="txtbl_tennhanvien" Text="Tên nhân viên" FontSize="24" FontWeight="Bold" Margin="20 10 5 5" />
-                                    
-                                    <TextBox Grid.Row="1" x:Name="txtb_doitennv" Style="{StaticResource textboxsuanhanvien}" Margin="20 0 20 10"  IsEnabled="False"/>
+                                    <TextBlock x:Name="txtbl_tennhanvien" Text="Họ Và Tên" FontSize="24" FontWeight="Bold" Margin="20 10 5 5" />
+
+                                    <TextBox Grid.Row="1" x:Name="txtName" Text="{Binding person.PersonName}"  Style="{StaticResource textboxsuanhanvien}" Margin="20 0 20 10" TextChanged="txtName_TextChanged" />
                                     
                                     
                                 </Grid>
@@ -57,9 +55,11 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock x:Name="txtbl_matkhaunv" Text="Mật khẩu" FontSize="24" FontWeight="Bold" Margin="20 10 5 5" />
-                                    <TextBlock Grid.Row="1" x:Name="txtChangePass" Margin="20 0 60 10" Padding="20"/>
-                                    <PasswordBox Grid.Row="1" x:Name="pswChangePass" Style="{StaticResource textboxpass}" Margin="20 0 20 10" IsEnabled="False"/>
-                                    <Button Grid.Row="1" x:Name="btnShowPswnv" HorizontalAlignment="Right" Margin="0 0 30 10" Style="{StaticResource Button3cham}" Grid.Column="1">
+                                    <TextBox Grid.Row="1" x:Name="txtChangePass" Style="{StaticResource txtPass}" Margin="20 0 20 10" Text="{Binding account.Password}" Visibility="Collapsed" TextChanged="txtChangePass_TextChanged" />
+                                    <PasswordBox Grid.Row="1" x:Name="pswChangePass" Style="{StaticResource textboxpass}" Margin="20 0 20 10" Visibility="Visible"/>
+
+
+                                    <Button Grid.Row="1" x:Name="btnShowPswnv" HorizontalAlignment="Right" Margin="0 0 30 10" Style="{StaticResource Button3cham}" Grid.Column="1" Click="btnShowPswnv_Click">
                                         <StackPanel Orientation="Horizontal" >
                                             <Icon:PackIconMaterial Kind="Eye" VerticalAlignment="Center" Width="20" Height="20"/>
                                         </StackPanel>
@@ -74,7 +74,7 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock x:Name="txtbl_emailnv" Text="Email" FontSize="24" FontWeight="Bold" Margin="20 10 5 5" />
-                                    <TextBox Grid.Row="1" x:Name="txtb_email" Style="{StaticResource textboxsuanhanvien}" Margin="20 0 20 10"   IsEnabled="False"/>
+                                    <TextBox Grid.Row="1" Text="{Binding person.Email}" x:Name="txtEmail" Style="{StaticResource textboxsuanhanvien}" Margin="20,0,20,0" VerticalAlignment="Top" TextChanged="txtEmail_TextChanged"   />
                                    
                                 </Grid>
                             </Border>
@@ -85,7 +85,7 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock x:Name="txtbl_sdtnv" Text="Số điện thoại" FontSize="24" FontWeight="Bold" Margin="20 10 5 5" />
-                                    <TextBox Grid.Row="1" x:Name="txtb_spdienthoai" Style="{StaticResource textboxsuanhanvien}" Margin="20 0 20 10" IsEnabled="False"/>
+                                    <TextBox Grid.Row="1" Text="{Binding person.Phone}" x:Name="txtPhone" Style="{StaticResource textboxsuanhanvien}" Margin="20 0 20 10" TextChanged="txtPhone_TextChanged" />
                                    
                                 </Grid>
                             </Border>
@@ -96,12 +96,12 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock x:Name="txtbl_tdiachinv" Text="Địa chỉ" FontSize="24" FontWeight="Bold" Margin="20 10 5 5" />
-                                    <TextBox Grid.Row="1" x:Name="txtb_diachi" Style="{StaticResource textboxsuanhanvien}" Margin="20 0 20 10"  IsEnabled="False"/>
+                                    <TextBox Grid.Row="1" Text="{Binding person.Address}" x:Name="txtAddress" Style="{StaticResource textboxsuanhanvien}" Margin="20 0 20 10" TextChanged="txtAddress_TextChanged"/>
                                     
                                 </Grid>
                             </Border>
 
-                            <Button Grid.Row="5" Style="{StaticResource btnthem}" Margin="0 40 200 0" IsEnabled="False" Opacity="50">
+                            <Button Grid.Row="5" Style="{StaticResource btnthem}" Margin="0 40 200 0" IsEnabled="False" Opacity="50" x:Name="btnSave" Click="btnSave_Click">
                                 <TextBlock x:Name="txtbl_luadoinv" Text="Lưu" FontSize="26" FontWeight="Bold"/>
                             </Button>
                             

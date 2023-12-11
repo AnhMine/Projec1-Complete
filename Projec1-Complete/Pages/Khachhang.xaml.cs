@@ -28,33 +28,42 @@ namespace Projec1_Complete.Pages
         {
             InitializeComponent();
             personBUS = new PersonBUS();
-            LoadPage();
+            LoadData();
         }
         private void btn_themkhahhang_Click(object sender, RoutedEventArgs e)
         {
             themmoi_khachhang add = new themmoi_khachhang();
             add.Show();
         }
-        void LoadPage()
+        void LoadData()
         {
             ObservableCollection<Person> customers = new ObservableCollection<Person>();
-            List<Person> list = personBUS.GetPeopleByStatus(true && false);
-            foreach (Person customer in list)
-            {
-                if(customer.Type == "Khách Hàng")
-                {
-                    customers.Add(customer);
+            ObservableCollection<Person> employees = new ObservableCollection<Person>();
+            List<Person> list = personBUS.GetPeopleByStatus();
 
+            foreach (Person person in list)
+            {
+                if (person.Type == "Khách Hàng")
+                {
+                    customers.Add(person);
+                }
+                else if (person.Type == "Admin" || person.Type == "Nhân Viên")
+                {
+                    employees.Add(person);
                 }
             }
+
             DTGCustomers.ItemsSource = customers;
+            DTGEmployees.ItemsSource = employees;
         }
+
 
         private void btn_sanpham_Click(object sender, RoutedEventArgs e)
         {
             stpn_dsnv.Visibility = Visibility.Collapsed;
             stpn_dskh.Visibility = Visibility.Visible;
-           
+            LoadData();
+
 
         }
 
@@ -62,7 +71,8 @@ namespace Projec1_Complete.Pages
         {
             stpn_dsnv.Visibility = Visibility.Visible;
             stpn_dskh.Visibility = Visibility.Collapsed;
-           
+            LoadData();
+
         }
     }
 }

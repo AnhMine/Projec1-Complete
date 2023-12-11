@@ -33,7 +33,10 @@ namespace Projec1_Complete.BUS
         {
             return _categoryDAL.GetProductsWithOrderInfo(personID);
         }
-
+        public List<ProductAndOrderInfo> GetProductsByPersonId(int personId)
+        {
+            return _categoryDAL.GetProductsByPersonId((int)personId);
+        }
 
     }
 }

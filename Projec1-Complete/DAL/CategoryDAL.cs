@@ -27,6 +27,35 @@ namespace Projec1_Complete.DAL
             }).ToList();
             return categoriesWithProducts;
         }
+
+        public List<ProductAndOrderInfo> GetProductsByPersonId(int personId)
+        {
+            var products = db.Products.ToList();
+            var orderInfo = (from oi in db.OrderInfoes
+                             join o in db.Orders on oi.OrderID equals o.OrderID
+                             where o.PersonID == personId
+                             select new
+                             {
+                                 oi.ProductID,
+                                 oi.Quantity,
+                                 oi.OrderID,
+                             }).ToList();
+            var orderInfoDict = orderInfo.ToDictionary(x => x.ProductID, x => x.Quantity);
+
+            var productsWithOrderInfo = products.Select(p =>
+            {
+                var quantity = (byte)(orderInfoDict.ContainsKey(p.ProductID) ? orderInfoDict[p.ProductID] : 0);
+                var orderInfoItem = orderInfo.FirstOrDefault(oi => oi.ProductID == p.ProductID);
+
+                return new ProductAndOrderInfo
+                {
+                    Product = p,
+                    orderInfo = orderInfoItem != null ? new OrderInfo { Quantity = orderInfoItem.Quantity } : null
+                };
+            }).ToList();
+
+            return productsWithOrderInfo;
+        }
         public List<ProductAndOrderInfo> GetProductByCateAndPersonId(int categoryId, int personId)
         {
             var products = db.Products.Where(p => p.CategoryID == categoryId).ToList();
@@ -35,20 +64,28 @@ namespace Projec1_Complete.DAL
                              where o.PersonID == personId
                              select new
                              {
+                                 oi.OrderID,
                                  oi.ProductID,
                                  oi.Quantity,
                              }).ToList();
+
+            // Create a Dictionary with both ProductID and OrderID
             var orderInfoDict = orderInfo.ToDictionary(x => x.ProductID, x => x.Quantity);
 
-            var productsWithOrderInfo = products.Select(p => new ProductAndOrderInfo
+            var productsWithOrderInfo = products.Select(p =>
             {
-                Product = p,
-                OrderQuantity = (byte)(orderInfoDict.ContainsKey(p.ProductID) ? orderInfoDict[p.ProductID] : 0)
+                var quantity = (byte)(orderInfoDict.ContainsKey(p.ProductID) ? orderInfoDict[p.ProductID] : 0);
+                var orderInfoItem = orderInfo.FirstOrDefault(oi => oi.ProductID == p.ProductID);
+
+                return new ProductAndOrderInfo
+                {
+                    Product = p,
+                    orderInfo = orderInfoItem != null ? new OrderInfo { Quantity = orderInfoItem.Quantity } : null
+                };
             }).ToList();
 
             return productsWithOrderInfo;
         }
-
 
 
         public List<ProductAndOrderInfo> GetProductsWithOrderInfo(int personID)
@@ -69,13 +106,16 @@ namespace Projec1_Complete.DAL
             // Tạo một Dictionary để lưu thông tin OrderInfo theo ProductID
             var orderInfoDict = orderInfo.ToDictionary(x => x.ProductID, x => x.Quantity);
 
-            // Tạo danh sách kết quả
-            var productsWithOrderInfo = products.Select(p => new ProductAndOrderInfo
+            var productsWithOrderInfo = products.Select(p =>
             {
-              
-                Product = p,
-             
-                OrderQuantity = ((byte)(orderInfoDict.ContainsKey(p.ProductID) ? orderInfoDict[p.ProductID] : 0))
+                var quantity = (byte)(orderInfoDict.ContainsKey(p.ProductID) ? orderInfoDict[p.ProductID] : 0);
+                var orderInfoItem = orderInfo.FirstOrDefault(oi => oi.ProductID == p.ProductID);
+
+                return new ProductAndOrderInfo
+                {
+                    Product = p,
+                    orderInfo = orderInfoItem != null ? new OrderInfo { Quantity = orderInfoItem.Quantity } : null
+                };
             }).ToList();
 
             return productsWithOrderInfo;

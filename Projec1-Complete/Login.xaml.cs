@@ -1,5 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Projec1_Complete.BUS;
+using Projec1_Complete.DAL;
 using Projec1_Complete.Pages;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,8 @@ namespace Projec1_Complete
         private void btn_DangNhap_Click(object sender, RoutedEventArgs e)
         {
             string username = txt_Email.Text;
-            string password = psw_MatKhau.Password;
+            string password = psw_MatKhau.Password ; 
+            string pass2 = txtShowPass.Text;
             if (cbRememberpsw.IsChecked == true)
             {
                 Properties.Settings.Default.username = username;
@@ -67,21 +69,19 @@ namespace Projec1_Complete
             }
 
             bool isValid = accountBUS.CheckAccount(username, password);
+            bool isValid2 = accountBUS.CheckAccount(username, pass2);
             string type = accountBUS.CheckType(username);
 
-            if (isValid)
+            if (isValid|| isValid2)
             {
-                if(type == "Admin")
+                int idPerson = accountBUS.GetIdPersonByUsername(username);
+                if(type == "Admin"|| type=="Nhân Viên")
                 {
-                    mainWindow = new MainWindow();
+                    mainWindow = new MainWindow(idPerson);
                     mainWindow.Show();
                     this.Hide();
                 }    
-                else
-                {
-                
-                }    
-                
+             
             }
             else
             {

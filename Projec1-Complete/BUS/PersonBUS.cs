@@ -38,9 +38,18 @@ namespace Projec1_Complete.BUS
         {
             return personDAL.GetPersonById(id);
         }
-        public List<Person> GetPeopleByStatus(bool isPaid)
+        public List<Person> GetPeopleByStatus()
         {
-            return personDAL.GetPeopleByStatus(isPaid);
+            return personDAL.GetPeopleByStatus();
         }
+        public void UpdateEmployees(Employees employees)
+        {
+            personDAL.UpdatePersonAndAccount(employees);
+        }
+        public List<Person> GetInfoPerson(int id)
+        {
+            return personDAL.GetInfoPerson(id);
+        }
+
     }
 }

@@ -5,7 +5,7 @@
         Height="600" Width="1200"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
-       FontFamily="Poppins">
+       FontFamily="Poppins" Loaded="home_Loaded">
 
 
     <Border x:Name="bdr_Main" CornerRadius="20" Background="#eff2f7">
@@ -101,7 +101,7 @@
 
                 <!-- Start: Frame Container -->
                 <Border x:Name="bdr_pagesFrame" Grid.Row="1" CornerRadius="0 0 5 0" Background="Transparent">
-                    <Frame x:Name="frameContent" NavigationUIVisibility="Hidden" Margin="10" Navigated="frameContent_Navigated"/>
+                    <Frame x:Name="frameContent" NavigationUIVisibility="Hidden" Margin="10"/>
                 </Border>
                 <!-- End: Frame Container -->
 

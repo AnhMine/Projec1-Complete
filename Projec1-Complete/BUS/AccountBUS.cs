@@ -28,7 +28,19 @@ namespace Projec1_Complete.BUS
         }
         public string CheckType(string username)
         {
-            return accountDAL.CheckStatus(username);
+            return accountDAL.CheckStatusByUsernameOrEmailOrPhone(username);
+        }
+        public Employees GetInfoEmployees (int id)
+        {
+            return accountDAL.GetInfoEmployees(id);
+        }
+        public int GetIdPersonByUsername(string username)
+        {
+            return accountDAL.GetIdPersonByUsernameOrEmailOrPhone(username);
+        }
+        public void UpdatePassword(string password, string email)
+        {
+            accountDAL.UpdatePassword(password, email);
         }
     }
 }

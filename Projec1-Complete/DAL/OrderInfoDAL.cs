@@ -25,16 +25,26 @@ namespace Projec1_Complete.DAL
         }
         public void UpdateOrderInfo(OrderInfo orderInfo)
         {
-            var info = db.OrderInfoes.FirstOrDefault( o => o.OrderID == orderInfo.OrderID && o.ProductID == orderInfo.ProductID );
+            var info = db.OrderInfoes.FirstOrDefault(o => o.OrderID == orderInfo.OrderID && o.ProductID == orderInfo.ProductID);
+
             if (info != null)
             {
-                info.Quantity = orderInfo.Quantity;
-                db.SaveChanges();
+                info.Quantity++;  // Tăng giá trị Quantity cho OrderInfo hiện tại
             }
             else
             {
+                OrderInfo newOrderInfo = new OrderInfo
+                {
+                    OrderID = orderInfo.OrderID,
+                    ProductID = orderInfo.ProductID,
+                    Quantity = orderInfo.Quantity
+                };
 
+                db.OrderInfoes.Add(newOrderInfo);  // Thêm OrderInfo mới vào ngữ cảnh
             }
+
+            db.SaveChanges();  // Lưu các thay đổi ra cơ sở dữ liệu
         }
+
     }
 }

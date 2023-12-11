@@ -78,11 +78,11 @@
                     <DataGrid.Columns>
                         
 
-                        <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding MaKH}"/>
-                        <DataGridTextColumn Header="Tên khách hàng" IsReadOnly="True" Binding="{Binding TenKH}"/>
-                        <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding SDT}"/>
+                        <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding PersonID}"/>
+                        <DataGridTextColumn Header="Tên khách hàng" IsReadOnly="True" Binding="{Binding PersonName}"/>
+                        <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding Phone}"/>
                         <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                        <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding Diachi}"/>
+                        <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding Address}"/>
 
                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -107,15 +107,15 @@
                 </DataGrid>
             </StackPanel>
             <StackPanel x:Name="stpn_dsnv" Grid.Row="5" Visibility="Collapsed" >
-                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="nhanvienDataGrid">
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="DTGEmployees">
                     <DataGrid.Columns>
-                        
 
-                        <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding o}"/>
-                        <DataGridTextColumn Header="Tên nhân viên" IsReadOnly="True" Binding="{Binding o}"/>
-                        <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding o}"/>
-                        <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding o}"/>
-                        <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding o}"/>
+
+                        <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding PersonID}"/>
+                        <DataGridTextColumn Header="Tên nhân viên" IsReadOnly="True" Binding="{Binding PersonName}"/>
+                        <DataGridTextColumn Header="Số điện thoại " IsReadOnly="True" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header="Địa chỉ" IsReadOnly="True" Width="*" Binding="{Binding Address}"/>
 
                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
                             <DataGridTemplateColumn.CellTemplate>

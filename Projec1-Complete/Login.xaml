@@ -112,7 +112,7 @@
                     <Grid Width="300" Margin="0 0 40 0 " HorizontalAlignment="Left">
                         <TextBlock x:Name="txtbl_hover_ten_email_std" Margin="30 0 0 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" Text="Tên tài khoản/ Email/ Số điện thoại"
-                               Visibility="{Binding ElementName=txt_Email, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                               Visibility="{Binding ElementName=txt_Email, Path=Text.Length,Converter={StaticResource BoolToVis}}"/>
 
                         <TextBox x:Name="txt_Email"
                              FontSize="14"
@@ -175,7 +175,7 @@
                              Margin="30,31,55,1" 
                              VerticalContentAlignment="Center"
                              Width="265" Grid.ColumnSpan="2" />
-                        <Button x:Name="btnShowPsw" HorizontalAlignment="Right" Margin="0 30 50 0" Style="{StaticResource Button3cham}" Click="btnShowPsw_Click" Grid.Column="1">
+                        <Button x:Name="btnShowPsw" Margin="125,30,50,0" Style="{StaticResource Button3cham}" Click="btnShowPsw_Click" Grid.Column="1">
                             <StackPanel Orientation="Horizontal" >
                                 <Icon:PackIconMaterial Kind="Eye" VerticalAlignment="Center" Width="20" Height="20"/>
                             </StackPanel>
@@ -193,7 +193,8 @@
 
                         <Button x:Name="btn_QuenMatKhau"                               
                                 Content="Quên mật khẩu?"
-                               Style="{StaticResource Buttonquenmk}" Click="btn_QuenMatKhau_Click"/>
+                               Style="{StaticResource Buttonquenmk}" Click="btn_QuenMatKhau_Click"
+                                Cursor="Hand"/>
 
 
                     </StackPanel>

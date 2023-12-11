@@ -12,9 +12,10 @@ namespace Projec1_Complete.DAL
         public Order order { get; set; }
         public Person person { get; set; }
         public Category category { get; set; }
+        public OrderInfo orderInfo { get; set; }
         public string DisplayStatus { get; set; }
         public decimal TotalAmount { get; set; }
-        public byte OrderQuantity { get; set; }
         public int CategoryID { get; set; }
+        public byte Discount { get; set; }
     }
 }

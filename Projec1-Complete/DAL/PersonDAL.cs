@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Projec1_Complete.DAL
 {
@@ -19,14 +20,11 @@ namespace Projec1_Complete.DAL
             return  person.ToList();
 
         }
-        public List<Person> GetPeopleByStatus(bool isPaid)
+        public List<Person> GetPeopleByStatus()
         {
-            var filteredPersons = from order in db.Orders
-                                  join person in db.People on order.PersonID equals person.PersonID
-                                  where order.Status == isPaid
-                                  select person;
-
-            return filteredPersons.ToList();
+          
+            return db.People.ToList();
+          
         }
         public List<Person> GetListCustomers()
         {
@@ -73,5 +71,41 @@ namespace Projec1_Complete.DAL
             return cus;
 
         }
+        public void UpdatePersonAndAccount(Employees employees)
+        {
+            if (employees == null || employees.person == null || employees.account == null)
+            {
+                
+                return;
+            }
+            var existingPerson = db.People.FirstOrDefault(p => p.PersonID == employees.person.PersonID);
+
+            if (existingPerson != null)
+            {
+                existingPerson.PersonImage = employees.person.PersonImage;
+                existingPerson.PersonName = employees.person.PersonName;
+                existingPerson.Address = employees.person.Address;
+                existingPerson.Phone = employees.person.Phone;
+                existingPerson.Email = employees.person.Email;
+                db.SaveChanges();
+            }
+
+            var existingAccount = db.Accounts.FirstOrDefault(a => a.PersonID == employees.account.PersonID);
+
+            if (existingAccount != null)
+            {
+                existingAccount.Password = employees.account.Password;
+
+                db.SaveChanges();
+            }
+        }
+        public List<Person> GetInfoPerson(int id)
+        {
+            var people = db.People.Where(p=> p.PersonID==id).ToList();
+            return people;
+        }
+
+
+
     }
 }
