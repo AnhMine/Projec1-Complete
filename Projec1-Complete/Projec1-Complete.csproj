@@ -199,16 +199,52 @@
     <Compile Include="BUS\PersonBUS.cs" />
     <Compile Include="BUS\ProductBUS.cs" />
     <Compile Include="BUS\ThongKeDataBUS.cs" />
+    <Compile Include="DAL\Account.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\AccountDAL.cs" />
+    <Compile Include="DAL\Category.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\Employees.cs" />
+    <Compile Include="DAL\History.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\HistoryDAL.cs" />
     <Compile Include="DAL\HisWithUsername.cs" />
+    <Compile Include="DAL\Order.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\OrderDAL.cs" />
+    <Compile Include="DAL\OrderInfo.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\OrderInfoDAL.cs" />
+    <Compile Include="DAL\Person.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\PersonDAL.cs" />
+    <Compile Include="DAL\Product.cs">
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\ProductAndOrderInfo.cs" />
     <Compile Include="DAL\ProductDAL.cs" />
+    <Compile Include="DAL\shopquanliquanao.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shopquanliquanao.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\shopquanliquanao.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shopquanliquanao.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\shopquanliquanao.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+    </Compile>
     <Compile Include="DAL\ThongKeData.cs" />
     <Compile Include="DAL\ThongKeDataDAL.cs" />
     <Compile Include="ForgotPassword.xaml.cs">
@@ -344,6 +380,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="DAL\shopquanliquanao.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>shopquanliquanao.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\shopquanliquanao.edmx.diagram">
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -374,7 +417,18 @@
   <ItemGroup>
     <Resource Include="Assets\Icons\WL.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DAL\shopquanliquanao.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+      <LastGenOutput>shopquanliquanao.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\shopquanliquanao.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shopquanliquanao.edmx</DependentUpon>
+      <LastGenOutput>shopquanliquanao.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
