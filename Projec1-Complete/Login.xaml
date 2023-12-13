@@ -175,7 +175,7 @@
                              Margin="30,31,55,1" 
                              VerticalContentAlignment="Center"
                              Width="265" Grid.ColumnSpan="2" />
-                        <Button x:Name="btnShowPsw" Margin="125,30,50,0" Style="{StaticResource Button3cham}" Click="btnShowPsw_Click" Grid.Column="1">
+                        <Button x:Name="btnShowPsw" Margin="125,30,50,0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Click="btnShowPsw_Click" Grid.Column="1">
                             <StackPanel Orientation="Horizontal" >
                                 <Icon:PackIconMaterial Kind="Eye" VerticalAlignment="Center" Width="20" Height="20"/>
                             </StackPanel>

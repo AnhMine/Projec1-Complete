@@ -1,4 +1,6 @@
-﻿using OfficeOpenXml.Style;
+﻿
+using OfficeOpenXml.Style;
+using OfficeOpenXml;
 using Projec1_Complete.BUS;
 using Projec1_Complete.DAL;
 using System;
@@ -19,8 +21,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static Projec1_Complete.DAL.CategoryDAL;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Microsoft.Win32;
+using System.IO;
+using Syncfusion.Pdf;
+using Syncfusion.UI.Xaml.Grid.Converter;
+
 
 namespace Projec1_Complete.Pages
 {
@@ -38,7 +44,7 @@ namespace Projec1_Complete.Pages
         private OrderBUS orderBUS;
         private int currentID;
         private int currentCateID;
-        private int currentOrderID;
+        private Order currentOrderID;
         public Donhang()
         {
             InitializeComponent();
@@ -49,14 +55,19 @@ namespace Projec1_Complete.Pages
             categoryBUS = new CategoryBUS();
             orderBUS = new OrderBUS();
             orderInfoBUS = new OrderInfoBUS();
-            currentID = -1;
             currentCateID = -1;
+            currentID = -1;
+            txtTotalAmount.Text = orderBUS.GetTotalAmount(-1).ToString();
             LoadCategory();
             LoadPersonsByStatus(null);
-            GetProductInfo(1);
+            //GetProductInfo(1);
 
         }
-
+      
+        void LoadTotalAmount(int orderID)
+        {
+            txtTotalAmount.Text = orderBUS.GetTotalAmount(orderID).ToString();
+        }
         private int GetCurrentPersonID()
         {
             return currentID;
@@ -80,13 +91,11 @@ namespace Projec1_Complete.Pages
 
                     listUnPaid.Add(oi);
                 }
-                
-                  
-
 
             }
 
             DTGOrder.ItemsSource = listUnPaid;
+            
 
 
 
@@ -99,13 +108,7 @@ namespace Projec1_Complete.Pages
 
         }
        
-        private void LoadProductByPersonID(int id)
-        {
-
-            List<ProductAndOrderInfo> prdList = categoryBUS.GetProductsByPersonId(id);
-            
-            itctProduct.ItemsSource = prdList;
-        }
+       
         private void LoadProductByIDCategory(int categoryId, int personId)
         {
             List<ProductAndOrderInfo> prdList = categoryBUS.GetProductByCateAndPersonId(categoryId, personId);
@@ -120,31 +123,29 @@ namespace Projec1_Complete.Pages
         private void LoadPersonsByStatus(bool? status)
         {
             List<Person> perList = personBUS.GetListCustomer();
-            List<ProductAndOrderInfo> personOrderlist = new List<ProductAndOrderInfo>();
 
-            foreach (Person personItem in perList)
+            List<ProductAndOrderInfo> personOrderlist = perList.Select(personItem =>
             {
                 bool personStatus = orderBUS.GetStatus(personItem.PersonID);
                 int OrderID = orderBUS.GetOrder(personItem.PersonID);
                 decimal totalAmount = orderBUS.GetTotalAmount(OrderID);
-
                 string statusText = personStatus == true ? "Đã Thanh Toán" : personStatus == false ? "Chưa Thanh Toán" : "";
                 statusText = statusText ?? "";
 
-                ProductAndOrderInfo personOrder = new ProductAndOrderInfo
+                return new ProductAndOrderInfo
                 {
                     person = personItem,
                     DisplayStatus = statusText,
-                    TotalAmount = totalAmount,
-                };
-                personOrderlist.Add(personOrder);
-            }
+                    TotalAmount = totalAmount
 
-            // Sắp xếp danh sách theo trạng thái (status)
+                };
+            }).ToList();
+
             if (status.HasValue)
             {
                 personOrderlist = personOrderlist.Where(o => orderBUS.GetStatus(o.person.PersonID) == status.Value).ToList();
             }
+
 
             itctPeople.ItemsSource = personOrderlist;
         }
@@ -198,40 +199,99 @@ namespace Projec1_Complete.Pages
         private void btnMinus_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-        private void btnPlus_Click(object sender, RoutedEventArgs e)
-        {
-
             RadioButton btn = (RadioButton)sender;
             ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
-            OrderInfo info = orderInfoBUS.GetOrderInfoByOrderAndProduct(currentOrderID, person.Product.ProductID);
-            //MessageBox.Show(info.Order.Status.ToString());
-            if (info != null)
+            OrderInfo info = orderInfoBUS.GetOrderInfoByOrderAndProduct(currentOrderID.OrderID, person.Product.ProductID);
+            if(info != null)
             {
 
                 person.orderInfo.Quantity++;
-                orderInfoBUS.UpdateOrderInfo(info);
+                orderInfoBUS.RemoveProductFromOrder(info);
                 LoadProductByIDCategory(currentCateID, currentID);
-                LoadProductByPersonID(currentID);
                 LoadOrderDTG(currentID);
-                LoadPersonsByStatus(null);
-                
-            }
+                LoadPersonsByStatus(false);
+                LoadTotalAmount(currentOrderID.OrderID);
+            }    
             else
             {
+                MessageBox.Show("Không Thể Nhập Số Bé Hơn 0");
+                return;
+            }    
+     
+
+        }
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        {
+            
+            RadioButton btn = (RadioButton)sender;
+            
+            ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
+            if(currentID ==-1 )
+            {
+                currentOrderID = orderBUS.ReturnOrderIdByPersonId(-1);
+            }    
+            OrderInfo info = orderInfoBUS.GetOrderInfoByOrderAndProduct(currentOrderID.OrderID, person.Product.ProductID);
+            //MessageBox.Show(currentID.ToString());
+
+            if (currentID == -1 && currentOrderID.Status == false)
+            {
+                person.orderInfo.Quantity++;
+                orderInfoBUS.UpdateOrderInfo(info);
+                LoadProductByIDCategory(currentCateID, -1);
+                LoadOrderDTG(-1);
+                LoadPersonsByStatus(false);
+                LoadTotalAmount(currentOrderID.OrderID);
+
+
+            }
+            else if (currentID == -1 && currentOrderID.Status == true)
+            {
+
                 OrderInfo newOrderInfo = new OrderInfo
                 {
-                    OrderID = currentOrderID,
+                    OrderID = currentOrderID.OrderID,
                     ProductID = person.Product.ProductID,
                     Quantity = 1,
                 };
                 orderInfoBUS.UpdateOrderInfo(newOrderInfo);
-                LoadProductByIDCategory(currentCateID, currentID);
-                LoadProductByPersonID(currentID);
-                LoadOrderDTG(currentID);
-                LoadPersonsByStatus(null);
+                LoadProductByIDCategory(currentCateID, -1);
+                LoadOrderDTG(-1);
+                LoadPersonsByStatus(false);
+                LoadTotalAmount(currentOrderID.OrderID);
 
             }
+            else
+            {
+                if (info != null)
+                {
+
+                    person.orderInfo.Quantity++;
+                    orderInfoBUS.UpdateOrderInfo(info);
+                    LoadProductByIDCategory(currentCateID, currentID);
+                    LoadOrderDTG(currentID);
+                    LoadPersonsByStatus(false);
+                    LoadTotalAmount(currentOrderID.OrderID);
+
+
+                }
+                else
+                {
+                    OrderInfo newOrderInfo = new OrderInfo
+                    {
+                        OrderID = currentOrderID.OrderID,
+                        ProductID = person.Product.ProductID,
+                        Quantity = 1,
+                    };
+                    orderInfoBUS.UpdateOrderInfo(newOrderInfo);
+                    LoadProductByIDCategory(currentCateID, currentID);
+                    LoadOrderDTG(currentID);
+                    LoadPersonsByStatus(false);
+                    LoadTotalAmount(currentOrderID.OrderID);
+
+
+                }
+            }
+
 
 
 
@@ -241,31 +301,34 @@ namespace Projec1_Complete.Pages
         private void btnAllCateGory_Click(object sender, RoutedEventArgs e)
         {
 
-            LoadProductByPersonID(currentID);
+            LoadProductByIDCategory(-1, currentID);
             LoadOrderDTG(currentID);
             currentCateID = -1;
+            LoadTotalAmount(currentOrderID.OrderID);
+
 
         }
 
-        private void btnRetailCustomers_Click(object sender, RoutedEventArgs e)
-        {
-            LoadOrderDTG(0);
-        }
+
         private void btnCustomers_Click(object sender, RoutedEventArgs e)
         {
 
             RadioButton btn = (RadioButton)sender;
             ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
             int personID = person.person.PersonID;
-
+      
+        
             currentID = personID;
             
             if (currentCateID == -1)
             {
                 currentOrderID = orderBUS.ReturnOrderIdByPersonId(personID) ;
-                LoadProductByPersonID(currentID);
+                LoadProductByIDCategory(-1, currentID);
                 LoadOrderDTG(personID);
                 LoadCustomerInfo(personID);
+                LoadTotalAmount(currentOrderID.OrderID);
+
+
 
 
             }
@@ -277,6 +340,8 @@ namespace Projec1_Complete.Pages
 
                 LoadOrderDTG(personID);
                 LoadCustomerInfo(personID);
+                LoadTotalAmount(currentOrderID.OrderID);
+
 
 
             }
@@ -302,21 +367,91 @@ namespace Projec1_Complete.Pages
         {
             currentID = -1;
 
-            if (currentCateID == -1)
-            {
-                LoadProductByPersonID(currentID);
+          
+                LoadProductByIDCategory(currentCateID, currentID);
                 LoadOrderDTG(-1);
 
-            }
-            else
-            {
-                LoadProductByIDCategory(currentCateID, -1);
-                LoadOrderDTG(-1);
-
-            }
+           
         }
 
-     
+        private void btnDiscount_Click(object sender, RoutedEventArgs e)
+        {
+            int discount ;
+            if (int.TryParse(txtDiscount.Text, out int discountValue))
+            {
+                discount = discountValue;
+                if(discountValue > orderBUS.GetTotalAmount(currentOrderID.OrderID))
+                {
+                    MessageBox.Show("Không Được Phép Nhập Quá Tổng Tiền");
+                    return;
+                }   
+                else
+                {
+                    orderBUS.UpdateDiscount(currentOrderID.OrderID, discount);
+                }    
+               
+            }
        
+
+
+        }
+
+
+        private void btnExportPDF_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.DataGrid dataGrid = DTGOrder; // Đảm bảo rằng DTGProduct là tên chính xác của DataGrid
+
+            // Tạo dialog để chọn vị trí lưu file Excel
+            Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog();
+            saveDialog.Filter = "Excel Files|*.xlsx";
+            if (saveDialog.ShowDialog() == true)
+            {
+                FileInfo newFile = new FileInfo(saveDialog.FileName);
+
+                // Tạo một package mới cho file Excel
+                ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.Commercial;
+                using (var excelPackage = new ExcelPackage(newFile))
+                {
+                    // Tạo một worksheet mới trong file Excel
+                    ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
+
+                    // Ghi tiêu đề cột
+                    for (int i = 0; i < dataGrid.Columns.Count; i++)
+                    {
+                        worksheet.Cells[1, i + 1].Value = dataGrid.Columns[i].Header;
+                    }
+
+                    for (int row = 0; row < dataGrid.Items.Count; row++)
+                    {
+                        for (int col = 0; col < dataGrid.Columns.Count; col++)
+                        {
+                            var cellContent = dataGrid.Columns[col].GetCellContent(dataGrid.Items[row]);
+
+                            if (cellContent is TextBlock textBlock)
+                            {
+                                var cellValue = textBlock.Text;
+                                worksheet.Cells[row + 2, col + 1].Value = cellValue;
+                            }
+                            else if (cellContent is Image image)
+                            {
+                                var dataItem = dataGrid.Items[row] as Product;
+                                var imagePath = dataItem.ImageLink;
+                                worksheet.Cells[row + 2, col + 1].Value = imagePath;
+                            }
+                        }
+                    }
+
+                    excelPackage.Save();
+                }
+
+                MessageBox.Show("Xuất ra file Excel thành công!");
+            }
+
+        }
+
+        private void btnPay_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -4,23 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cf448b5d03894dbf84873de068ca4e3d" Name="Diagram1">
-        <EntityTypeShape EntityType="ASMProject1Model.Account" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+      <Diagram DiagramId="b0e2626c65ad462e8c60d992f4af9b51" Name="Diagram1">
+        <EntityTypeShape EntityType="ASMProject1Model.Account" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.Category" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.History" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.OrderInfo" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.Order" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.Person" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ASMProject1Model.Product" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASMProject1Model.sysdiagram" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
-        <AssociationConnector Association="ASMProject1Model.FK__Account__PersonI__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="ASMProject1Model.FK__Orders__AccountI__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="ASMProject1Model.FK__Product__Categor__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="ASMProject1Model.FK__History__OrderID__6754599E" ManuallyRouted="false" />
-        <AssociationConnector Association="ASMProject1Model.FK__History__Product__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="ASMProject1Model.FK__OrderInfo__Order__6383C8BA" ManuallyRouted="false" />
-        <AssociationConnector Association="ASMProject1Model.FK__OrderInfo__Produ__6477ECF3" ManuallyRouted="false" />
-        <AssociationConnector Association="ASMProject1Model.FK__Orders__PersonID__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__Account__PersonI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__Orders__AccountI__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__Product__Categor__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__History__OrderID__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__History__Product__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__OrderInfo__Order__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__OrderInfo__Produ__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ASMProject1Model.FK__Orders__PersonID__5629CD9C" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

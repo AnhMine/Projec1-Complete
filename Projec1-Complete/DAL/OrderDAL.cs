@@ -14,17 +14,7 @@ namespace Projec1_Complete.DAL
         {
             db = new ASMProject1Entities();
         }
-        public void AddProductToOrder(Order order, OrderInfo orderInfo)
-        {
-            string productId = orderInfo.ProductID;
-            Product prd = db.Products.FirstOrDefault(x => x.ProductID == productId);
-            if(prd != null)
-            {
-                db.OrderInfoes.Add(orderInfo);
-                db.SaveChanges();
-            }    
-         
-        }
+       
         public int GetOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(o => o.PersonID == id);
@@ -40,23 +30,52 @@ namespace Projec1_Complete.DAL
 
         public bool GetStatus(int personId)
         {
-            var order = db.Orders.FirstOrDefault(o => o.PersonID == personId);
-            return order != null && order.Status != null && order.Status.Value;
-        }
-        public decimal GetTotalAmount(int id)
-        {
-            var totalAmount = db.OrderInfoes
-                .Where(oi => oi.OrderID == id)
-                .Sum(oi => oi.Quantity * oi.Product.PriceSell);
-            if(totalAmount  == null)
+            if (personId !=-1)
             {
-                return 0;
+                var order = db.Orders.FirstOrDefault(o => o.PersonID == personId);
+                return order != null && order.Status != null && order.Status.Value;
             }
             else
             {
-                return (decimal)totalAmount;
+                return false;
             }
+          
         }
+        public decimal GetTotalAmount(int id)
+        {
+            
+            var totalAmount = db.OrderInfoes
+                .Where(oi => oi.OrderID == id)
+                .Sum(oi => oi.Quantity * oi.Product.PriceSell);
+            var status = db.Orders.FirstOrDefault(s => s.OrderID == id);
+            if(totalAmount ==  null)
+            {
+                return 0;
+            }    
+            else
+            {
+                if (status != null)
+                {
+                    if (status.Status == false)
+                    {
+
+                        return (decimal)(totalAmount - status.Discount);
+
+                    }
+                    else
+                    {
+                        return 0;
+
+                    }
+
+                }
+                else { return 0; }
+
+            }
+
+
+        }
+       
         public List<ProductAndOrderInfo> GetOrdersByPersonId2(int personId)
         {
             var ordersAndCustomers = db.Orders
@@ -71,22 +90,33 @@ namespace Projec1_Complete.DAL
                           person = combined.Customer,
                           Product = product,
                           orderInfo = combined.OrderAndInfo.OrderInfo,
-                          CategoryID = (int)product.CategoryID,
+                          TotalPrice = (decimal)(combined.OrderAndInfo.OrderInfo.Quantity * product.PriceSell),
                           DisplayStatus = combined.OrderAndInfo.Order.Status == true ? "Thanh Toán" : "Chưa Thanh Toán"
                       })
                 .Where(item => item.order.PersonID == personId)
                 .ToList();
 
-            var result = ordersAndCustomers.Select(item => new ProductAndOrderInfo
+            var result = ordersAndCustomers.Select(item =>
             {
-                order = item.order,
-                person = item.person,
-                Product = item.Product,
-                orderInfo = item.orderInfo,
-                CategoryID = item.CategoryID,
-                DisplayStatus = item.DisplayStatus,
-                TotalAmount = CalculateTotalAmount((int)item.orderInfo.Quantity, (decimal)item.Product.PriceSell, (int)item.order.Discount)
-            }).ToList();
+                if (item.order != null && item.person != null && item.Product != null)
+                {
+                    var totalAmount = CalculateTotalAmount(new List<OrderInfo> { item.orderInfo }, new List<Product> { item.Product }, (int)item.order?.Discount);
+                    return new ProductAndOrderInfo
+                    {
+                        order = item.order,
+                        person = item.person,
+                        Product = item.Product,
+                        orderInfo = item.orderInfo,
+                        DisplayStatus = item.DisplayStatus,
+                        TotalPrice = item.TotalPrice,
+                        TotalAmount = totalAmount
+                        
+                    };
+                }
+                return null; 
+            }).Where(item => item != null)
+.ToList();
+
 
             return result;
         }
@@ -124,27 +154,46 @@ namespace Projec1_Complete.DAL
 
 
 
-        private decimal CalculateTotalAmount(int quantity, decimal priceSell, int discount)
+        public decimal CalculateTotalAmount(List<OrderInfo> orderInfos, List<Product> products, decimal discount)
         {
-            decimal discountedPrice = priceSell - (priceSell * discount / 100);
-            return quantity * discountedPrice;
+            decimal totalAmount = 0;
+
+            foreach (var orderInfo in orderInfos)
+            {
+                var product = products.FirstOrDefault(p => p.ProductID == orderInfo.ProductID);
+
+                if (product != null)
+                {
+                    totalAmount += (decimal)(orderInfo.Quantity ?? 0) * (decimal)(product.PriceSell ?? 0);
+                }
+            }
+
+            // Áp dụng chiết khấu
+            totalAmount -= totalAmount * discount / 100;
+
+            return totalAmount;
         }
+
         public bool PersonIDExists(int personID)
         {
             return db.Orders.Any(p => p.PersonID == personID );
         }
-
-        public int ReturnOrderIdByPersonId(int personId)
+       public void UpdateDiscount (int orderID, int discount)
         {
-            var order = db.Orders.FirstOrDefault(o => o.PersonID == personId);
+            Order update = db.Orders.FirstOrDefault(p=> p.OrderID == orderID);
+            if (update != null)
+            {
+                update.Discount = discount;
+                db.SaveChanges();
+            }
+
+        }
+        public Order ReturnOrderIdByPersonId(int personId)
+        {
             var maxOrderId = db.Orders.Max(o => (int?)o.OrderID) ?? 0;
             int newOrderId = maxOrderId + 1;
-     
-            if (order != null)
-            {
-                return order.OrderID;
-            }
-            else
+            var status = db.Orders.FirstOrDefault(s => s.PersonID == -1);
+            if (personId == -1 && status.Status == true)
             {
                 Order newOrder = new Order
                 {
@@ -156,13 +205,42 @@ namespace Projec1_Complete.DAL
                     Discount = 0,
                 };
 
-                db.Orders.Add(newOrder);  
-                db.SaveChanges();  
+                db.Orders.Add(newOrder);
+                db.SaveChanges();
 
-                return newOrder.OrderID;
+                return newOrder;
             }
-        }
+            else
+            {
+                var order = db.Orders.FirstOrDefault(o => o.PersonID == personId);
 
+
+
+                if (order != null)
+                {
+                    return order;
+                }
+                else
+                {
+                    Order newOrder = new Order
+                    {
+                        OrderID = newOrderId,
+                        PersonID = personId,
+                        AccountID = 1,
+                        OrderDate = DateTime.Now,
+                        Status = false,
+                        Discount = 0,
+                    };
+
+                    db.Orders.Add(newOrder);
+                    db.SaveChanges();
+
+                    return newOrder;
+                }
+            }
+          
+        }
+       
 
     }
 }

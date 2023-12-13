@@ -104,7 +104,11 @@ namespace Projec1_Complete.DAL
             var people = db.People.Where(p=> p.PersonID==id).ToList();
             return people;
         }
-
+        public Person GetPerson(int id)
+        {
+            var people = db.People.FirstOrDefault(p=>p.PersonID==id);
+            return people;
+        }
 
 
     }

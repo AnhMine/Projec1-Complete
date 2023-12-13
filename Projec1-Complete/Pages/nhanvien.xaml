@@ -15,13 +15,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <Grid Width="600" Height="800" Margin="20 0 0 0">
+            <Grid>
+                
+                <Border Width="700" Height="700" Padding="3" Background="Transparent" CornerRadius="400" Margin="30 0 0 0" BorderThickness="3" BorderBrush="Aqua"
+                                DockPanel.Dock="Top" HorizontalAlignment="Center">
+                    <Image x:Name="imgEmployee" Source="{Binding person.PersonImage}"  Width="600" Height="800" VerticalAlignment="Center" Margin="0 0 0 200" MouseLeftButtonUp="imgEmployee_MouseLeftButtonUp" Cursor="Hand" Loaded="imgEmployee_Loaded">
 
-                <Image x:Name="imgEmployee" Source="{Binding person.PersonImage}"  Width="600" Height="800" VerticalAlignment="Center" Margin="0 0 0 200" MouseLeftButtonUp="imgEmployee_MouseLeftButtonUp" Cursor="Hand" Loaded="imgEmployee_Loaded">
+                    </Image>
+                </Border>
+                <Button Width="600" Height="600" Style="{StaticResource Buttonimage}" x:Name="btnImg"></Button>
 
-                </Image>
-                <Button Width="600" Height="800" Style="{StaticResource Buttonimage}" x:Name="btnImg"></Button>
             </Grid>
+            
             <Border Grid.Column="1" CornerRadius="20" Background="#eff2f7" Margin="40">
                 <Grid>
                     <StackPanel x:Name="stpnbillttnv" Visibility="Visible">
@@ -101,7 +106,7 @@
                                 </Grid>
                             </Border>
 
-                            <Button Grid.Row="5" Style="{StaticResource btnthem}" Margin="0 40 200 0" IsEnabled="False" Opacity="50" x:Name="btnSave" Click="btnSave_Click">
+                            <Button Grid.Row="5" Style="{StaticResource btnthem}" Margin="0 40 180 0" IsEnabled="False" Opacity="50" x:Name="btnSave" Click="btnSave_Click">
                                 <TextBlock x:Name="txtbl_luadoinv" Text="Lưu" FontSize="26" FontWeight="Bold"/>
                             </Button>
                             

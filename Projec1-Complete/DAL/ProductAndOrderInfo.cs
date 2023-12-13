@@ -14,8 +14,7 @@ namespace Projec1_Complete.DAL
         public Category category { get; set; }
         public OrderInfo orderInfo { get; set; }
         public string DisplayStatus { get; set; }
-        public decimal TotalAmount { get; set; }
-        public int CategoryID { get; set; }
-        public byte Discount { get; set; }
+        public decimal TotalAmount  { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

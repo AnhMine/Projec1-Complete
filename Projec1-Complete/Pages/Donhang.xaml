@@ -24,24 +24,37 @@
                     <Button Grid.Row="0" Style="{StaticResource Buttonalldon}" Margin="0 20 7 0">
                         <StackPanel>
                             <Grid Width="480" Height="90">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Margin="0 0 0 -5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <RadioButton x:Name="btnAllCustomer"  Style="{StaticResource Buttonloaitt}"  Click="btnAllCustomer_Click" GroupName="tinhtrangdoanhang" >
+                                        <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả" />
+                                    </RadioButton>
+                                    <RadioButton Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
+                                        <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
+                                    </RadioButton>
+                                    <RadioButton Grid.Column="2" x:Name="btnUnPaid" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click" GroupName="tinhtrangdoanhang">
+                                        <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
+                                    </RadioButton>
+                                </Grid>
 
 
-                                <RadioButton x:Name="btnAllCustomer" Style="{StaticResource Buttonloaitt}"  Click="btnAllCustomer_Click" GroupName="tinhtrangdoanhang" >
-                                    <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả" />
-                                </RadioButton>
-                                <RadioButton Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
-                                    <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
-                                </RadioButton>
-                                <RadioButton Grid.Column="2" x:Name="btnUnPaid" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click" GroupName="tinhtrangdoanhang">
-                                    <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
-                                </RadioButton>
+                                <Grid Grid.Row="1" Width="200" HorizontalAlignment="Right" Margin="0 15 15 0" Grid.ColumnSpan="2">
 
+
+                                    <TextBox x:Name="txtSearchkhmh" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0"/>
+
+                                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
+                                           Margin="0 0 10 13" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+
+                                </Grid>
 
                             </Grid>
                         </StackPanel>
@@ -71,11 +84,11 @@
                             </Border>
 
                             <TextBlock Text="Khách lẻ" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
-                            <TextBlock Text="Chưa Thanh Toán" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="Orange" FontSize="18"/>
+                            <TextBlock Text="Chưa Thanh Toán" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="Orange" FontSize="16"/>
                             <TextBlock Text="0" Grid.Column="2" FontWeight="Bold" Margin="20 10 0 0" FontSize="18"/>
 
                             <Button x:Name="btn_bacham2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0">
-                                <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
+                                <Icon:PackIconMaterial Margin="0 1 8 0" Style="{StaticResource icon3cham}"/>
                             </Button>
 
                         </Grid>
@@ -109,11 +122,11 @@
                                                 </Border>
 
                                                 <TextBlock Text="{Binding person.PersonName}" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
-                                                <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0"  FontSize="18" Style="{StaticResource StatusTextStyle}"/>
+                                                <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0"  FontSize="16" Style="{StaticResource StatusTextStyle}"/>
                                                 <TextBlock Text="{Binding TotalAmount}" Grid.Column="2" FontWeight="Bold" Margin="20 10 0 0" FontSize="18"/>
 
                                                 <Button x:Name="btn_bacham2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0">
-                                                    <Icon:PackIconMaterial Kind="DotsVertical"  VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
+                                                    <Icon:PackIconMaterial Margin="0 1 8 0" Style="{StaticResource icon3cham}"/>
                                                 </Button>
 
                                             </Grid>
@@ -153,13 +166,13 @@
                     </Grid>
                     <Grid Grid.Row="1" >
 
-                        <StackPanel Grid.Column="1" Grid.Row="1" x:Name="stpn_packages" Visibility="Collapsed" >
+                        <StackPanel Grid.Column="1" Grid.Row="1" x:Name="stpn_packages" Visibility="Visible" >
 
                             <Grid>
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="520"/>
+                                    <RowDefinition Height="530"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Column="0">
@@ -200,16 +213,16 @@
                                 <Grid Grid.Row="1">
                                     <DataGrid Grid.Row="1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}"  x:Name="DTGOrder" Grid.RowSpan="3" Margin="10">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn x:Name="dtgtxtOrderID" Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding order.OrderID}"/>
+
                                             <DataGridTemplateColumn Header="Ảnh">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <Image Source="{Binding Product.ImageLink}" Width="24" Height="24" />
+                                                        <Image Source="{Binding Product.ImageLink}" Width="50" Height="50" Margin="0 0 0 0" HorizontalAlignment="Left"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                             <DataGridTextColumn x:Name="dtgtxtcolumn_tensp"  Header="Tên sản phẩm" IsReadOnly="True" Width="*" Binding="{Binding Product.ProductName}"/>
-                                            <DataGridTextColumn x:Name="dtgtxtcolumn_giabansp"  Header="Giá" IsReadOnly="True" Width="*" Binding="{Binding Product.PriceSell}"/>
+                                            <DataGridTextColumn x:Name="dtgtxtcolumn_giabansp"  Header="Đơn Giá" IsReadOnly="True" Width="*" Binding="{Binding TotalPrice}"/>
                                             <DataGridTextColumn x:Name="dtgtxtcolumn_slsp"  Header="Số lượng" IsReadOnly="True" Width="*" Binding="{Binding orderInfo.Quantity}"/>
                                             <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto" >
                                                 <DataGridTemplateColumn.CellTemplate>
@@ -225,8 +238,9 @@
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                         </DataGrid.Columns>
+
                                     </DataGrid>
-                                    
+
                                 </Grid>
 
                                 <Grid Grid.Row="2">
@@ -234,12 +248,18 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="auto"/>
+
 
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="2" x:Name="txtbl_tongtien" Text="Tổng tiền:" Margin="0 28 95 0" FontSize="20" HorizontalAlignment="Right" Style="{StaticResource texttensp}"/>
-                                    <TextBlock Grid.Column="2" x:Name="txtbl_tongtiensp" Margin="150 40 15 0" Text="320 000" FontSize="20"  HorizontalAlignment="Right" Style="{StaticResource textgiasp}"/>
-                                    <Button Grid.Column="3" x:Name="btn_thanhtien" Margin="0 30 20 0" Style="{StaticResource Buttonthanhtoan}">
+                                    <TextBlock Grid.Column="2" x:Name="txtbl_tongtien" Text="Tổng tiền:" Margin="0 0 130 60" FontSize="20" HorizontalAlignment="Right" Style="{StaticResource texttensp}"/>
+                                    <TextBlock Grid.Column="2" x:Name="txtTotalAmount" Margin="0 0 30 0"  FontSize="20"  HorizontalAlignment="Right" Style="{StaticResource textgiasp}" Text="0000000"/>
+                                    <Button x:Name="btnExportPDF" Grid.Column="2" Style="{StaticResource Buttonthanhtoan}" Margin="0,36,160,0" Click="btnExportPDF_Click" Height="45" VerticalAlignment="Top">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="30" Height="30"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Grid.Column="2" x:Name="btnPay" Margin="0 30 20 0" Style="{StaticResource Buttonthanhtoan}" Click="btnPay_Click">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock x:Name="txtbl_thanhtien" Text="Thành tiền" FontSize="18" FontWeight="Bold"/>
                                         </StackPanel>
@@ -253,10 +273,10 @@
                                         <TextBlock Margin="10 22 20 0" VerticalAlignment="Center" Foreground="Black" IsHitTestVisible="False"
                                     Panel.ZIndex="1"/>
 
-                                        <TextBox x:Name="txtSearch" Style="{StaticResource textboxgiamgia}" Margin="0 20 10 0"/>
+                                        <TextBox x:Name="txtDiscount" Style="{StaticResource textboxgiamgia}" Margin="0,26,10,0" VerticalAlignment="Top" Text="{Binding order.Discount}"/>
 
                                     </Grid>
-                                    <Button Grid.Column="1" x:Name="btn_addgiamgia" Margin="130 30 0 0" HorizontalAlignment="Left" Style="{StaticResource Buttonthanhtoan}">
+                                    <Button Grid.Column="1" x:Name="btnDiscount" Margin="130 30 0 0" HorizontalAlignment="Left" Style="{StaticResource Buttonthanhtoan}" Click="btnDiscount_Click">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock x:Name="txtbl_addgiamgia" Text="Áp dụng" FontSize="18" FontWeight="Bold"/>
                                         </StackPanel>
@@ -268,7 +288,7 @@
 
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" x:Name="stpn_invoices" Background="#eff2f7"  >
+                        <StackPanel Grid.Row="1" x:Name="stpn_invoices" Background="#eff2f7" Visibility="Collapsed" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
@@ -312,13 +332,12 @@
 
 
                                     <Grid Width="200" HorizontalAlignment="Left" Margin="1045 0 0 0" Grid.ColumnSpan="2">
-                                        <TextBlock Margin="20 -20 40 0" VerticalAlignment="Center" Foreground="Black" IsHitTestVisible="False"
-                                     Panel.ZIndex="1"/>
+
 
                                         <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0" VerticalAlignment="Center"/>
 
                                         <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                                           Margin="0 0 8 15" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+                                           Margin="0 0 10 13" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
 
                                     </Grid>
 
@@ -355,7 +374,7 @@
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="auto"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <RadioButton x:Name="btnMinus" Style="{StaticResource Buttonsoluong}" Click="btnMinus_Click">
+                                                                <RadioButton x:Name="btnMinus" Style="{StaticResource Buttonsoluong}"  Click="btnMinus_Click">
                                                                     <TextBlock Text="-" VerticalAlignment="Center" FontSize="32" Margin="0 0 0 5"/>
                                                                 </RadioButton>
 
@@ -379,16 +398,12 @@
                                 </Grid>
 
                                 <Grid  Background="#eff2f7" Margin="15,800,0,-25" Grid.Row="1" Grid.RowSpan="2">
-                                    <Button x:Name="btn_thanhtoan" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 0 0" Click="btn_thanhtoan_Click">
+                                    <Button x:Name="btn_thanhtoan" Style="{StaticResource Buttonthanhtoan}" Margin="1101,20,0,10" Click="btn_thanhtoan_Click" HorizontalAlignment="Left">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock x:Name="txtbl_thanhtoan" Text="Thanh toán" FontSize="18" FontWeight="Bold"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button x:Name="btn_in" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" Margin="0 10 140 0">
-                                        <StackPanel Orientation="Horizontal" >
-                                            <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="30" Height="30"/>
-                                        </StackPanel>
-                                    </Button>
+
 
                                 </Grid>
 

@@ -27,11 +27,8 @@ namespace Projec1_Complete.BUS
         {
             return orderDAL.GetTotalAmount(id);
         }
-        public void AddProductToOrder(Order order, OrderInfo orderInfo)
         
-        {
-            orderDAL.AddProductToOrder(order, orderInfo);
-        }
+       
         public bool PersonIDExists(int personID)
         {
             return orderDAL.PersonIDExists(personID);
@@ -40,9 +37,13 @@ namespace Projec1_Complete.BUS
         {
             return orderDAL.GetOrdersByPersonId2(personId);
         }
-        public int ReturnOrderIdByPersonId(int personId)
+        public Order ReturnOrderIdByPersonId(int personId)
         {
           return orderDAL.ReturnOrderIdByPersonId(personId);
+        }
+      public void UpdateDiscount(int id, int discount)
+        {
+           orderDAL.UpdateDiscount(id, discount);
         }
 
 

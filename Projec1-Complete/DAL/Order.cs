@@ -26,7 +26,7 @@ namespace Projec1_Complete.DAL
         public Nullable<int> PersonID { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<byte> Discount { get; set; }
+        public Nullable<int> Discount { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

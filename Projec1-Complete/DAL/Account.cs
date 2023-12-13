@@ -24,6 +24,7 @@ namespace Projec1_Complete.DAL
         public string UserName { get; set; }
         public string Password { get; set; }
         public Nullable<int> PersonID { get; set; }
+        public string Status { get; set; }
     
         public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

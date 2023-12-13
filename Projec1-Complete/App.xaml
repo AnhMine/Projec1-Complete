@@ -3,16 +3,20 @@
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Projec1_Complete"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="Projec1_Complete.App"
-             StartupUri="Login.xaml"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="clr-namespace:Projec1_Complete.Assets" mc:Ignorable="av" x:Class="Projec1_Complete.App"
+      StartupUri="Login.xaml"
     >
+    
     <Application.Resources>
+        
         <ResourceDictionary>
 
-            <ResourceDictionary.MergedDictionaries>
 
+            <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/LightTheme.xaml"/>
                 <ResourceDictionary Source="/Assets/Icons/Icons.xaml"/>
+
                 <ResourceDictionary Source="/Styles/RadioButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ButtonStyle.xaml"/>
                 <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />-->
@@ -215,6 +219,7 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
                                     </SelectiveScrollingGrid.RowDefinitions>
+
                                     <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                     <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Visibility="{TemplateBinding DetailsVisibility}"/>
                                     <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
@@ -421,10 +426,10 @@
                 <Setter Property="Background" Value="#ffffff"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Height" Value="40"/>
                 <Setter Property="Padding" Value="15 10"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="0 10"/>
                 <Setter Property="Template">
                     <Setter.Value>
@@ -574,6 +579,7 @@
                 <Setter Property="Width" Value="10"/>
                 <Setter Property="Height" Value="10"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
+                
             </Style>
 
             <Style x:Key="gridEditButton" TargetType="{x:Type Button}">
@@ -739,11 +745,103 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="RadioButton">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="0" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsChecked" Value="False"/>
+                                    <Setter TargetName="border" Property="Background" Value="White"/>
+                                </MultiDataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="1">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="2">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="3">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="4">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="5">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="6">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="7">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="8">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="9">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="10">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="11">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="12">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="13">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="14">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="15">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="16">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="17">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="18">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="19">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding orderInfo.Quantity, Mode=OneWay}" Value="20">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                    <Setter TargetName="border" Property="Background" Value="#8E8FFA"/>
+                                </DataTrigger>
+
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
+
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
@@ -781,6 +879,7 @@
                             <Border Background="{TemplateBinding Background}" CornerRadius="10">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
+
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -917,6 +1016,7 @@
                 </Setter>
 
             </Style>
+            
             <Style x:Key="txtPass" TargetType="TextBox">
                 <Setter Property="Background" Value="#ffffff"/>
                 <Setter Property="Foreground" Value="Black"/>
@@ -1176,15 +1276,30 @@
                 </Setter>
 
             </Style>
+            
             <Style x:Key="StatusTextStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="18"/>
-                <!-- Các thiết lập khác cho TextBlock -->
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding DisplayStatus}" Value="Đã Thanh Toán">
                         <Setter Property="Foreground" Value="#00CC33"/>
+                        
                     </DataTrigger>
                     <DataTrigger Binding="{Binding DisplayStatus}" Value="Chưa Thanh Toán">
                         <Setter Property="Foreground" Value="Orange"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="icon3cham" TargetType="{x:Type Icon:PackIconMaterial}">
+                <Setter Property="Width" Value="16"/>
+                <Setter Property="Height" Value="16"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding DisplayStatus}" Value="Đã Thanh Toán">
+                        <Setter Property="Kind" Value="Plus"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding DisplayStatus}" Value="Chưa Thanh Toán">
+                        <Setter Property="Kind" Value="DotsVertical"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>

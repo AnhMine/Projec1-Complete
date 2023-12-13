@@ -50,6 +50,10 @@ namespace Projec1_Complete.BUS
         {
             return personDAL.GetInfoPerson(id);
         }
+        public Person GetPerson(int id)
+        {
+            return personDAL.GetPerson(id);
+        }
 
     }
 }

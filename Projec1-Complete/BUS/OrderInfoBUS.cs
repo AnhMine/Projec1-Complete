@@ -22,5 +22,9 @@ namespace Projec1_Complete.BUS
         {
              _orderInfoDAL.UpdateOrderInfo(orderInfo);
         }
+        public void RemoveProductFromOrder(OrderInfo orderInfo)
+        {
+            _orderInfoDAL.RemoveProductFromOrder(orderInfo);
+        }
     }
 }

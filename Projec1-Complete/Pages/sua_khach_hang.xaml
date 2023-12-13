@@ -3,14 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
          WindowStyle="None" 
-        Title="AddNewClient" Height="550" Width="800" Background="Transparent">
+        Title="AddNewClient" Height="550" Width="1100" Background="Transparent">
 
 
 
     <Border Background="#eff2f7" CornerRadius="20">
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Width="300" Height="400" Margin="0 0 0 0 ">
+                <Image x:Name="imgkh" Source="/Assets/Icons/anhpic-removebg-preview.png"  Width="300" Height="400" VerticalAlignment="Center" Margin="0 0 0 100">
 
-            <Grid>
+                </Image>
+                <Button Width="300" Height="400" Margin="0 0 0 0" Style="{StaticResource Buttonimage}" >
+
+                </Button>
+            </Grid>
+            <Grid Grid.Column="1">
 
                 <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="730 0 0 490" Click="btn_Close_Click" />
 
