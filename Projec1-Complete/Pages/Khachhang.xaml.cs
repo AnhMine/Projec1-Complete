@@ -39,7 +39,7 @@ namespace Projec1_Complete.Pages
         {
             ObservableCollection<Person> customers = new ObservableCollection<Person>();
             ObservableCollection<Person> employees = new ObservableCollection<Person>();
-            List<Person> list = personBUS.GetPeopleByStatus();
+            List<Person> list = personBUS.GetListCustomer();
 
             foreach (Person person in list)
             {

@@ -56,10 +56,10 @@ namespace Projec1_Complete.Pages
             orderBUS = new OrderBUS();
             orderInfoBUS = new OrderInfoBUS();
             currentCateID = -1;
-            currentID = -1;
+            currentID = 0;
             txtTotalAmount.Text = orderBUS.GetTotalAmount(-1).ToString();
             LoadCategory();
-            LoadPersonsByStatus(null);
+            LoadPersonsByStatus(false);
             //GetProductInfo(1);
 
         }
@@ -95,10 +95,25 @@ namespace Projec1_Complete.Pages
             }
 
             DTGOrder.ItemsSource = listUnPaid;
-            
 
 
+        }
+        private void LoadOrderDTGPaid(int id )
+        {
+            ObservableCollection<ProductAndOrderInfo> listPaid = new ObservableCollection<ProductAndOrderInfo>();
 
+            List<ProductAndOrderInfo> orders = orderBUS.GetOrdersByPersonId2(id);
+            foreach (ProductAndOrderInfo oi in orders)
+            {
+                if (oi.order.Status == true)
+                {
+
+                    listPaid.Add(oi);
+                }
+
+            }
+
+            DTGOrder.ItemsSource = listPaid;
         }
 
         private void LoadCategory()
@@ -114,42 +129,30 @@ namespace Projec1_Complete.Pages
             List<ProductAndOrderInfo> prdList = categoryBUS.GetProductByCateAndPersonId(categoryId, personId);
             itctProduct.ItemsSource = prdList;
         }
-        private void GetProductInfo(int id)
-        {
-            List<ProductAndOrderInfo> list = categoryBUS.GetProductsWithOrderInfo(id);
-            itctProduct.ItemsSource = list;
-        }
 
-        private void LoadPersonsByStatus(bool? status)
+        private void LoadPersonsByStatus(bool status)
         {
-            List<Person> perList = personBUS.GetListCustomer();
+            List<Order> orderList = orderBUS.GetOrderList(status);
+            List<ProductAndOrderInfo> personOrderlist = new List<ProductAndOrderInfo>();
 
-            List<ProductAndOrderInfo> personOrderlist = perList.Select(personItem =>
+            foreach (Order order in orderList)
             {
-                bool personStatus = orderBUS.GetStatus(personItem.PersonID);
-                int OrderID = orderBUS.GetOrder(personItem.PersonID);
-                decimal totalAmount = orderBUS.GetTotalAmount(OrderID);
-                string statusText = personStatus == true ? "Đã Thanh Toán" : personStatus == false ? "Chưa Thanh Toán" : "";
-                statusText = statusText ?? "";
+                decimal totalAmount = orderBUS.GetTotalAmount(order.OrderID);
+                string statusText = orderBUS.GetStatus(order.OrderID) == true ? "Đã Thanh Toán" : "Chưa Thanh Toán";
 
-                return new ProductAndOrderInfo
+                ProductAndOrderInfo product = new ProductAndOrderInfo
                 {
-                    person = personItem,
-                    DisplayStatus = statusText,
-                    TotalAmount = totalAmount
-
+                    person = orderBUS.GetPersonByOrderId(order.OrderID),
+                    TotalAmount = totalAmount,
+                    DisplayStatus = statusText
                 };
-            }).ToList();
 
-            if (status.HasValue)
-            {
-                personOrderlist = personOrderlist.Where(o => orderBUS.GetStatus(o.person.PersonID) == status.Value).ToList();
+                personOrderlist.Add(product);
             }
 
-
             itctPeople.ItemsSource = personOrderlist;
-        }
 
+        }
 
 
 
@@ -181,6 +184,7 @@ namespace Projec1_Complete.Pages
             stpn_invoices.Visibility = Visibility.Collapsed;
             spr_duonggach.Visibility = Visibility.Visible;
             btn_quayve.Visibility = Visibility.Visible;
+            LoadOrderDTG(currentID);
 
         }
 
@@ -208,7 +212,6 @@ namespace Projec1_Complete.Pages
                 person.orderInfo.Quantity++;
                 orderInfoBUS.RemoveProductFromOrder(info);
                 LoadProductByIDCategory(currentCateID, currentID);
-                LoadOrderDTG(currentID);
                 LoadPersonsByStatus(false);
                 LoadTotalAmount(currentOrderID.OrderID);
             }    
@@ -226,51 +229,18 @@ namespace Projec1_Complete.Pages
             RadioButton btn = (RadioButton)sender;
             
             ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
-            if(currentID ==-1 )
-            {
-                currentOrderID = orderBUS.ReturnOrderIdByPersonId(-1);
-            }    
+    
             OrderInfo info = orderInfoBUS.GetOrderInfoByOrderAndProduct(currentOrderID.OrderID, person.Product.ProductID);
-            //MessageBox.Show(currentID.ToString());
 
-            if (currentID == -1 && currentOrderID.Status == false)
-            {
-                person.orderInfo.Quantity++;
-                orderInfoBUS.UpdateOrderInfo(info);
-                LoadProductByIDCategory(currentCateID, -1);
-                LoadOrderDTG(-1);
-                LoadPersonsByStatus(false);
-                LoadTotalAmount(currentOrderID.OrderID);
-
-
-            }
-            else if (currentID == -1 && currentOrderID.Status == true)
-            {
-
-                OrderInfo newOrderInfo = new OrderInfo
-                {
-                    OrderID = currentOrderID.OrderID,
-                    ProductID = person.Product.ProductID,
-                    Quantity = 1,
-                };
-                orderInfoBUS.UpdateOrderInfo(newOrderInfo);
-                LoadProductByIDCategory(currentCateID, -1);
-                LoadOrderDTG(-1);
-                LoadPersonsByStatus(false);
-                LoadTotalAmount(currentOrderID.OrderID);
-
-            }
-            else
-            {
+            
                 if (info != null)
                 {
 
                     person.orderInfo.Quantity++;
                     orderInfoBUS.UpdateOrderInfo(info);
                     LoadProductByIDCategory(currentCateID, currentID);
-                    LoadOrderDTG(currentID);
-                    LoadPersonsByStatus(false);
-                    LoadTotalAmount(currentOrderID.OrderID);
+                LoadPersonsByStatus(false);
+                LoadTotalAmount(currentOrderID.OrderID);
 
 
                 }
@@ -284,12 +254,11 @@ namespace Projec1_Complete.Pages
                     };
                     orderInfoBUS.UpdateOrderInfo(newOrderInfo);
                     LoadProductByIDCategory(currentCateID, currentID);
-                    LoadOrderDTG(currentID);
-                    LoadPersonsByStatus(false);
-                    LoadTotalAmount(currentOrderID.OrderID);
+                LoadPersonsByStatus(false);
+                LoadTotalAmount(currentOrderID.OrderID);
 
 
-                }
+                
             }
 
 
@@ -304,7 +273,7 @@ namespace Projec1_Complete.Pages
             LoadProductByIDCategory(-1, currentID);
             LoadOrderDTG(currentID);
             currentCateID = -1;
-            LoadTotalAmount(currentOrderID.OrderID);
+       
 
 
         }
@@ -349,13 +318,15 @@ namespace Projec1_Complete.Pages
 
         }
 
-        private void btnAllCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            LoadPersonsByStatus(null);
-        }
+     
         private void btnPaid_Click(object sender, RoutedEventArgs e)
         {
             LoadPersonsByStatus(true);
+            stpn_packages.Visibility = Visibility.Visible;
+            stpn_invoices.Visibility = Visibility.Collapsed;
+            spr_duonggach.Visibility = Visibility.Visible;
+            btn_quayve.Visibility = Visibility.Visible;
+            LoadOrderDTG(currentID);
         }
         private void btnUnPaid_Click(object sender, RoutedEventArgs e)
         {
@@ -363,17 +334,7 @@ namespace Projec1_Complete.Pages
 
         }
 
-        private void btnACustomer_Click(object sender, RoutedEventArgs e)
-        {
-            currentID = -1;
-
-          
-                LoadProductByIDCategory(currentCateID, currentID);
-                LoadOrderDTG(-1);
-
-           
-        }
-
+      
         private void btnDiscount_Click(object sender, RoutedEventArgs e)
         {
             int discount ;
@@ -388,6 +349,7 @@ namespace Projec1_Complete.Pages
                 else
                 {
                     orderBUS.UpdateDiscount(currentOrderID.OrderID, discount);
+                    LoadTotalAmount(currentOrderID.OrderID);
                 }    
                
             }
@@ -451,7 +413,26 @@ namespace Projec1_Complete.Pages
 
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Bạn Chắc Chắn Muốn Thanh Toán Cho Đơn Hàng Này ?", "Xác Nhận Thanh Toán", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                orderBUS.UpdateStatus(currentOrderID.OrderID);
+                if(currentID == 0)
+                {
+                    LoadPersonsByStatus(false);
+                    LoadOrderDTG(currentID);
+                }   
+                else
+                {
+                    LoadPersonsByStatus(false);
+                }    
+                
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

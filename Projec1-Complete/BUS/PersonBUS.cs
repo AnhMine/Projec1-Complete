@@ -38,10 +38,7 @@ namespace Projec1_Complete.BUS
         {
             return personDAL.GetPersonById(id);
         }
-        public List<Person> GetPeopleByStatus()
-        {
-            return personDAL.GetPeopleByStatus();
-        }
+       
         public void UpdateEmployees(Employees employees)
         {
             personDAL.UpdatePersonAndAccount(employees);

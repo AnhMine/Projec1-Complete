@@ -29,111 +29,42 @@ namespace Projec1_Complete.DAL
 
         public List<ProductAndOrderInfo> GetProductByCateAndPersonId(int categoryId, int personId)
         {
-            var status = db.Orders.FirstOrDefault(p => p.PersonID == personId);
-            var kt = db.Orders.Any(p => p.PersonID == personId);
-            var list = db.Orders.Max(p => p.OrderID);
-            int newOrderId = 0;
+            var products = categoryId == -1
+              ? db.Products.ToList()
+              : db.Products.Where(p => p.CategoryID == categoryId).ToList();
+
+            var orderInfo = (from oi in db.OrderInfoes
+                             join o in db.Orders on oi.OrderID equals o.OrderID
+                             where o.PersonID == personId
+                             select new
+                             {
+                                 oi.OrderID,
+                                 oi.ProductID,
+                                 oi.Quantity,
+                                 o.Status
+                             }).ToList();
 
 
-                if (status.Status == true && kt== true && status != null)
+            var productsWithOrderInfo = products.Select(p =>
+            {
+                var orderInfoItem = orderInfo.FirstOrDefault(oi => oi.ProductID == p.ProductID);
+                var quantity = (byte)(orderInfoItem?.Quantity ?? 0);
+
+                if (orderInfoItem != null && categoryId != -1 && orderInfoItem.Status == true)
                 {
-                    // Nếu status là true, tạo Order mới và OrderInfo mới
-                    var newOrder = new Order
-                    {
-                        OrderID = list+1,
-                        PersonID = personId,
-                        AccountID = 1,
-                        Discount = 0,
-                        Status = false,
-                    };
-                    db.Orders.Add(newOrder);
-                    db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu để có OrderID mới
-                     newOrderId = newOrder.OrderID;
-
-                    var products = categoryId == -1
-                    ? db.Products.ToList()
-                     : db.Products.Where(p => p.CategoryID == categoryId).ToList();
-
-                    var productsWithNewOrder = products.Select(p =>
-                    {
-                        return new ProductAndOrderInfo
-                        {
-                            Product = p,
-                            orderInfo = new OrderInfo
-                            {
-                                OrderID = newOrder.OrderID,
-                                ProductID = p.ProductID,
-                                Quantity = 0
-                            }
-                        };
-                    }).ToList();
-
-                    return productsWithNewOrder;
+                    quantity = 0;
                 }
-                else if(status.Status == true && kt == false && status != null)
-                 {
-                    var products = categoryId == -1
-                    ? db.Products.ToList()
-                    : db.Products.Where(p => p.CategoryID == categoryId).ToList();
 
-                var productsWithNewOrder = products.Select(p =>
+                return new ProductAndOrderInfo
                 {
-                    return new ProductAndOrderInfo
-                    {
-                        Product = p,
-                        orderInfo = new OrderInfo
-                        {
-                            OrderID = newOrderId, 
-                            ProductID = p.ProductID,
-                            Quantity = 0
-                        }
-                    };
-                }).ToList();
+                    Product = p,
+                    orderInfo = new OrderInfo { Quantity = quantity }
+                };
+            }).ToList();
 
-                return productsWithNewOrder;
-            }    
-                else 
-                {
-                    // Nếu status là false, thực hiện logic cũ
-                   var products = categoryId == -1
-               ? db.Products.ToList()
-               : db.Products.Where(p => p.CategoryID == categoryId).ToList();
+            return productsWithOrderInfo;
 
-                    var orderInfo = (from oi in db.OrderInfoes
-                                     join o in db.Orders on oi.OrderID equals o.OrderID
-                                     where o.PersonID == personId
-                                     select new
-                                     {
-                                         oi.OrderID,
-                                         oi.ProductID,
-                                         oi.Quantity,
-                                         o.Status
-                                     }).ToList();
 
-                    var orderInfoDict = orderInfo.ToDictionary(x => x.ProductID, x => x.Quantity);
-
-                    var productsWithOrderInfo = products.Select(p =>
-                    {
-                        var orderInfoItem = orderInfo.FirstOrDefault(oi => oi.ProductID == p.ProductID);
-                        var quantity = (byte)(orderInfoItem?.Quantity ?? 0);
-
-                        if (orderInfoItem != null && categoryId != -1 && orderInfoItem.Status == true)
-                        {
-                            quantity = 0;
-                        }
-
-                        return new ProductAndOrderInfo
-                        {
-                            Product = p,
-                            orderInfo = new OrderInfo { Quantity = quantity }
-                        };
-                    }).ToList();
-
-                    return productsWithOrderInfo;
-                }
-            
-
-            
         }
 
 

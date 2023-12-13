@@ -20,12 +20,7 @@ namespace Projec1_Complete.DAL
             return  person.ToList();
 
         }
-        public List<Person> GetPeopleByStatus()
-        {
-          
-            return db.People.ToList();
-          
-        }
+      
         public List<Person> GetListCustomers()
         {
             return db.People.ToList();

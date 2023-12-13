@@ -34,9 +34,9 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <RadioButton x:Name="btnAllCustomer"  Style="{StaticResource Buttonloaitt}"  Click="btnAllCustomer_Click" GroupName="tinhtrangdoanhang" >
+                                    <!--<RadioButton x:Name="btnAllCustomer"  Style="{StaticResource Buttonloaitt}"  Click="btnAllCustomer_Click" GroupName="tinhtrangdoanhang" >
                                         <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả" />
-                                    </RadioButton>
+                                    </RadioButton>-->
                                     <RadioButton Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
                                         <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
                                     </RadioButton>
@@ -66,33 +66,7 @@
 
 
                 <StackPanel Grid.Row="1" >
-                    <RadioButton Margin="0 5 7 0" Style="{StaticResource Buttonsale}" x:Name="btnACustomer"  GroupName="CustomersGroup" Click="btnACustomer_Click">
-                        <Grid Width="480" Height="90">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="65"/>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
-                                                 DockPanel.Dock="Top" HorizontalAlignment="left">
-                                <Ellipse>
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="img_anhkh6" ImageSource="/Assets/Icons/anhhoathinh.jpg"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
-
-                            <TextBlock Text="Khách lẻ" Grid.Column="1" FontWeight="Bold" Margin="10 10 0 0" FontSize="18"/>
-                            <TextBlock Text="Chưa Thanh Toán" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0" Foreground="Orange" FontSize="16"/>
-                            <TextBlock Text="0" Grid.Column="2" FontWeight="Bold" Margin="20 10 0 0" FontSize="18"/>
-
-                            <Button x:Name="btn_bacham2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0">
-                                <Icon:PackIconMaterial Margin="0 1 8 0" Style="{StaticResource icon3cham}"/>
-                            </Button>
-
-                        </Grid>
-                    </RadioButton>
+                    
                     <Grid  Margin="-5 5 0 0" >
 
                         <ScrollViewer Margin="0 0 0 0">
@@ -288,7 +262,7 @@
 
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" x:Name="stpn_invoices" Background="#eff2f7" Visibility="Collapsed" >
+                        <StackPanel Grid.Row="1" x:Name="stpn_invoices" Background="#eff2f7" Visibility="Visible" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>

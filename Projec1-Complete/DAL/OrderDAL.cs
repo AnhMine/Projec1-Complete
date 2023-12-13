@@ -14,7 +14,28 @@ namespace Projec1_Complete.DAL
         {
             db = new ASMProject1Entities();
         }
-       
+        public List<Order> GetOrderList(bool status)
+        {
+           var data = db.Orders.Where(o => o.Status == status);
+            return data.ToList();
+        }
+        public Person GetPersonByOrderId(int orderId)
+        {
+            var order = db.Orders.FirstOrDefault(o => o.OrderID == orderId);
+
+            if (order != null)
+            {
+                var person = db.People.FirstOrDefault(p => p.PersonID == order.PersonID);
+
+                return person;
+            }
+            else
+            {
+                // Đơn hàng không tồn tại, có thể xử lý tùy thuộc vào yêu cầu của bạn
+                return null;
+            }
+        }
+
         public int GetOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(o => o.PersonID == id);
@@ -30,15 +51,13 @@ namespace Projec1_Complete.DAL
 
         public bool GetStatus(int personId)
         {
-            if (personId !=-1)
+            if (personId !=0)
             {
-                var order = db.Orders.FirstOrDefault(o => o.PersonID == personId);
-                return order != null && order.Status != null && order.Status.Value;
+                var order = db.Orders.FirstOrDefault(o => o.OrderID == personId);
+                return (bool)order.Status;
             }
-            else
-            {
-                return false;
-            }
+            else { return false; }
+       
           
         }
         public decimal GetTotalAmount(int id)
@@ -188,56 +207,39 @@ namespace Projec1_Complete.DAL
             }
 
         }
-        public Order ReturnOrderIdByPersonId(int personId)
+        public void UpdateStatus(int orderID)
         {
-            var maxOrderId = db.Orders.Max(o => (int?)o.OrderID) ?? 0;
-            int newOrderId = maxOrderId + 1;
-            var status = db.Orders.FirstOrDefault(s => s.PersonID == -1);
-            if (personId == -1 && status.Status == true)
+            Order order = db.Orders.FirstOrDefault(o=> o.OrderID == orderID);
+            if(order != null)
             {
-                Order newOrder = new Order
-                {
-                    OrderID = newOrderId,
-                    PersonID = personId,
-                    AccountID = 1,
-                    OrderDate = DateTime.Now,
-                    Status = false,
-                    Discount = 0,
-                };
-
-                db.Orders.Add(newOrder);
+                order.Status = true;
                 db.SaveChanges();
-
-                return newOrder;
-            }
-            else
+            }    
+          
+        }
+        public void CreateNewOrder(int id)
+        {
+            var maxid = db.Orders.Max(o => o.OrderID);
+            var order = db.Orders.FirstOrDefault(p => p.PersonID == id);
+            if(order.Status == true)
             {
-                var order = db.Orders.FirstOrDefault(o => o.PersonID == personId);
-
-
-
-                if (order != null)
+                Order order2 = new Order();
                 {
-                    return order;
-                }
-                else
-                {
-                    Order newOrder = new Order
-                    {
-                        OrderID = newOrderId,
-                        PersonID = personId,
-                        AccountID = 1,
-                        OrderDate = DateTime.Now,
-                        Status = false,
-                        Discount = 0,
-                    };
-
-                    db.Orders.Add(newOrder);
+                    order.OrderID = maxid++;
+                    order.Status = false;
+                    order.AccountID = 1;
+                    order.Discount = 0;
+                    order.OrderDate = DateTime.Now;
+                    order.PersonID = id;
                     db.SaveChanges();
 
-                    return newOrder;
-                }
-            }
+                };
+            }    
+        }
+        public Order ReturnOrderIdByPersonId(int personId)
+        {
+           var order = db.Orders.FirstOrDefault(p=> p.PersonID == personId);
+            return order;
           
         }
        
