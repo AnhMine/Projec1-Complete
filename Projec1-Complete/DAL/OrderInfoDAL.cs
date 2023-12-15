@@ -70,7 +70,7 @@ namespace Projec1_Complete.DAL
     {
         if (product != null && product.Quantity > 0)
         {
-            existingOrderInfo.Quantity++;
+                    existingOrderInfo.Quantity = orderInfo.Quantity;
             product.Quantity--;
         }
         else
@@ -110,6 +110,16 @@ namespace Projec1_Complete.DAL
 
     db.SaveChanges();  
 }
-
+        public void DelProduct(string ProductID, int OrderId)
+        {
+            var ord = db.OrderInfoes.FirstOrDefault(o=>o.OrderID == OrderId && o.ProductID == ProductID);
+            if (ord != null)
+            {
+                db.OrderInfoes.Remove(ord);
+                db.SaveChanges();
+            }
+            
     }
+    }
+   
 }

@@ -30,17 +30,17 @@
                                 </Grid.RowDefinitions>
                                 <Grid Margin="0 0 0 -5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                      
                                     </Grid.ColumnDefinitions>
                                     <!--<RadioButton x:Name="btnAllCustomer"  Style="{StaticResource Buttonloaitt}"  Click="btnAllCustomer_Click" GroupName="tinhtrangdoanhang" >
                                         <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả" />
                                     </RadioButton>-->
-                                    <RadioButton Grid.Column="1" x:Name="btnPaid" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
+                                    <RadioButton Grid.Column="0" x:Name="btnPaid" HorizontalAlignment="Center" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
                                         <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
                                     </RadioButton>
-                                    <RadioButton Grid.Column="2" x:Name="btnUnPaid" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click" GroupName="tinhtrangdoanhang">
+                                    <RadioButton Grid.Column="1" x:Name="btnUnPaid" HorizontalAlignment="Center" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click" GroupName="tinhtrangdoanhang">
                                         <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
                                     </RadioButton>
                                 </Grid>
@@ -49,7 +49,7 @@
                                 <Grid Grid.Row="1" Width="200" HorizontalAlignment="Right" Margin="0 15 15 0" Grid.ColumnSpan="2">
 
 
-                                    <TextBox x:Name="txtSearchkhmh" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0"/>
+                                    <TextBox x:Name="txtSearchCustomers" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0" TextChanged="txtSearchCustomers_TextChanged"/>
 
                                     <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
                                            Margin="0 0 10 13" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
@@ -99,7 +99,7 @@
                                                 <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0"  FontSize="16" Style="{StaticResource StatusTextStyle}"/>
                                                 <TextBlock Text="{Binding TotalAmount}" Grid.Column="2" FontWeight="Bold" Margin="20 10 0 0" FontSize="18"/>
 
-                                                <Button x:Name="btn_bacham2" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0">
+                                                <Button x:Name="btnPlusOrder" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0" Click="btnPlusOrder_Click">
                                                     <Icon:PackIconMaterial Margin="0 1 8 0" Style="{StaticResource icon3cham}"/>
                                                 </Button>
 
@@ -203,7 +203,7 @@
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
 
-                                                            <Button x:Name="RemoveButton" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                                            <Button x:Name="RemoveButton" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" Click="RemoveButton_Click">
                                                                 <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                                             </Button>
 
@@ -308,7 +308,7 @@
                                     <Grid Width="200" HorizontalAlignment="Left" Margin="1045 0 0 0" Grid.ColumnSpan="2">
 
 
-                                        <TextBox x:Name="txtSearchsp" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="txtSearchPrd" Style="{StaticResource textboxSearch}" Margin="0 -15 0 0" VerticalAlignment="Center" TextChanged="txtSearchPrd_TextChanged"/>
 
                                         <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
                                            Margin="0 0 10 13" Foreground="#b0b9c6" HorizontalAlignment="Right"/>

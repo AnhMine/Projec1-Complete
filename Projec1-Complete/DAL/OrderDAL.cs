@@ -19,6 +19,21 @@ namespace Projec1_Complete.DAL
            var data = db.Orders.Where(o => o.Status == status);
             return data.ToList();
         }
+        public List<Order> GetOrderListBySearch(string search)
+        {
+            var data = db.Orders
+                .Where(o =>
+                    search.Length > 0 && (
+                        o.PersonID.ToString().Contains(search) ||  // Kiểm tra PersonID nếu search là chuỗi
+                        o.Person.PersonName.ToLower().Contains(search.ToLower())  // Kiểm tra PersonName không phân biệt chữ hoa chữ thường
+                    ))
+                .ToList();
+
+            return data;
+        }
+
+
+
         public Person GetPersonByOrderId(int orderId)
         {
             var order = db.Orders.FirstOrDefault(o => o.OrderID == orderId);
@@ -35,6 +50,8 @@ namespace Projec1_Complete.DAL
                 return null;
             }
         }
+    
+
 
         public int GetOrder(int id)
         {
@@ -75,18 +92,11 @@ namespace Projec1_Complete.DAL
             {
                 if (status != null)
                 {
-                    if (status.Status == false)
-                    {
+                
 
                         return (decimal)(totalAmount - status.Discount);
 
-                    }
-                    else
-                    {
-                        return 0;
-
-                    }
-
+                  
                 }
                 else { return 0; }
 
@@ -95,7 +105,7 @@ namespace Projec1_Complete.DAL
 
         }
        
-        public List<ProductAndOrderInfo> GetOrdersByPersonId2(int personId)
+        public List<ProductAndOrderInfo> GetOrdersByPersonId2(int personId, int orderid)
         {
             var ordersAndCustomers = db.Orders
                 .Join(db.OrderInfoes, order => order.OrderID, orderinfo => orderinfo.OrderID,
@@ -110,9 +120,10 @@ namespace Projec1_Complete.DAL
                           Product = product,
                           orderInfo = combined.OrderAndInfo.OrderInfo,
                           TotalPrice = (decimal)(combined.OrderAndInfo.OrderInfo.Quantity * product.PriceSell),
+
                           DisplayStatus = combined.OrderAndInfo.Order.Status == true ? "Thanh Toán" : "Chưa Thanh Toán"
                       })
-                .Where(item => item.order.PersonID == personId)
+                .Where(item => item.order.PersonID == personId && item.order.OrderID == orderid)
                 .ToList();
 
             var result = ordersAndCustomers.Select(item =>
@@ -217,32 +228,38 @@ namespace Projec1_Complete.DAL
             }    
           
         }
-        public void CreateNewOrder(int id)
-        {
-            var maxid = db.Orders.Max(o => o.OrderID);
-            var order = db.Orders.FirstOrDefault(p => p.PersonID == id);
-            if(order.Status == true)
-            {
-                Order order2 = new Order();
-                {
-                    order.OrderID = maxid++;
-                    order.Status = false;
-                    order.AccountID = 1;
-                    order.Discount = 0;
-                    order.OrderDate = DateTime.Now;
-                    order.PersonID = id;
-                    db.SaveChanges();
 
-                };
-            }    
-        }
-        public Order ReturnOrderIdByPersonId(int personId)
+        public Order ReturnOrderIdByPersonId(int personId,bool status)
         {
-           var order = db.Orders.FirstOrDefault(p=> p.PersonID == personId);
+            var order = db.Orders.FirstOrDefault(p => p.PersonID == personId && p.Status == status );
             return order;
+
           
         }
-       
+
+
+
+        public void CreateNewOrder(int personId)
+        {
+            // Lấy OrderID lớn nhất trong danh sách Orders (nếu có)
+            var maxOrderId = db.Orders.Max(p => (int?)p.OrderID) ?? 0;
+
+            // Tạo một đối tượng Order mới với OrderID tăng lên từ OrderID lớn nhất
+            Order newOrder = new Order
+            {
+                OrderID = maxOrderId + 1,
+                OrderDate = DateTime.Now,
+                PersonID = personId,
+                Status = false,
+                AccountID = 1,
+                Discount = 0
+            };
+
+            // Thêm đơn hàng mới vào DbSet và lưu thay đổi vào cơ sở dữ liệu
+            db.Orders.Add(newOrder);
+            db.SaveChanges();
+        }
+
 
     }
 }

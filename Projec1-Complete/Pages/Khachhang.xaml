@@ -33,7 +33,7 @@
                 <RadioButton x:Name="btn_khachhang" Content="Khách hàng" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_sanpham_Click" GroupName="tabnahnluc"/>
                 <RadioButton x:Name="btn_nhanvien" Content="Nhân viên" FontWeight="Bold" FontSize="16" Style="{StaticResource TabButton}" Click="btn_nhanvien_Click" GroupName="tabnahnluc" />
             </StackPanel>
-            
+
             <!--select textbox-->
             <Grid Width="300" HorizontalAlignment="Left">
                 <TextBlock x:Name="txtbl_timkiemKH" Margin="20 0 30 0" Height="30" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
@@ -41,7 +41,7 @@
                                
                              />
 
-                <TextBox x:Name="txtB_SearchClient" Style="{StaticResource textboxSearch}"/>
+                <TextBox x:Name="txtSerach" Style="{StaticResource textboxSearch}" TextChanged="txtSerach_TextChanged"/>
 
                 <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
                                            Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
@@ -57,26 +57,26 @@
                            HorizontalAlignment="Left" Foreground="#121528"/>
 
             <!--Add Button-->
-            
-            <Button x:Name="btn_themkhahhang" Style="{StaticResource addButton}" Margin="0 5 90 0" Click="btn_themkhahhang_Click">
+
+            <Button x:Name="btnAddPerSon" Style="{StaticResource addButton}" Margin="620,14,0,0" Click="btn_themkhahhang_Click" Height="40" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" >
                     <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="20" Height="20"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="btnImportFile_customer" Style="{StaticResource addButton}" Margin="0 0 30 40" Grid.RowSpan="2" Grid.Row="1">
+            <Button x:Name="btnImportFile_customer" Style="{StaticResource addButton}" Margin="0 0 30 40" Grid.RowSpan="2" Grid.Row="1" Click="btnImportFile_customer_Click">
                 <StackPanel Orientation="Horizontal" >
                     <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="20" Height="20"/>
                 </StackPanel>
             </Button>
 
-        
-            
+
+
 
             <!--Member Datagrid-->
             <StackPanel x:Name="stpn_dskh" Grid.Row="5" >
                 <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="DTGCustomers">
                     <DataGrid.Columns>
-                        
+
 
                         <DataGridTextColumn Header="Mã " IsReadOnly="True" Width="*" Binding="{Binding PersonID}"/>
                         <DataGridTextColumn Header="Tên khách hàng" IsReadOnly="True" Binding="{Binding PersonName}"/>
@@ -88,11 +88,11 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="btb_suakhachhang" Style="{StaticResource gridEditButton}">
+                                        <Button x:Name="btnUpdateCustomer" Style="{StaticResource gridEditButton}" Click="btnUpdateCustomer_Click">
                                             <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
 
-                                        <Button x:Name="btb_xoakhachhang" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                        <Button x:Name="btnDelCustomer" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" Click="btnDelCustomer_Click">
                                             <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
 
@@ -121,11 +121,11 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="btb_suakhachhang" Style="{StaticResource gridEditButton}">
+                                        <Button x:Name="btnUpdateEmployee" Style="{StaticResource gridEditButton}" Click="btnUpdateEmployee_Click">
                                             <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
 
-                                        <Button x:Name="btb_xoakhachhang" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                        <Button x:Name="btnDelEmployee" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" Click="btnDelEmployee_Click">
                                             <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
 

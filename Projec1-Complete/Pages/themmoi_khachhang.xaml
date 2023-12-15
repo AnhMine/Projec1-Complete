@@ -91,7 +91,7 @@
                          VerticalContentAlignment="Top" />
 
 
-                <Button x:Name="btn_themkhachhangmoi" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold">
+                <Button x:Name="btnAddNew" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold" Click="btnAddNew_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_themKH" Text="Thêm"/>
                     </StackPanel>

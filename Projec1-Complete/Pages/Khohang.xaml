@@ -68,6 +68,7 @@
 
             <!--Member Datagrid-->
             <StackPanel Grid.Row="6" x:Name="stpn_product" >
+                
                 <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="DTGProduct" Margin="0,10,0,60" Grid.RowSpan="3">
                     <DataGrid.Columns>
 
@@ -75,7 +76,7 @@
                         <DataGridTemplateColumn Header="Ảnh">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding ImageLink}" Width="auto" Height="auto" />
+                                    <Image Source="{Binding ImageLink}" Width="auto" Height="auto" HorizontalAlignment="Left" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

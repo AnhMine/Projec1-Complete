@@ -20,7 +20,13 @@ namespace Projec1_Complete.DAL
             return  person.ToList();
 
         }
-      
+        public List<Person> SearchPersonById(string search)
+        {
+            var peopleQuery = db.People.Where(p => p.PersonName.Contains(search) || p.PersonID.ToString().Contains(search));
+
+            return peopleQuery.ToList();
+        }
+
         public List<Person> GetListCustomers()
         {
             return db.People.ToList();
@@ -38,8 +44,19 @@ namespace Projec1_Complete.DAL
             int maxID = GetMaxCustomerID();
             int newID = maxID + 1;
             customer.PersonID = newID;
+            
+            Order order = new Order();
+            {
+                order.AccountID = 1;
+                order.OrderDate = DateTime.Now;
+                order.Status = false;
+                order.Discount = 0;
+                order.PersonID = newID;
+                
 
+            }
             db.People.Add(customer);
+            db.Orders.Add(order);
             db.SaveChanges();
         }
         public void RemoveCustomer(int id)
@@ -60,12 +77,28 @@ namespace Projec1_Complete.DAL
                 db.SaveChanges();
             }
         }
-        public List<Person> SearchCustomer(string search)
+        public Person GetPersonBySearchString(string searchString,int orderid)
         {
-            var cus = db.People.Where(c => c.PersonID.ToString().Contains(search) || c.PersonName.ToString().Contains(search) || c.Address.ToString().Contains(search) || c.Phone.ToString().Contains(search) || c.Email.ToString().Contains(search)).ToList();
-            return cus;
+            var order = db.Orders.FirstOrDefault(o => o.OrderID == orderid);
 
+            if (order != null)
+            {
+                // Tìm người với PersonID tương ứng trong đơn hàng
+                var person = db.People.FirstOrDefault(p => p.PersonID == order.PersonID && p.PersonName.Contains(searchString));
+
+                return person;
+            }
+            else
+            {
+                // Đơn hàng không tồn tại hoặc không có người phù hợp, có thể xử lý tùy thuộc vào yêu cầu của bạn
+                return null;
+            }
         }
+
+
+
+
+
         public void UpdatePersonAndAccount(Employees employees)
         {
             if (employees == null || employees.person == null || employees.account == null)

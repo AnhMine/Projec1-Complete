@@ -30,10 +30,7 @@ namespace Projec1_Complete.BUS
         {
             personDAL.UpdateCustomer(customer);
         }
-        public List<Person> Search(string query)
-        {
-            return personDAL.SearchCustomer(query);
-        }
+  
         public List<Person> GetPersonById(int id)
         {
             return personDAL.GetPersonById(id);
@@ -51,6 +48,16 @@ namespace Projec1_Complete.BUS
         {
             return personDAL.GetPerson(id);
         }
+        public Person SerachPerson(string search, int orderid)
+        {
+            return personDAL.GetPersonBySearchString(search,orderid);
+        }
+        public List<Person> SearchPersonById(string search)
+        {
+            return personDAL.SearchPersonById(search);
+        }
+
+
 
     }
 }

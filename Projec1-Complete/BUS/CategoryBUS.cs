@@ -19,9 +19,9 @@ namespace Projec1_Complete.BUS
         {
             return _categoryDAL.GetCategories();
         }
-        public List<ProductAndOrderInfo> GetProductByCateAndPersonId(int id, int id2)
+        public List<ProductAndOrderInfo> GetProductByCateAndPersonId(int id, int id2, int orderid)
         {
-            return _categoryDAL.GetProductByCateAndPersonId(id,id2);
+            return _categoryDAL.GetProductByCateAndPersonId(id,id2,orderid);
         }
         public List<ProductAndOrderInfo> GetCateGory()
         {
@@ -33,7 +33,12 @@ namespace Projec1_Complete.BUS
         {
             return _categoryDAL.GetProductsWithOrderInfo(personID);
         }
-       
+        public List<ProductAndOrderInfo> SearchProductByText(string search, int personId, int orderid)
+        {
+            return _categoryDAL.SearchProductByText(search, personId, orderid);
+        }
+
+
 
     }
 }

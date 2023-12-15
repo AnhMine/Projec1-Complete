@@ -26,5 +26,9 @@ namespace Projec1_Complete.BUS
         {
             _orderInfoDAL.RemoveProductFromOrder(orderInfo);
         }
+        public void DelProduct(string productId, int orderId)
+        {
+            _orderInfoDAL.DelProduct(productId, orderId);
+        }
     }
 }

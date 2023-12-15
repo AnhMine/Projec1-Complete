@@ -27,15 +27,13 @@ namespace Projec1_Complete.DAL
             return categoriesWithProducts;
         }
 
-        public List<ProductAndOrderInfo> GetProductByCateAndPersonId(int categoryId, int personId)
+        public List<ProductAndOrderInfo> GetProductByCateAndPersonId(int categoryId, int personId,int orderid)
         {
-            var products = categoryId == -1
-              ? db.Products.ToList()
-              : db.Products.Where(p => p.CategoryID == categoryId).ToList();
+            var products = categoryId == -1 ? db.Products.ToList()  : db.Products.Where(p => p.CategoryID == categoryId).ToList();
 
             var orderInfo = (from oi in db.OrderInfoes
                              join o in db.Orders on oi.OrderID equals o.OrderID
-                             where o.PersonID == personId
+                             where o.PersonID == personId && o.OrderID == orderid
                              select new
                              {
                                  oi.OrderID,
@@ -66,7 +64,7 @@ namespace Projec1_Complete.DAL
 
 
         }
-
+   
 
 
 
@@ -112,5 +110,40 @@ namespace Projec1_Complete.DAL
             List<Product> products = db.Products.ToList();
             return products;
         }
+        public List<ProductAndOrderInfo> SearchProductByText(string search, int personId, int orderid)
+        {
+            var products = string.IsNullOrEmpty(search) ? db.Products.ToList() : db.Products.Where(p => p.ProductName.Contains(search)).ToList();
+
+            var orderInfo = (from oi in db.OrderInfoes
+                             join o in db.Orders on oi.OrderID equals o.OrderID
+                             where o.PersonID == personId && o.OrderID == orderid
+                             select new
+                             {
+                                 oi.OrderID,
+                                 oi.ProductID,
+                                 oi.Quantity,
+                                 o.Status
+                             }).ToList();
+
+            var productsWithOrderInfo = products.Select(p =>
+            {
+                var orderInfoItem = orderInfo.FirstOrDefault(oi => oi.ProductID == p.ProductID);
+                var quantity = (byte)(orderInfoItem?.Quantity ?? 0);
+
+                if (orderInfoItem != null && !string.IsNullOrEmpty(search) && orderInfoItem.Status == true)
+                {
+                    quantity = 0;
+                }
+
+                return new ProductAndOrderInfo
+                {
+                    Product = p,
+                    orderInfo = new OrderInfo { Quantity = quantity }
+                };
+            }).ToList();
+
+            return productsWithOrderInfo;
+        }
+
     }
 }

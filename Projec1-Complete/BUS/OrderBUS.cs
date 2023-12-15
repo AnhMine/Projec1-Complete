@@ -40,13 +40,13 @@ namespace Projec1_Complete.BUS
         {
             return orderDAL.PersonIDExists(personID);
         }
-        public List<ProductAndOrderInfo> GetOrdersByPersonId2(int personId)
+        public List<ProductAndOrderInfo> GetOrdersByPersonId2(int personId, int orderid)
         {
-            return orderDAL.GetOrdersByPersonId2(personId);
+            return orderDAL.GetOrdersByPersonId2(personId, orderid);
         }
-        public Order ReturnOrderIdByPersonId(int personId)
+        public Order ReturnOrderIdByPersonId(int personId, bool status)
         {
-          return orderDAL.ReturnOrderIdByPersonId(personId);
+          return orderDAL.ReturnOrderIdByPersonId(personId,status);
         }
       public void UpdateDiscount(int id, int discount)
         {
@@ -55,6 +55,14 @@ namespace Projec1_Complete.BUS
         public void UpdateStatus(int id)
         {
             orderDAL.UpdateStatus(id);
+        }
+        public void CreateNewOrder(int id)
+        {
+            orderDAL.CreateNewOrder(id);
+        }
+        public List<Order> GetListOrderBySearch(string orderId)
+        {
+            return orderDAL.GetOrderListBySearch(orderId);
         }
 
 

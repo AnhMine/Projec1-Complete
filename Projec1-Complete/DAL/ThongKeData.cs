@@ -11,5 +11,6 @@ namespace Projec1_Complete.DAL
         public DateTime Date { get; set; }
         public decimal TotalRevenue { get; set; }
         public string ProductId { get; set; }
+        public string ProductName { get; set; }
     }
 }

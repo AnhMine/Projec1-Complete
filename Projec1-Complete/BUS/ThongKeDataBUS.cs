@@ -40,7 +40,7 @@ namespace Projec1_Complete.BUS
                 }
                 else if (groupBy == "Product")
                 {
-                    labelsList.Add(item.ProductId.ToString());
+                    labelsList.Add(item.ProductName.ToString());
                 }
 
                 values.Add(item.TotalRevenue);
