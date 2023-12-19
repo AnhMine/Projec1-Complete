@@ -22,7 +22,7 @@
                 <Border x:Name="bdImg" Width="150" Height="150" Padding="3" Background="#623ed0" CornerRadius="100"
                                 DockPanel.Dock="Top" HorizontalAlignment="left" Margin="105 0 0 0" BorderBrush="#623ed0" BorderThickness="1">
 
-                    <Button x:Name="btnImage" Background="Transparent" Width="100" Height="100" BorderBrush="Transparent" Loaded="btnImage_Loaded" Click="btnImage_Click" >
+                    <Button Cursor="Hand" x:Name="btnImage" Background="Transparent" Width="100" Height="100" BorderBrush="Transparent" Loaded="btnImage_Loaded" Click="btnImage_Click" >
                         <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}" Width="50" Height="50"/>
                     </Button>
 
@@ -32,14 +32,14 @@
             </Grid>
             <Grid>
 
-                <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="820 0 0 490" Click="btnClose_Click" />
+                <Button Cursor="Hand" x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="820 0 0 490" Click="btnClose_Click" />
                 <Button x:Name="btnSave" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold" Click="btnSave_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_luu" Text="Lưu"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="btn_huysuasp" Style="{StaticResource btnhuy}" FontSize="20" FontWeight="SemiBold" Click="btn_huysuasp_Click">
+                <Button Cursor="Hand" x:Name="btn_huysuasp" Style="{StaticResource btnhuy}" FontSize="20" FontWeight="SemiBold" Click="btn_huysuasp_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_huysua" Text="Hủy"/>
                     </StackPanel>
@@ -56,26 +56,26 @@
 
 
 
-                <Button x:Name="btnName" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 0 0 300 " Click="btnName_Click">
+                <Button Cursor="Hand" x:Name="btnName" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 0 0 300 " Click="btnName_Click">
                     <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                 </Button>
 
 
 
-                <Button x:Name="btnPriceSell" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 0 0 140 " Click="btnPriceSell_Click">
+                <Button Cursor="Hand" x:Name="btnPriceSell" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 0 0 140 " Click="btnPriceSell_Click">
                     <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                 </Button>
 
-                <Button x:Name="btnPrice" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 20 0 70 " Click="btnPrice_Click">
+                <Button Cursor="Hand" x:Name="btnPrice" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 20 0 70 " Click="btnPrice_Click">
                     <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                 </Button>
 
-                <Button x:Name="btnQuantity" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 30 0 0 " Click="btnQuantity_Click">
+                <Button Cursor="Hand" x:Name="btnQuantity" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 30 0 0 " Click="btnQuantity_Click">
                     <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                 </Button>
 
 
-                <Button x:Name="btnDes" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 260 0 0 " Click="btnDes_Click">
+                <Button Cursor="Hand" x:Name="btnDes" Style="{StaticResource gridEditButton}" Width="30" Height="30" Margin="820 260 0 0 " Click="btnDes_Click">
                     <Icon:PackIconMaterial Kind="PencilOutline"  Style="{StaticResource gridButtonIcon}"/>
                 </Button>
 

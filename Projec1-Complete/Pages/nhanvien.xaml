@@ -16,18 +16,23 @@
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                
-                <Border Width="700" Height="700" Padding="3" Background="Transparent" CornerRadius="400" Margin="30 0 0 0" BorderThickness="3" BorderBrush="Aqua"
-                                DockPanel.Dock="Top" HorizontalAlignment="Center">
-                    <Image x:Name="imgEmployee" Source="{Binding person.PersonImage}"  Width="600" Height="800" VerticalAlignment="Center" Margin="0 0 0 200" MouseLeftButtonUp="imgEmployee_MouseLeftButtonUp" Cursor="Hand" Loaded="imgEmployee_Loaded">
 
-                    </Image>
+                <Border Margin="10 0 0 0" Grid.Column="0" Width="640" Height="640" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                    <Ellipse x:Name="imgElEmployee" MouseLeftButtonUp="imgElEmployee_MouseLeftButtonUp" Loaded="imgElEmployee_Loaded" Cursor="Hand">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="imgBrEmployee" ImageSource="{Binding person.PersonImage}" Stretch="UniformToFill"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
                 </Border>
-                <Button Width="600" Height="600" Style="{StaticResource Buttonimage}" x:Name="btnImg"></Button>
+
+
+
+
+                <Button Cursor="Hand" Width="600" Height="600" Style="{StaticResource Buttonimage}" x:Name="btnImg"></Button>
 
             </Grid>
             
-            <Border Grid.Column="1" CornerRadius="20" Background="#eff2f7" Margin="40">
+            <Border Grid.Column="1" CornerRadius="20" Background="#eff2f7" Margin="20">
                 <Grid>
                     <StackPanel x:Name="stpnbillttnv" Visibility="Visible">
                         <Grid>
@@ -64,7 +69,7 @@
                                     <PasswordBox Grid.Row="1" x:Name="pswChangePass" Style="{StaticResource textboxpass}" Margin="20 0 20 10" Visibility="Visible"/>
 
 
-                                    <Button Grid.Row="1" x:Name="btnShowPswnv" HorizontalAlignment="Right" Margin="0 0 30 10" Style="{StaticResource Button3cham}" Grid.Column="1" Click="btnShowPswnv_Click">
+                                    <Button Cursor="Hand" Grid.Row="1" x:Name="btnShowPswnv" HorizontalAlignment="Right" Margin="0 0 30 10" Style="{StaticResource Button3cham}" Grid.Column="1" Click="btnShowPswnv_Click">
                                         <StackPanel Orientation="Horizontal" >
                                             <Icon:PackIconMaterial Kind="Eye" VerticalAlignment="Center" Width="20" Height="20"/>
                                         </StackPanel>
@@ -106,7 +111,7 @@
                                 </Grid>
                             </Border>
 
-                            <Button Grid.Row="5" Style="{StaticResource btnthem}" Margin="0 40 180 0" IsEnabled="False" Opacity="50" x:Name="btnSave" Click="btnSave_Click">
+                            <Button Cursor="Hand" Grid.Row="5" Style="{StaticResource btnthem}" Margin="0 40 180 0" IsEnabled="False" Opacity="50" x:Name="btnSave" Click="btnSave_Click">
                                 <TextBlock x:Name="txtbl_luadoinv" Text="Lưu" FontSize="26" FontWeight="Bold"/>
                             </Button>
                             

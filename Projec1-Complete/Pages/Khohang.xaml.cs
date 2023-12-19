@@ -92,15 +92,7 @@ namespace Projec1_Complete.Pages
             add.Show();
 
         }
-        private void btn_sanpham_Click(object sender, RoutedEventArgs e)
-        {
-            stpn_product.Visibility = Visibility.Visible;
-            txtbl_khohang.Text = "KHO HÀNG";
-
-            btnAddPrd.Visibility = Visibility.Visible;
-            btnImportFile.Visibility = Visibility.Visible;
-        }
-
+       
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             string search = txtSearch.Text;

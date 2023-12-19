@@ -62,54 +62,44 @@ namespace Projec1_Complete.DAL
         }
 
         public void UpdateOrderInfo(OrderInfo orderInfo)
-{
-    var existingOrderInfo = db.OrderInfoes.FirstOrDefault(o => o.OrderID == orderInfo.OrderID && o.ProductID == orderInfo.ProductID);
-    var product = db.Products.FirstOrDefault(p => p.ProductID == orderInfo.ProductID);
-
-    if (existingOrderInfo != null)
-    {
-        if (product != null && product.Quantity > 0)
         {
-                    existingOrderInfo.Quantity = orderInfo.Quantity;
-            product.Quantity--;
-        }
-        else
-        {
-            MessageBoxResult result = System.Windows.MessageBox.Show("Hết Hàng Trong Kho. Bạn Vẫn Muốn Tiếp Tục?", "Thông Báo", MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.No)
+            if (db == null || orderInfo == null)
             {
+                // Xử lý nếu db hoặc orderInfo là null
                 return;
             }
-        }
-    }
-    else
-    {
-        if (product != null && product.Quantity > 0)
-        {
-            OrderInfo newOrderInfo = new OrderInfo
-            {
-                OrderID = orderInfo.OrderID,
-                ProductID = orderInfo.ProductID,
-                Quantity = orderInfo.Quantity
-            };
-            product.Quantity--;
 
-            db.OrderInfoes.Add(newOrderInfo);  
-        }
-        else
-        {
-            MessageBoxResult result = System.Windows.MessageBox.Show("Hết Hàng Trong Kho. Bạn Vẫn Muốn Tiếp Tục?", "Thông Báo", MessageBoxButton.YesNo);
+            var existingOrderInfo = db.OrderInfoes.FirstOrDefault(o => o.OrderID == orderInfo.OrderID && o.ProductID == orderInfo.ProductID);
+            var product = db.Products.FirstOrDefault(p => p.ProductID == orderInfo.ProductID);
 
-            if (result == MessageBoxResult.No)
+            if (existingOrderInfo != null)
             {
-                return;
+                existingOrderInfo.Quantity = orderInfo.Quantity;
+
+                if (product != null && product.Quantity > 0)
+                {
+                    product.Quantity--;
+                }
             }
-        }
-    }
+            else
+            {
+                if (product != null && product.Quantity > 0)
+                {
+                    OrderInfo newOrderInfo = new OrderInfo
+                    {
+                        OrderID = orderInfo.OrderID,
+                        ProductID = orderInfo.ProductID,
+                        Quantity = orderInfo.Quantity
+                    };
 
-    db.SaveChanges();  
-}
+                    db.OrderInfoes.Add(newOrderInfo);
+                    product.Quantity--;
+                }
+            }
+
+            db.SaveChanges();
+        }
+
         public void DelProduct(string ProductID, int OrderId)
         {
             var ord = db.OrderInfoes.FirstOrDefault(o=>o.OrderID == OrderId && o.ProductID == ProductID);

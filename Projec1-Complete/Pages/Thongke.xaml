@@ -48,17 +48,17 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <RadioButton Grid.Column="1" x:Name="btnDay" FontSize="18" Style="{StaticResource Buttontktheo}" Margin="0" Click="btnDay_Click" GroupName="tktheo">
+                                <RadioButton Cursor="Hand" Grid.Column="1" x:Name="btnDay" FontSize="18" Style="{StaticResource Buttontktheo}" Margin="0" Click="btnDay_Click" GroupName="tktheo">
                                     <TextBlock x:Name="txtbl_ltktheongay" Text="Ngày" />
                                 </RadioButton>
-                                <RadioButton Grid.Column="2"  x:Name="btnMonth" FontSize="18" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0" Click="btnMonth_Click" GroupName="tktheo">
+                                <RadioButton Cursor="Hand" Grid.Column="2"  x:Name="btnMonth" FontSize="18" Style="{StaticResource Buttontktheo}" Margin="10 0 0 0" Click="btnMonth_Click" GroupName="tktheo">
                                     <TextBlock x:Name="txtbl_tktheothang" Text="Tháng" />
                                 </RadioButton>
-                                <RadioButton Grid.Column="3" x:Name="btnPrd" FontSize="18" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnPrd_Click" GroupName="tktheo">
+                                <RadioButton Cursor="Hand" Grid.Column="3" x:Name="btnPrd" FontSize="18" Style="{StaticResource Buttontktheo}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnPrd_Click" GroupName="tktheo">
                                     <TextBlock x:Name="txtbl_tksanpham" Text="Sản phẩm" />
                                 </RadioButton>
 
-                                <Button x:Name="btn_quayve" Visibility="Collapsed" Style="{StaticResource Button3cham}" HorizontalAlignment="Left" Margin="0 0 10 0" Click="btn_thongke_Click">
+                                <Button Cursor="Hand" x:Name="btn_quayve" Visibility="Collapsed" Style="{StaticResource Button3cham}" HorizontalAlignment="Left" Margin="0 0 10 0" Click="btn_thongke_Click">
                                     <StackPanel Orientation="Horizontal" >
                                         <StackPanel Orientation="Horizontal" >
                                             <Icon:PackIconMaterial Kind="ArrowLeft" VerticalAlignment="Center" Width="15" Height="15" Margin="0 0 60 0"/>
@@ -71,7 +71,7 @@
                                                
                     </StackPanel>
 
-                    <RadioButton Grid.Column="1" x:Name="btn_lichsu" Margin="0 -5 10 0" Content="Lịch sử" FontSize="18" FontWeight="Bold" Style="{StaticResource TabButton}" Click="btn_lichsu_Click"/>
+                    <RadioButton Cursor="Hand" Grid.Column="1" x:Name="btn_lichsu" Margin="0 -5 10 0" Content="Lịch sử" FontSize="18" FontWeight="Bold" Style="{StaticResource TabButton}" Click="btn_lichsu_Click"/>
                    
                     
 
@@ -81,10 +81,10 @@
 
 
 
-            <!--Main Chart Section-->
+           
             <StackPanel Grid.Row="2" Visibility="Collapsed" x:Name="stpn_history" Margin="20 20 20 0" >
 
-                <Button x:Name="btn_inlichsu" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" >
+                <Button Cursor="Hand" x:Name="btn_inlichsu" Grid.Row="2" Style="{StaticResource Buttonthanhtoan}" >
                     <StackPanel Orientation="Horizontal" >
                         <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="20" Height="20"/>
                     </StackPanel>
@@ -108,7 +108,7 @@
                                     <StackPanel Orientation="Horizontal">
 
 
-                                        <Button x:Name="btn_xoals" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                        <Button Cursor="Hand" x:Name="btn_xoals" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
                                             <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
 
@@ -123,17 +123,18 @@
                 </DataGrid>
             </StackPanel>
 
+            <!--Main Chart Section-->
             <Border x:Name="bd_thongke" Grid.Row="2" Style="{StaticResource whiteboder}" Margin="20 20 20 0" >
 
 
                 <lvc:CartesianChart x:Name="ChartDT" Series="{Binding SeriesCollection}" LegendLocation="Bottom">
 
                     <lvc:CartesianChart.AxisX>
-                        <lvc:Axis Title="Vendedor" Labels="{Binding Labels}"></lvc:Axis>
+                        <lvc:Axis  Labels="{Binding Labels}" FontSize="18"></lvc:Axis>
                     </lvc:CartesianChart.AxisX>
 
                     <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Aplicaciones Vendidas" Labels="{Binding Values}"></lvc:Axis>
+                        <lvc:Axis  Labels="{Binding Values}" x:Name="lvcLabels" FontSize="18"></lvc:Axis>
                     </lvc:CartesianChart.AxisY>
 
                 </lvc:CartesianChart>

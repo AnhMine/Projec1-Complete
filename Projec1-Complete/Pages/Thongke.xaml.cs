@@ -38,6 +38,7 @@ namespace Projec1_Complete.Pages
             historyBUS = new HistoryBUS();
             accountBUS = new AccountBUS();
             productBUS = new ProductBUS();
+            LoadChart("Date");
 
         }
         public void LoadHis()
@@ -119,58 +120,39 @@ namespace Projec1_Complete.Pages
 
         }
 
+        private void LoadChart(string GroupBy)
+        {
+            var seriesCollection = thongKeDataBUS.GetChartData(out var labels, GroupBy);
+
+            // Clear the existing axes
+            ChartDT.AxisX.Clear();
+            ChartDT.AxisY.Clear();
+
+            // Create new axes and set their properties
+            var xAxis = new Axis { Labels = labels, FontSize = 18 };
+            var yAxis = new Axis { FontSize = 18 };
+
+            // Add the new axes to the chart
+            ChartDT.AxisX.Add(xAxis);
+            ChartDT.AxisY.Add(yAxis);
+
+            // Set the series collection
+            ChartDT.Series = seriesCollection;
+        }
+
         private void btnDay_Click(object sender, RoutedEventArgs e)
         {
-            seriesCollection = thongKeDataBUS.GetChartData(out var labels, "Date");
-            ChartDT.AxisX.Clear();
-            ChartDT.AxisX.Add(new Axis
-            {
-                Title = "Ngày",
-                Labels = labels,
-            });
-            ChartDT.AxisY.Clear();
-            ChartDT.AxisY.Add(new Axis
-            {
-                Title = "Doanh thu"
-            });
-
-            ChartDT.Series = seriesCollection;
+            LoadChart("Date");
         }
 
         private void btnMonth_Click(object sender, RoutedEventArgs e)
         {
-            seriesCollection = thongKeDataBUS.GetChartData(out var labels, "Month");
-            ChartDT.AxisX.Clear();
-            ChartDT.AxisX.Add(new Axis
-            {
-                Title = "Tháng",
-                Labels = labels,
-            });
-            ChartDT.AxisY.Clear();
-            ChartDT.AxisY.Add(new Axis
-            {
-                Title = "Doanh thu"
-            });
-
-            ChartDT.Series = seriesCollection;
+            LoadChart("Month");
         }
 
         private void btnPrd_Click(object sender, RoutedEventArgs e)
         {
-            seriesCollection = thongKeDataBUS.GetChartData(out var labels, "Product");
-            ChartDT.AxisX.Clear();
-            ChartDT.AxisX.Add(new Axis
-            {
-                Title = "Sản Phẩm",
-                Labels = labels,
-            });
-            ChartDT.AxisY.Clear();
-            ChartDT.AxisY.Add(new Axis
-            {
-                Title = "Doanh thu"
-            });
-
-            ChartDT.Series = seriesCollection;
+            LoadChart("Product");
         }
 
         private void DTGHistory_Loaded(object sender, RoutedEventArgs e)

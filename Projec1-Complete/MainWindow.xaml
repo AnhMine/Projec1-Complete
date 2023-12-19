@@ -36,13 +36,13 @@
                     
 
                     <StackPanel x:Name="stpn_subradiobutton" Grid.Row="1">
-                        <RadioButton x:Name="rd_khohang" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource home}" Margin="0 10 0 0" Checked="rd_khohang_Checked"/>
-                        <RadioButton x:Name="rd_donhang" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource calendar}" Margin="0 20 0 1" Checked="rd_donhang_Checked" />
-                        <RadioButton x:Name="rd_khachhang" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource user}" Margin="0 20 0 0" Checked="rd_khachhang_Checked" />
-                        <RadioButton x:Name="rd_thongke" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource analytics}" Margin="0 20 0 1" Checked="rd_thongke_Checked"/>
-                        <RadioButton x:Name="rd_nhanvien" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource settingIcon}" Margin="8 20 0 1" Checked="rd_nhanvien_Checked"   />
+                        <RadioButton Cursor="Hand" x:Name="rd_khohang" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Home}" Margin="0 20 0 0" Checked="rd_khohang_Checked"/>
+                        <RadioButton Cursor="Hand" x:Name="rd_donhang" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Cart}" Margin="0 20 0 0" Checked="rd_donhang_Checked" />
+                        <RadioButton Cursor="Hand" x:Name="rd_khachhang" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource User}" Margin="0 20 0 0" Checked="rd_khachhang_Checked" Height="58" />
+                        <RadioButton Cursor="Hand" x:Name="rd_thongke" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Chart}" Margin="0 20 0 0" Checked="rd_thongke_Checked"/>
+                        <RadioButton Cursor="Hand" x:Name="rd_nhanvien" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Gear}" Margin="0 20 0 0" Checked="rd_nhanvien_Checked"   />
                         <Separator Margin="20 20" Background="{DynamicResource TertiaryBackgroundColor}"/>
-                        <RadioButton x:Name="rdLogout" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource logout}" Margin="0 480 0 1" Click="rdLogOut_Click" RenderTransformOrigin="0.478,-1.479" >
+                        <RadioButton Cursor="Hand" x:Name="rdLogout" Content="" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource logout}" Margin="0 480 0 1" Click="rdLogOut_Click" >
                             <UIElement.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -59,7 +59,7 @@
                     <Border x:Name="bdr_sangtoi" Visibility="Hidden" Grid.Row="3" CornerRadius="18" Width="110" Height="35" Background="{DynamicResource TertiaryBackgroundColor}" HorizontalAlignment="Right" Margin="0 0 20 0">
                         <StackPanel x:Name="stpn_sangtoi" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Path x:Name="pth_sang" Data="{DynamicResource sun}" Height="16" Width="16" Stretch="UniformToFill" Fill="{DynamicResource PrimaryYellowColor}" VerticalAlignment="Center"/>
-                            <ToggleButton x:Name="Themes"
+                            <ToggleButton Cursor="Hand" x:Name="Themes"
                                   IsChecked="False"
                                   Click="Themes_Click"
                                   HorizontalAlignment="Right"
@@ -82,8 +82,8 @@
                 </Grid.RowDefinitions>
                 <!-- Start: Button Close | Restore | Minimize -->
                 <StackPanel x:Name="stpn_pages" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="20" Orientation="Horizontal" FlowDirection="RightToLeft">
-                    <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
-                    <Button x:Name="btn_Restore" Margin="5 0" Click="btnRestore_Click">
+                    <Button Cursor="Hand" x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                    <Button Cursor="Hand" x:Name="btn_Restore" Margin="5 0" Click="btnRestore_Click">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
                                 <Setter Property="Content" Value="{DynamicResource maximize}"/>
@@ -95,7 +95,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button x:Name="btn_Minimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+                    <Button Cursor="Hand" x:Name="btn_Minimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
                 </StackPanel>
                 <!-- End: Button Close | Restore | Minimize -->
 

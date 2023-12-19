@@ -19,7 +19,7 @@
                     <Image x:Name="imgkh" Source="/Assets/Icons/anhpic-removebg-preview.png"  Width="350" Height="400" VerticalAlignment="Center" Margin="0 0 0 50">
 
                     </Image>
-                    <Button Width="350" Height="400" Margin="0 0 0 0" Style="{StaticResource Buttonimage}" >
+                <Button Cursor="Hand" Width="350" Height="400" Margin="0 0 0 0" Style="{StaticResource Buttonimage}" >
 
                     </Button>
                 </Grid>
@@ -27,7 +27,7 @@
 
             <Grid Grid.Column="1">
 
-                <Button x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="660 0 0 500" Click="btn_Close_Click"/>
+                <Button Cursor="Hand" x:Name="btn_Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" Margin="660 0 0 500" Click="btn_Close_Click"/>
 
                 <TextBlock x:Name="txtbl_tenkh" Text="Nhập tên khách " FontSize="20"  Margin="0 0 500 320 "  Height="30" Width="200" />
                 <TextBlock x:Name="txtbl_sdt"  Text="Nhập số điện thoại " FontSize="20"  Margin="0 0 500 170  "  Height="30" Width="200" />
@@ -91,13 +91,13 @@
                          VerticalContentAlignment="Top" />
 
 
-                <Button x:Name="btnAddNew" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold" Click="btnAddNew_Click">
+                <Button Cursor="Hand" x:Name="btnAddNew" Style="{StaticResource btnthem}" FontSize="20" FontWeight="SemiBold" Click="btnAddNew_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_themKH" Text="Thêm"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="btn_huythemkhachhang" Style="{StaticResource btnhuy}" FontSize="20" FontWeight="SemiBold" Click="btn_huythemkhachhang_Click">
+                <Button Cursor="Hand" x:Name="btn_huythemkhachhang" Style="{StaticResource btnhuy}" FontSize="20" FontWeight="SemiBold" Click="btn_huythemkhachhang_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock x:Name="txtbl_huyKH" Text="Hủy"/>
                     </StackPanel>

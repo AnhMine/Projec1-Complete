@@ -16,5 +16,7 @@ namespace Projec1_Complete.DAL
         public string DisplayStatus { get; set; }
         public decimal TotalAmount  { get; set; }
         public decimal TotalPrice { get; set; }
+        public bool IsSelected { get; set; }
+
     }
 }

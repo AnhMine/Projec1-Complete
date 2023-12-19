@@ -50,7 +50,7 @@
                                     VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 -5 0">
                                 <Path.RenderTransform>
                                     <TransformGroup>
-                                        <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        <ScaleTransform ScaleX="1.8" ScaleY="1.9" />
                                         <TranslateTransform X="0" Y="0" />
                                     </TransformGroup>
                                 </Path.RenderTransform>

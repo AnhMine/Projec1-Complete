@@ -24,8 +24,6 @@ using System.Windows.Shapes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using Microsoft.Win32;
 using System.IO;
-using Syncfusion.Pdf;
-using Syncfusion.UI.Xaml.Grid.Converter;
 using System.Diagnostics.Eventing.Reader;
 
 namespace Projec1_Complete.Pages
@@ -36,8 +34,8 @@ namespace Projec1_Complete.Pages
     public partial class Donhang : Page
 
     {
-        public ObservableCollection<Category> categories { get; set; }
-        public ObservableCollection<Person> persons { get; set; }
+       bool flag = false;
+        string search = "";
         private CategoryBUS categoryBUS;
         private OrderInfoBUS orderInfoBUS;
         private PersonBUS personBUS;
@@ -49,18 +47,16 @@ namespace Projec1_Complete.Pages
         {
             InitializeComponent();
             DataContext = this;
-            categories = new ObservableCollection<Category>();
-            persons = new ObservableCollection<Person>();
+       
             personBUS = new PersonBUS();
             categoryBUS = new CategoryBUS();
             orderBUS = new OrderBUS();
             orderInfoBUS = new OrderInfoBUS();
             currentCateID = -1;
-            currentID = 0;
+            //currentID = 0;
             txtTotalAmount.Text = orderBUS.GetTotalAmount(-1).ToString();
             LoadCategory();
             LoadPersonsByStatus(false);
-            LoadProductByIDCategory(-1, 0,12);
 
         }
          bool convertStatus(string DisplayStatus)
@@ -89,20 +85,29 @@ namespace Projec1_Complete.Pages
         private void LoadOrderDTG(int id, int orderId)
         {
 
-            ObservableCollection<ProductAndOrderInfo> listUnPaid = new ObservableCollection<ProductAndOrderInfo>();
-
-            List<ProductAndOrderInfo> orders = orderBUS.GetOrdersByPersonId2(id,orderId);
-            foreach(ProductAndOrderInfo oi in orders)
+            if(id == -10 && orderId ==-10)
             {
-                if(oi.order.Status == false)
-                {
 
-                    listUnPaid.Add(oi);
+                DTGOrder.ItemsSource = null;
+            }   
+            else
+            {
+                ObservableCollection<ProductAndOrderInfo> listUnPaid = new ObservableCollection<ProductAndOrderInfo>();
+
+                List<ProductAndOrderInfo> orders = orderBUS.GetOrdersByPersonId2(id, orderId);
+                foreach (ProductAndOrderInfo oi in orders)
+                {
+                    if (oi.order.Status == false)
+                    {
+
+                        listUnPaid.Add(oi);
+                    }
+
                 }
 
-            }
-
-            DTGOrder.ItemsSource = listUnPaid;
+                DTGOrder.ItemsSource = listUnPaid;
+            }    
+         
 
 
         }
@@ -115,7 +120,7 @@ namespace Projec1_Complete.Pages
             {
                 if (oi.order.Status == true)
                 {
-
+                   
                     listPaid.Add(oi);
                 }
 
@@ -161,6 +166,44 @@ namespace Projec1_Complete.Pages
             itctPeople.ItemsSource = personOrderlist;
 
         }
+        private void LoadPeople(string search)
+        {
+
+
+            List<Order> orderList = orderBUS.GetListOrderBySearch(search);
+            List<ProductAndOrderInfo> personOrderlist = new List<ProductAndOrderInfo>();
+
+            foreach (Order order in orderList)
+            {
+                decimal totalAmount = orderBUS.GetTotalAmount(order.OrderID);
+                string statusText = orderBUS.GetStatus(order.OrderID) == true ? "Đã Thanh Toán" : "Chưa Thanh Toán";
+
+                Person person = personBUS.SerachPerson(search, order.OrderID);
+
+                if (person != null)
+                {
+                    ProductAndOrderInfo product = new ProductAndOrderInfo
+                    {
+                        person = person,
+                        TotalAmount = totalAmount,
+                        DisplayStatus = statusText
+                    };
+
+                    personOrderlist.Add(product);
+                }
+            }
+
+            personOrderlist = personOrderlist
+                .OrderByDescending(p => p.person.PersonName == "Khách Lẻ")
+                .ThenBy(p => p.person.PersonName)
+                .ToList();
+
+            itctPeople.ItemsSource = personOrderlist;
+
+
+
+
+        }
 
 
 
@@ -168,13 +211,23 @@ namespace Projec1_Complete.Pages
 
         private void CategoryBtn_Click(object sender, RoutedEventArgs e)
         {
-            RadioButton btn = (RadioButton)sender;
-            Category prd = (Category)btn.DataContext;
-            int categoryID = prd.CategoryID;
-            int personID = currentID;
-            currentCateID = categoryID;
-            LoadProductByIDCategory(categoryID, personID, currentOrderID.OrderID);
-            LoadOrderDTG(personID, currentOrderID.OrderID);
+
+            if (currentOrderID != null)
+            {
+                RadioButton btn = (RadioButton)sender;
+                Category prd = (Category)btn.DataContext;
+                int categoryID = prd.CategoryID;
+                int personID = currentID;
+                currentCateID = categoryID;
+                LoadProductByIDCategory(categoryID, personID, currentOrderID.OrderID);
+                LoadOrderDTG(personID, currentOrderID.OrderID);
+
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng trước <3");
+                return;
+            }    
 
         }
 
@@ -182,18 +235,21 @@ namespace Projec1_Complete.Pages
 
         private void btn_thanhtoan_Click(object sender, RoutedEventArgs e)
         {
-            stpn_packages.Visibility = Visibility.Visible;
-            stpn_invoices.Visibility = Visibility.Collapsed;
+            stpnDTG.Visibility = Visibility.Visible;
+            stpn_sanpham.Visibility = Visibility.Collapsed;
             spr_duonggach.Visibility = Visibility.Visible;
             btn_quayve.Visibility = Visibility.Visible;
-            LoadOrderDTG(currentID, currentOrderID.OrderID);
+          
+                LoadOrderDTG(currentID, currentOrderID.OrderID);
+
+        
 
         }
 
         private void btn_quayve_Click(object sender, RoutedEventArgs e)
         {
-            stpn_invoices.Visibility = Visibility.Visible;
-            stpn_packages.Visibility = Visibility.Collapsed;
+            stpn_sanpham.Visibility = Visibility.Visible;
+            stpnDTG.Visibility = Visibility.Collapsed;
             spr_duonggach.Visibility = Visibility.Collapsed;
             btn_quayve.Visibility = Visibility.Collapsed;
             LoadProductByIDCategory(currentCateID,currentID,currentOrderID.OrderID);
@@ -209,11 +265,20 @@ namespace Projec1_Complete.Pages
             if(info != null)
             {
 
-                person.orderInfo.Quantity++;
+                person.orderInfo.Quantity--;
                 orderInfoBUS.RemoveProductFromOrder(info);
                 LoadProductByIDCategory(currentCateID, currentID, currentOrderID.OrderID);
-                LoadPersonsByStatus(false);
                 LoadTotalAmount(currentOrderID.OrderID);
+                if (search.Trim() == "")
+                {
+                    LoadPersonsByStatus(false);
+                }
+                else
+                {
+                    LoadPeople(search);
+                }
+
+               
             }    
             else
             {
@@ -225,27 +290,16 @@ namespace Projec1_Complete.Pages
         }
         private void btnPlus_Click(object sender, RoutedEventArgs e)
         {
-            
             RadioButton btn = (RadioButton)sender;
-            
             ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
-    
-            OrderInfo info = orderInfoBUS.GetOrderInfoByOrderAndProduct(currentOrderID.OrderID, person.Product.ProductID);
-            //MessageBox.Show(currentOrderID.OrderID.ToString());
 
+            OrderInfo info = orderInfoBUS.GetOrderInfoByOrderAndProduct(currentOrderID.OrderID, person.Product.ProductID);
 
             if (info != null)
             {
-
-                person.orderInfo.Quantity++;
-            
-                info.Quantity = person.orderInfo.Quantity;
+                //person.orderInfo.Quantity++;
+                info.Quantity++;
                 orderInfoBUS.UpdateOrderInfo(info);
-                LoadProductByIDCategory(currentCateID, currentID, currentOrderID.OrderID);
-                LoadPersonsByStatus(false);
-                LoadTotalAmount(currentOrderID.OrderID);
-                LoadOrderDTG(currentID, currentOrderID.OrderID);
-
             }
             else
             {
@@ -256,35 +310,42 @@ namespace Projec1_Complete.Pages
                     Quantity = 1,
                 };
                 orderInfoBUS.UpdateOrderInfo(newOrderInfo);
-                LoadProductByIDCategory(currentCateID, currentID, currentOrderID.OrderID);
-                LoadPersonsByStatus(false);
-                LoadTotalAmount(currentOrderID.OrderID);
-
-
-
-
             }
 
+            LoadProductByIDCategory(currentCateID, currentID, currentOrderID.OrderID);
 
-
-
-
-        }
-
-        private void btnAllCateGory_Click(object sender, RoutedEventArgs e)
-        {
-            if(currentOrderID == null)
+            if (search.Trim() == "")
             {
-                LoadProductByIDCategory(-1, currentID,13);
-
+                LoadPersonsByStatus(false);
             }
             else
             {
-                LoadProductByIDCategory(-1, currentID, currentOrderID.OrderID);
-                LoadOrderDTG(currentID, currentOrderID.OrderID);
-                currentCateID = -1;
-
+                LoadPeople(search);
             }
+
+            LoadTotalAmount(currentOrderID.OrderID);
+            LoadOrderDTG(currentID, currentOrderID.OrderID);
+        }
+
+
+        private void btnAllCateGory_Click(object sender, RoutedEventArgs e)
+        {
+            if(currentOrderID==null)
+            {
+                MessageBox.Show("Vui Lòng Chọn Khách Hàng Trước <3");
+                return;
+                
+            } 
+            else
+            {
+              
+                    LoadProductByIDCategory(-1, currentID, currentOrderID.OrderID);
+                    LoadOrderDTG(currentID, currentOrderID.OrderID);
+                    currentCateID = -1;
+
+                
+            }
+           
 
 
 
@@ -293,7 +354,8 @@ namespace Projec1_Complete.Pages
 
         private void btnCustomers_Click(object sender, RoutedEventArgs e)
         {
-
+            btn_thanhtoan.Visibility = Visibility.Visible;
+            stpnDTG.Visibility = Visibility.Visible;
             RadioButton btn = (RadioButton)sender;
             ProductAndOrderInfo person = (ProductAndOrderInfo)btn.DataContext;
             int personID = person.person.PersonID;
@@ -307,13 +369,20 @@ namespace Projec1_Complete.Pages
                     LoadOrderDTG(personID, currentOrderID.OrderID);
                     LoadCustomerInfo(personID);
                     LoadTotalAmount(currentOrderID.OrderID);
+                    txtTotalAmount.Text = Convert.ToString(person.TotalAmount);
+                    txtDiscount.Text = Convert.ToString(currentOrderID.Discount);
 
                 }
                else
                 {
                     btn_quayve.Visibility = Visibility.Hidden;
                     LoadOrderDTGPaid(personID, currentOrderID.OrderID);
-                }    
+
+                    txtTotalAmount.Text = Convert.ToString(person.TotalAmount);
+                    txtDiscount.Text = Convert.ToString(currentOrderID.Discount);
+
+
+                }
 
             }
             else
@@ -325,13 +394,21 @@ namespace Projec1_Complete.Pages
                     LoadOrderDTG(personID, currentOrderID.OrderID);
                     LoadCustomerInfo(personID);
                     LoadTotalAmount(currentOrderID.OrderID);
-                }    
-             
+                                        txtTotalAmount.Text = Convert.ToString(person.TotalAmount);
+                    txtDiscount.Text = Convert.ToString(currentOrderID.Discount);
+
+
+                }
+
                 else
                 {
                     btn_quayve.Visibility = Visibility.Hidden;
                     LoadOrderDTGPaid(personID, currentOrderID.OrderID);
-                }    
+                    txtTotalAmount.Text = Convert.ToString(person.TotalAmount);
+                    txtDiscount.Text = Convert.ToString(currentOrderID.Discount);
+
+
+                }
 
 
             }
@@ -343,17 +420,30 @@ namespace Projec1_Complete.Pages
         private void btnPaid_Click(object sender, RoutedEventArgs e)
         {
             LoadPersonsByStatus(true);
-            stpn_packages.Visibility = Visibility.Visible;
-            stpn_invoices.Visibility = Visibility.Collapsed;
-            spr_duonggach.Visibility = Visibility.Visible;
+            stpn_sanpham.Visibility = Visibility.Collapsed;
+            spr_duonggach.Visibility = Visibility.Collapsed;
             btn_quayve.Visibility = Visibility.Hidden;
-            LoadOrderDTGPaid(currentID, currentOrderID.OrderID);
+            btnPay.Visibility = Visibility.Hidden;
+            btnDiscount.Visibility = Visibility.Hidden;
+            txtDiscount.IsEnabled = false;
+            flag = true;
+            LoadOrderDTG(-10, -10);
         }
         private void btnUnPaid_Click(object sender, RoutedEventArgs e)
         {
-            btn_quayve.Visibility = Visibility.Visible;
-            
+            LoadCategory();
+
+            stpn_sanpham.Visibility = Visibility.Visible;
+            stpnDTG.Visibility = Visibility.Collapsed;
+            spr_duonggach.Visibility = Visibility.Collapsed;
+            btn_quayve.Visibility = Visibility.Collapsed;
+            btnPay.Visibility = Visibility.Visible;
+            btnDiscount.Visibility = Visibility.Visible;
+            txtDiscount.IsEnabled = true;
             LoadPersonsByStatus(false);
+            flag = false;
+            //LoadOrderDTG(-10, -10);
+
             //LoadOrderDTG(currentID, currentOrderID.OrderID);
 
         }
@@ -373,6 +463,7 @@ namespace Projec1_Complete.Pages
                 else
                 {
                     orderBUS.UpdateDiscount(currentOrderID.OrderID, discount);
+                    LoadOrderDTG(currentID, currentOrderID.OrderID);
                     LoadTotalAmount(currentOrderID.OrderID);
                 }    
                
@@ -437,6 +528,7 @@ namespace Projec1_Complete.Pages
 
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
+            
             MessageBoxResult result = MessageBox.Show("Bạn Chắc Chắn Muốn Thanh Toán Cho Đơn Hàng Này ?", "Xác Nhận Thanh Toán", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
@@ -463,41 +555,34 @@ namespace Projec1_Complete.Pages
 
         private void txtSearchCustomers_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string search = txtSearchCustomers.Text;
-
-            List<Order> orderList = orderBUS.GetListOrderBySearch(search);
-            List<ProductAndOrderInfo> personOrderlist = new List<ProductAndOrderInfo>();
-
-            foreach (Order order in orderList)
+            
+          search =   txtSearchCustomers.Text  ;
+            if(search.Trim()== null)
             {
-                decimal totalAmount = orderBUS.GetTotalAmount(order.OrderID);
-                string statusText = orderBUS.GetStatus(order.OrderID) == true ? "Đã Thanh Toán" : "Chưa Thanh Toán";
-
-                Person person = personBUS.SerachPerson(search,order.OrderID);
-              
-                if (person != null)
-                {
-                    ProductAndOrderInfo product = new ProductAndOrderInfo
-                    {
-                        person = person,
-                        TotalAmount = totalAmount,
-                        DisplayStatus = statusText
-                    };
-
-                    personOrderlist.Add(product);
-                }
+                LoadPersonsByStatus(false );
             }
+            else
+            {
+                LoadPeople(search);
 
-            itctPeople.ItemsSource = personOrderlist;
-
+            }
 
         }
 
         private void txtSearchPrd_TextChanged(object sender, TextChangedEventArgs e)
         {
             string search = txtSearchPrd.Text;
-            List<ProductAndOrderInfo> prdList = categoryBUS.SearchProductByText(search, currentID, currentOrderID.OrderID);
-            itctProduct.ItemsSource = prdList;
+            if(currentOrderID==null)
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng");
+                return;
+            }
+            else
+            {
+                List<ProductAndOrderInfo> prdList = categoryBUS.SearchProductByText(search, currentID, currentOrderID.OrderID);
+                itctProduct.ItemsSource = prdList;
+            }
+         
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
@@ -519,6 +604,15 @@ namespace Projec1_Complete.Pages
             }
 
 
+        }
+
+        private void btnCart_Click(object sender, RoutedEventArgs e)
+        {
+            stpnDTG.Visibility = Visibility.Visible;
+            stpn_sanpham.Visibility = Visibility.Collapsed;
+            spr_duonggach.Visibility = Visibility.Visible;
+            btn_quayve.Visibility = Visibility.Visible;
+            LoadOrderDTG(currentID, currentOrderID.OrderID);
         }
     }
 }

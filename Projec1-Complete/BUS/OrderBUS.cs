@@ -64,6 +64,10 @@ namespace Projec1_Complete.BUS
         {
             return orderDAL.GetOrderListBySearch(orderId);
         }
+        public bool CheckOrder(int personId)
+        {
+            return orderDAL.CheckOrder(personId);
+        }
 
 
     }

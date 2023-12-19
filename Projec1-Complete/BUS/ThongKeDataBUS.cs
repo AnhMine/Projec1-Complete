@@ -48,7 +48,6 @@ namespace Projec1_Complete.BUS
 
             var columnSeries = new ColumnSeries
             {
-                Title = "Doanh thu",
                 Values = values
             };
 

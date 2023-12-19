@@ -1,4 +1,5 @@
-﻿using Projec1_Complete.BUS;
+﻿using Microsoft.Win32;
+using Projec1_Complete.BUS;
 using Projec1_Complete.DAL;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Projec1_Complete.Pages
     /// </summary>
     public partial class sua_khach_hang : Window
     {
+        private string selectedImagePath;
         private PersonBUS personBUS;
         public sua_khach_hang()
         {
@@ -33,11 +35,7 @@ namespace Projec1_Complete.Pages
             personBUS = new PersonBUS();
             DataContext = person;
         }
-        private bool IsValidEmail(string email)
-        {
-            string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
-            return Regex.IsMatch(email, pattern);
-        }
+   
 
         private bool IsNumeric(string value)
         {
@@ -72,6 +70,8 @@ namespace Projec1_Complete.Pages
         private void btnSavePerson_Click(object sender, RoutedEventArgs e)
         {
             Person selectedCustomer = (Person)DataContext;
+            selectedCustomer.PersonImage = selectedImagePath;
+
 
             if (selectedCustomer != null)
             {
@@ -81,27 +81,45 @@ namespace Projec1_Complete.Pages
                     return;
                 }
 
-                if (!IsValidEmail(selectedCustomer.Email))
-                {
-                    MessageBox.Show("Địa chỉ email không hợp lệ.");
-                    return;
-                }
+             
 
-                if (selectedCustomer.Phone.Length != 10 || !IsNumeric(selectedCustomer.Phone))
-                {
-                    MessageBox.Show("Số điện thoại phải có 10 chữ số.");
-                    return;
-                }
+                //if (selectedCustomer.Phone.Length != 10 || !IsNumeric(selectedCustomer.Phone))
+                //{
+                //    MessageBox.Show("Số điện thoại phải có 10 chữ số.");
+                //    return;
+                //}
 
-                if (selectedCustomer.Address.Length > 255)
-                {
-                    MessageBox.Show("Địa chỉ không được vượt quá 255 kí tự.");
-                    return;
-                }
+                //if (selectedCustomer.Address.Length > 255)
+                //{
+                //    MessageBox.Show("Địa chỉ không được vượt quá 255 kí tự.");
+                //    return;
+                //}
 
                 personBUS.UpdateCustomer(selectedCustomer);
                 MessageBox.Show("Đã Cập Nhật Thành Công");
             }
+        }
+
+        private void btn_huysuakhachhang_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnImg_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp|All Files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                selectedImagePath = openFileDialog.FileName;
+                imgCustomer.Source = new BitmapImage(new Uri(selectedImagePath));
+            }
+            else
+            {
+                imgCustomer.Source = new BitmapImage(new Uri("/Assets/Icons/anhpic-removebg-preview.png", UriKind.Relative));
+            }
+
         }
     }
 }

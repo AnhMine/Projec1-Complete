@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Projec1_Complete.Pages"
         mc:Ignorable="d"
         Title="Donhang" Height="1000" Width="1800">
+    
     <Border Background="#eff2f7" CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -21,7 +22,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel>
-                    <Button Grid.Row="0" Style="{StaticResource Buttonalldon}" Margin="0 20 7 0">
+                    <Button Grid.Row="0" Style="{StaticResource Buttonalldon}" Margin="0 20 7 0" >
                         <StackPanel>
                             <Grid Width="480" Height="90">
                                 <Grid.RowDefinitions>
@@ -37,10 +38,10 @@
                                     <!--<RadioButton x:Name="btnAllCustomer"  Style="{StaticResource Buttonloaitt}"  Click="btnAllCustomer_Click" GroupName="tinhtrangdoanhang" >
                                         <TextBlock x:Name="txtbl_tatcakh" Text="Tất cả" />
                                     </RadioButton>-->
-                                    <RadioButton Grid.Column="0" x:Name="btnPaid" HorizontalAlignment="Center" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
+                                    <RadioButton Cursor="Hand" Grid.Column="0" x:Name="btnPaid" HorizontalAlignment="Center" Margin="15 0 0 0" Style="{StaticResource Buttonloaitt}" Click="btnPaid_Click" GroupName="tinhtrangdoanhang">
                                         <TextBlock x:Name="txtbl_dathanhtoan" Text="Đã thanh toán"/>
                                     </RadioButton>
-                                    <RadioButton Grid.Column="1" x:Name="btnUnPaid" HorizontalAlignment="Center" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click" GroupName="tinhtrangdoanhang">
+                                    <RadioButton Cursor="Hand" Grid.Column="1" x:Name="btnUnPaid" HorizontalAlignment="Center" Margin="0 0 15 0" Style="{StaticResource Buttonloaitt}" Click="btnUnPaid_Click" GroupName="tinhtrangdoanhang">
                                         <TextBlock x:Name="txtbl_chuathanhtoan" Text="Chưa thanh toán"/>
                                     </RadioButton>
                                 </Grid>
@@ -65,12 +66,12 @@
                 </StackPanel>
 
 
-                <StackPanel Grid.Row="1" >
+                <Grid Grid.Row="1" >
                     
                     <Grid  Margin="-5 5 0 0" >
 
                         <ScrollViewer Margin="0 0 0 0">
-                            <ItemsControl x:Name="itctPeople" ItemsSource="{Binding}">
+                            <ItemsControl x:Name="itctPeople" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Orientation="Horizontal" />
@@ -78,7 +79,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <RadioButton Margin="20 5 0 0" Style="{StaticResource Buttonsale}" x:Name="btnCustomers" Click="btnCustomers_Click" GroupName="CustomersGroup" >
+                                        <RadioButton Cursor="Hand" Margin="20 5 0 0" Style="{StaticResource Buttonsale}" x:Name="btnCustomers" Click="btnCustomers_Click" GroupName="CustomersGroup"  IsChecked="{Binding IsSelected, Mode=TwoWay}" >   
                                             <Grid Width="480" Height="90">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="65"/>
@@ -99,7 +100,7 @@
                                                 <TextBlock Text="{Binding DisplayStatus}" Grid.Column="1" FontWeight="Bold" Margin="10 50 0 0"  FontSize="16" Style="{StaticResource StatusTextStyle}"/>
                                                 <TextBlock Text="{Binding TotalAmount}" Grid.Column="2" FontWeight="Bold" Margin="20 10 0 0" FontSize="18"/>
 
-                                                <Button x:Name="btnPlusOrder" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0" Click="btnPlusOrder_Click">
+                                                <Button Cursor="Hand" x:Name="btnPlusOrder" Grid.Column="3" Style="{StaticResource Button3cham}" Margin="0 0 -90 0" Click="btnPlusOrder_Click">
                                                     <Icon:PackIconMaterial Margin="0 1 8 0" Style="{StaticResource icon3cham}"/>
                                                 </Button>
 
@@ -111,13 +112,13 @@
                         </ScrollViewer>
                     </Grid>
 
-                </StackPanel>
+                </Grid>
 
 
 
             </Grid>
 
-            <Border CornerRadius="10" Grid.Column="1" Background="White" Margin="20">
+            <Border CornerRadius="10" Grid.Column="1" Background="White" Margin="20" Visibility="Visible" x:Name="bdAll">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -127,7 +128,7 @@
                     <Grid Grid.Row="0">
 
 
-                        <Button x:Name="btn_quayve" Visibility="Collapsed" Style="{StaticResource Buttontieude}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btn_quayve_Click">
+                        <Button Cursor="Hand" x:Name="btn_quayve" Visibility="Collapsed" Style="{StaticResource Buttontieude}" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btn_quayve_Click">
                             <StackPanel Orientation="Horizontal" >
                                 <StackPanel Orientation="Horizontal" >
                                     <Icon:PackIconMaterial Kind="ArrowLeft" VerticalAlignment="Center" Width="15" Height="15" Margin="0 0 60 0"/>
@@ -140,7 +141,7 @@
                     </Grid>
                     <Grid Grid.Row="1" >
 
-                        <StackPanel Grid.Column="1" Grid.Row="1" x:Name="stpn_packages" Visibility="Visible" >
+                        <StackPanel Grid.Column="1" Grid.Row="1" x:Name="stpnDTG" Visibility="Visible" >
 
                             <Grid>
 
@@ -160,7 +161,7 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Width="300" Height="50" x:Name="txtbl_salesorder" Text="Đơn Đặt Hàng" Foreground="Black" FontWeight="Bold" FontSize="38" Margin="20" HorizontalAlignment="Left"/>
                                     <TextBlock Grid.Row="1" x:Name="txtbl_ngaydathang" Text="Ngày Đặt" Foreground="Gray" FontWeight="Bold" Margin="20 0 0 20" Width="100" Height="30" FontSize="20" HorizontalAlignment="Left"/>
-                                    <TextBlock Grid.Row="1" x:Name="txtbl_ngaydat" Text="10/10/2023"  FontWeight="Bold" Margin="20 40 0 0" Width="150" Height="30" FontSize="20" HorizontalAlignment="Left"/>
+                                    <TextBlock Grid.Row="1" x:Name="txtbl_ngaydat" Text="18/12/2023"  FontWeight="Bold" Margin="20 40 0 0" Width="150" Height="30" FontSize="20" HorizontalAlignment="Left"/>
                                 </Grid>
 
                                 <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Buttonbilingkh}">
@@ -203,7 +204,7 @@
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
 
-                                                            <Button x:Name="RemoveButton" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" Click="RemoveButton_Click">
+                                                            <Button Cursor="Hand" x:Name="btnRemoveButton" Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" Click="RemoveButton_Click">
                                                                 <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                                             </Button>
 
@@ -227,13 +228,13 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="2" x:Name="txtbl_tongtien" Text="Tổng tiền:" Margin="0 0 130 60" FontSize="20" HorizontalAlignment="Right" Style="{StaticResource texttensp}"/>
                                     <TextBlock Grid.Column="2" x:Name="txtTotalAmount" Margin="0 0 30 0"  FontSize="20"  HorizontalAlignment="Right" Style="{StaticResource textgiasp}" Text="0000000"/>
-                                    <Button x:Name="btnExportPDF" Grid.Column="2" Style="{StaticResource Buttonthanhtoan}" Margin="0,36,160,0" Click="btnExportPDF_Click" Height="45" VerticalAlignment="Top">
+                                    <Button Cursor="Hand" x:Name="btnExportPDF" Grid.Column="2" Style="{StaticResource Buttonthanhtoan}" Margin="0,36,160,0" Click="btnExportPDF_Click" Height="45" VerticalAlignment="Top">
                                         <StackPanel Orientation="Horizontal" >
                                             <Icon:PackIconMaterial Kind="Printer" VerticalAlignment="Center" Width="30" Height="30"/>
                                         </StackPanel>
                                     </Button>
 
-                                    <Button Grid.Column="2" x:Name="btnPay" Margin="0 30 20 0" Style="{StaticResource Buttonthanhtoan}" Click="btnPay_Click">
+                                    <Button Cursor="Hand" Grid.Column="2" x:Name="btnPay" Margin="0 30 20 0" Style="{StaticResource Buttonthanhtoan}" Click="btnPay_Click">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock x:Name="txtbl_thanhtien" Text="Thành tiền" FontSize="18" FontWeight="Bold"/>
                                         </StackPanel>
@@ -243,14 +244,14 @@
 
 
 
-                                    <Grid Width="100" Grid.Column="1" HorizontalAlignment="Left" Margin="20 10 0 0">
+                                    <Grid Width="100" Grid.Column="1" HorizontalAlignment="Left" Margin="20 10 0 0" x:Name="grDiscount">
                                         <TextBlock Margin="10 22 20 0" VerticalAlignment="Center" Foreground="Black" IsHitTestVisible="False"
                                     Panel.ZIndex="1"/>
 
-                                        <TextBox x:Name="txtDiscount" Style="{StaticResource textboxgiamgia}" Margin="0,26,10,0" VerticalAlignment="Top" Text="{Binding order.Discount}"/>
+                                        <TextBox x:Name="txtDiscount" Style="{StaticResource textboxgiamgia}" Margin="0,26,10,0" VerticalAlignment="Top" />
 
                                     </Grid>
-                                    <Button Grid.Column="1" x:Name="btnDiscount" Margin="130 30 0 0" HorizontalAlignment="Left" Style="{StaticResource Buttonthanhtoan}" Click="btnDiscount_Click">
+                                    <Button Cursor="Hand" Grid.Column="1" x:Name="btnDiscount" Margin="130 30 0 0" HorizontalAlignment="Left" Style="{StaticResource Buttonthanhtoan}" Click="btnDiscount_Click">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock x:Name="txtbl_addgiamgia" Text="Áp dụng" FontSize="18" FontWeight="Bold"/>
                                         </StackPanel>
@@ -262,7 +263,7 @@
 
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" x:Name="stpn_invoices" Background="#eff2f7" Visibility="Visible" >
+                        <StackPanel Grid.Row="1" x:Name="stpn_sanpham" Background="#eff2f7" Visibility="Visible" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
@@ -272,12 +273,12 @@
 
                                 <Grid>
 
-                                    <RadioButton x:Name="btnAllCateGory" Style="{StaticResource Buttonloai}" Margin="0 0 0 14" Click="btnAllCateGory_Click"  GroupName="CategoryButtons">
+                                    <RadioButton Cursor="Hand" x:Name="btnAllCateGory" Style="{StaticResource Buttonloai}" Margin="0 0 0 14" Click="btnAllCateGory_Click"  GroupName="CategoryButtons">
                                         <TextBlock x:Name="txtbl_tatcaloai" Text="Tất cả"/>
                                     </RadioButton>
 
 
-                                    <Grid Grid.Row="1" Margin="90 -5 0 0">
+                                    <Grid Grid.Row="1" Margin="105 -5 0 0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="5*"/>
                                             <RowDefinition Height="7*"/>
@@ -290,7 +291,7 @@
                                             </ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <RadioButton  Style="{StaticResource Buttonloai}" Margin="5" Click="CategoryBtn_Click"
+                                                    <RadioButton Cursor="Hand" Style="{StaticResource Buttonloai}" Margin="5" Click="CategoryBtn_Click"
                                                         GroupName="CategoryButtons">
                                                         <TextBlock Text="{Binding CategoryName}"  />
                                                     </RadioButton>
@@ -329,7 +330,7 @@
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
 
-                                                    <RadioButton Grid.Row="1" x:Name="btn_sp" Style="{StaticResource Buttonspham}" >
+                                                    <RadioButton Cursor="Hand" Grid.Row="1" x:Name="btn_sp" Style="{StaticResource Buttonspham}" >
                                                         <Grid Width="275" Height="320">
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition Height="auto"/>
@@ -348,18 +349,18 @@
                                                                     <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition Width="auto"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <RadioButton x:Name="btnMinus" Style="{StaticResource Buttonsoluong}"  Click="btnMinus_Click">
+                                                                <RadioButton Cursor="Hand" x:Name="btnMinus" Style="{StaticResource Buttonsoluong}"  Click="btnMinus_Click">
                                                                     <TextBlock Text="-" VerticalAlignment="Center" FontSize="32" Margin="0 0 0 5"/>
                                                                 </RadioButton>
 
                                                                 <TextBlock Grid.Column="1" x:Name="tblQuantity" Text="{Binding orderInfo.Quantity}" HorizontalAlignment="Center" FontSize="18"/>
 
-                                                                <RadioButton Grid.Column="2" x:Name="btnPlus" Style="{StaticResource Buttonsoluong}"  Click="btnPlus_Click">
-                                                                    <TextBlock Text="+" VerticalAlignment="Center" FontSize="18" Margin="0 0 0 5"/>
+                                                                <RadioButton Cursor="Hand" Grid.Column="2" x:Name="btnPlus" Style="{StaticResource Buttonsoluong}"  Click="btnPlus_Click">
+                                                                    <TextBlock Text="+" VerticalAlignment="Center" FontSize="24" Margin="0 0 0 5"/>
                                                                 </RadioButton>
                                                             </Grid>
 
-                                                            <Button x:Name="btn_giohang" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" HorizontalAlignment="Right" Margin="0 5 10 0">
+                                                            <Button Cursor="Hand" x:Name="btnCart" Grid.Row="2" Grid.Column="3" Style="{StaticResource Button3cham}" HorizontalAlignment="Right" Margin="0 5 10 0" Click="btnCart_Click">
                                                                 <Icon:PackIconMaterial Kind="Cart" VerticalAlignment="Center" Width="30" Height="30" />
                                                             </Button>
 
@@ -372,7 +373,7 @@
                                 </Grid>
 
                                 <Grid  Background="#eff2f7" Margin="15,800,0,-25" Grid.Row="1" Grid.RowSpan="2">
-                                    <Button x:Name="btn_thanhtoan" Style="{StaticResource Buttonthanhtoan}" Margin="1101,20,0,10" Click="btn_thanhtoan_Click" HorizontalAlignment="Left">
+                                    <Button Cursor="Hand" x:Name="btn_thanhtoan" Style="{StaticResource Buttonthanhtoan}" Margin="1101,20,0,10" Click="btn_thanhtoan_Click" HorizontalAlignment="Left" Visibility="Hidden">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock x:Name="txtbl_thanhtoan" Text="Thanh toán" FontSize="18" FontWeight="Bold"/>
                                         </StackPanel>

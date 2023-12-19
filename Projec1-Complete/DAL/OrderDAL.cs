@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Projec1_Complete.DAL
 {
@@ -16,21 +17,31 @@ namespace Projec1_Complete.DAL
         }
         public List<Order> GetOrderList(bool status)
         {
-           var data = db.Orders.Where(o => o.Status == status);
-            return data.ToList();
+           var data2 = db.Orders.Where(o => o.Status == status);
+            return data2.ToList();
         }
         public List<Order> GetOrderListBySearch(string search)
         {
             var data = db.Orders
                 .Where(o =>
                     search.Length > 0 && (
-                        o.PersonID.ToString().Contains(search) ||  // Kiểm tra PersonID nếu search là chuỗi
-                        o.Person.PersonName.ToLower().Contains(search.ToLower())  // Kiểm tra PersonName không phân biệt chữ hoa chữ thường
+                        o.PersonID.ToString().Contains(search) ||
+                        o.Person.PersonName.ToLower().Contains(search.ToLower())
                     ))
                 .ToList();
 
-            return data;
+            var data2 = db.Orders
+                .Where(o => o.Status.ToString() == search)
+                .ToList();
+
+            var result = data
+                .OrderByDescending(o => o.PersonID.ToString().Contains(search))
+                .Concat(data2)
+                .ToList();
+
+            return result;
         }
+
 
 
 
@@ -258,6 +269,11 @@ namespace Projec1_Complete.DAL
             // Thêm đơn hàng mới vào DbSet và lưu thay đổi vào cơ sở dữ liệu
             db.Orders.Add(newOrder);
             db.SaveChanges();
+        }
+        public bool CheckOrder(int personId)
+        {
+            var data = db.Orders.Any(p => p.PersonID == personId && p.Status == false);
+            return data;
         }
 
 

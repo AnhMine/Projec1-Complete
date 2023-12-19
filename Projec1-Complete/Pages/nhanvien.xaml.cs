@@ -133,26 +133,51 @@ namespace Projec1_Complete.Pages
 
         }
 
-        private void imgEmployee_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //private void imgEmployee_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp|All Files (*.*)|*.*";
+
+        //    if (openFileDialog.ShowDialog() == true)
+        //    {
+        //        selectedImagePath = openFileDialog.FileName;
+        //        imgEmployee.Source = new BitmapImage(new Uri(selectedImagePath));
+        //    }
+        //    else
+        //    {
+        //        imgEmployee.Source = new BitmapImage(new Uri("/Assets/Icons/WL.jpg", UriKind.Relative));
+        //    }
+        //}
+
+        //private void imgEmployee_Loaded(object sender, RoutedEventArgs e)
+        //{
+
+        //    if (imgEmployee.Source != null)
+        //    {
+        //        btnImg.Visibility = Visibility.Hidden;
+        //    }
+        //}
+
+
+        private void imgElEmployee_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp|All Files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == true)
             {
                 selectedImagePath = openFileDialog.FileName;
-                imgEmployee.Source = new BitmapImage(new Uri(selectedImagePath));
+                imgBrEmployee.ImageSource = new BitmapImage(new Uri(selectedImagePath));
             }
-            else
-            {
-                imgEmployee.Source = new BitmapImage(new Uri("/Assets/Icons/WL.jpg", UriKind.Relative));
-            }
+    
         }
 
-        private void imgEmployee_Loaded(object sender, RoutedEventArgs e)
+        private void imgElEmployee_Loaded(object sender, RoutedEventArgs e)
         {
 
-            if (imgEmployee.Source != null)
+            if (imgBrEmployee.ImageSource != null)
             {
                 btnImg.Visibility = Visibility.Hidden;
             }
